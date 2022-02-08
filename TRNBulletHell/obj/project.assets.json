@@ -174,19 +174,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\colinwillis\\.nuget\\packages\\": {}
+    "C:\\Users\\Tanner\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\colinwillis\\Desktop\\teamreptileninjas\\TRNBulletHell\\TRNBulletHell.csproj",
+      "projectUniqueName": "C:\\Users\\Tanner\\Documents\\School\\WSU\\Senior Year\\Spring 2022\\CPTS_487\\teamreptileninjas\\TRNBulletHell\\TRNBulletHell.csproj",
       "projectName": "TRNBulletHell",
-      "projectPath": "C:\\Users\\colinwillis\\Desktop\\teamreptileninjas\\TRNBulletHell\\TRNBulletHell.csproj",
-      "packagesPath": "C:\\Users\\colinwillis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\colinwillis\\Desktop\\teamreptileninjas\\TRNBulletHell\\obj\\",
+      "projectPath": "C:\\Users\\Tanner\\Documents\\School\\WSU\\Senior Year\\Spring 2022\\CPTS_487\\teamreptileninjas\\TRNBulletHell\\TRNBulletHell.csproj",
+      "packagesPath": "C:\\Users\\Tanner\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Tanner\\Documents\\School\\WSU\\Senior Year\\Spring 2022\\CPTS_487\\teamreptileninjas\\TRNBulletHell\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\colinwillis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Tanner\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -236,7 +236,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
       }
     }
   }

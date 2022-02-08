@@ -2,12 +2,12 @@
 
 namespace TRNBulletHell
 {
-    public static class Program
+    public static class RunGame
     {
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new GameDriver())
                 game.Run();
         }
     }

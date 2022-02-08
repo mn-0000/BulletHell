@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Fg7sxAm6KUYvuaQV9fDs/oOmAsGYuInf4xAJ7uRGDS4rAufQCDglysODgk5DxFa4sZxxC+skFPZx85WhLQ7piQ==",
+  "dgSpecHash": "as80Txzyj1ySEUPTwuzC1qeY0zvwLdDnkphpVcTqIetZDYzklTcDc+H4JlIY4dgzJ/qBi4fNP57/LfqfVTxc2w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\colinwillis\\Desktop\\teamreptileninjas\\TRNBulletHell\\TRNBulletHell.csproj",
+  "projectFilePath": "C:\\Users\\Tanner\\Documents\\School\\WSU\\Senior Year\\Spring 2022\\CPTS_487\\teamreptileninjas\\TRNBulletHell\\TRNBulletHell.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\colinwillis\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
-    "C:\\Users\\colinwillis\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
+    "C:\\Users\\Tanner\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\Tanner\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
   ],
   "logs": []
 }
