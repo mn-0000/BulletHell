@@ -1,4 +1,10 @@
 .vs/
+<<<<<<< HEAD
 TRNBulletHell/.vs/
 TRNBulletHell/bin/
 TRNBulletHell/obj/
+=======
+TRNBulletHell/.vs
+TRNBulletHell/bin
+TRNBulletHell/obj
+>>>>>>> 1-Architecture
