@@ -1,3 +1,4 @@
-TRNBulletHell/.vs/TRNBulletHell/v16/.suo
-TRNBulletHell/obj/Debug/netcoreapp3.1/TRNBulletHell.GeneratedMSBuildEditorConfig.editorconfig
-TRNBulletHell/obj/Debug/netcoreapp3.1/TRNBulletHell.assets.cache
+.vs/
+TRNBulletHell/.vs/
+TRNBulletHell/bin/
+TRNBulletHell/obj/
