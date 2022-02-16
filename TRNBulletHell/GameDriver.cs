@@ -79,7 +79,7 @@ namespace TRNBulletHell
 
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(enemySprite, new Vector2(0, 300), Color.White);
+            _spriteBatch.Draw(enemySprite, new Vector2(300, 0), Color.White);
             _spriteBatch.Draw(playerSprite, player.getPosition(), Color.White);
             
             _spriteBatch.End();
