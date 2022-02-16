@@ -6,9 +6,11 @@
   <SourceFiles>
     <File>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/background.png</File>
     <File>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/enemy.png</File>
+    <File>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/galleryFont.spritefont</File>
     <File>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/player.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
