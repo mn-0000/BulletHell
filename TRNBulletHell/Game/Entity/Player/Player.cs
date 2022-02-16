@@ -9,7 +9,7 @@ namespace TRNBulletHell.Game.Entity.Player
 {
     class Player : Entity
     {
-        Vector2 playerPosition;
+        
         
         public Player()
         {
@@ -17,58 +17,55 @@ namespace TRNBulletHell.Game.Entity.Player
             this.Xposition = 300;
             this.Yposition = 300;
 
-            playerPosition = new Vector2(0, 0);
-            playerPosition.X = this.Xposition;
-            playerPosition.Y = this.Yposition;
+            position = new Vector2(0, 0);
+            position.X = this.Xposition;
+            position.Y = this.Yposition;
         }
 
 
         public void moveLeft()
         {
 
-            float newPosition = playerPosition.X + -5;
+            float newPosition = position.X + -5;
             if (newPosition < 0)
             {
                 newPosition = 0;
             }
-            playerPosition.X = newPosition;
+            position.X = newPosition;
    
         }
 
         public void moveRight()
         {
-            float newPosition = playerPosition.X + 5;
-            if (newPosition > 700)
+            float newPosition = position.X + 5;
+            if (newPosition > 750)
             {
-                newPosition = 695;
+                newPosition = 750;
             }
-            playerPosition.X = newPosition;
+            position.X = newPosition;
         }
 
         public void moveUp()
         {
-            float newPosition = playerPosition.Y + -5;
+            float newPosition = position.Y + -5;
             if (newPosition < 0)
             {
-                newPosition = 2;
+                newPosition = 0;
             }
-            playerPosition.Y = newPosition;
+            position.Y = newPosition;
 
         }
 
         public void moveDown()
         {
-            float newPosition = playerPosition.Y + 5;
-            if (newPosition > 320)
+            float newPosition = position.Y + 5;
+            if (newPosition > 400)
             {
-                newPosition = 300;
+                newPosition = 400;
             }
-            playerPosition.Y = newPosition;
+            position.Y = newPosition;
         }
 
-        public Vector2 playersPosition()
-        {
-            return this.playerPosition;
-        }
+       
     }
 }

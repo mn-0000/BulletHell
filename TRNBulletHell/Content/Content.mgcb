@@ -25,7 +25,7 @@
 /processorParam:TextureFormat=Color
 /build:background.png
 
-#begin enemy.png
+#begin enemyA.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,14 +35,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:enemy.png
-
-#begin galleryFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:galleryFont.spritefont
+/build:enemyA.png
 
 #begin player.png
 /importer:TextureImporter

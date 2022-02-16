@@ -18,7 +18,7 @@ namespace TRNBulletHell
 
         public GameDriver()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);           
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
         }
@@ -33,7 +33,7 @@ namespace TRNBulletHell
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            enemySprite = Content.Load<Texture2D>("enemy");
+            enemySprite = Content.Load<Texture2D>("enemyA");
             playerSprite = Content.Load<Texture2D>("player");
             backgroundSprite = Content.Load<Texture2D>("background");
 
@@ -79,8 +79,8 @@ namespace TRNBulletHell
 
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(enemySprite, new Vector2(300, 300), Color.White);
-            _spriteBatch.Draw(playerSprite, player.playersPosition(), Color.White);
+            _spriteBatch.Draw(enemySprite, new Vector2(0, 300), Color.White);
+            _spriteBatch.Draw(playerSprite, player.getPosition(), Color.White);
             
             _spriteBatch.End();
             base.Draw(gameTime);

@@ -8,8 +8,13 @@ namespace TRNBulletHell.Game.Entity
 {
     abstract class Entity
     {
-   
+        protected Vector2 position;
         protected float Xposition;
         protected float Yposition;
+
+        public Vector2 getPosition()
+        {
+            return this.position;
+        }
     }
 }
