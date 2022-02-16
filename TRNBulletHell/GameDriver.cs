@@ -14,7 +14,6 @@ namespace TRNBulletHell
 
         Vector2 playerPosition = new Vector2(100, 100);
         const int enemyRadius = 75;
-        int score = 0;
         SpriteFont gameFont;
         public GameDriver()
         {
@@ -55,22 +54,42 @@ namespace TRNBulletHell
             }
             if (state.IsKeyDown(Keys.Left))
             {
-                playerPosition.X = playerPosition.X + -5;
+                float newPosition = playerPosition.X + -5;
+                if(newPosition < 0)
+                {
+                    newPosition = 0;
+                }
+                playerPosition.X = newPosition;
                 //move player left
             }
             if (state.IsKeyDown(Keys.Right))
             {
-                playerPosition.X = playerPosition.X + 5;
+                float newPosition = playerPosition.X + 5;
+                if(newPosition > 700)
+                {
+                    newPosition = 695;
+                }
+                playerPosition.X = newPosition;
                 //move player right
             }
             if (state.IsKeyDown(Keys.Up))
             {
-                playerPosition.Y = playerPosition.Y + -5;
+                float newPosition = playerPosition.Y + -5;
+                if(newPosition < 0)
+                {
+                    newPosition = 2;
+                }
+                playerPosition.Y = newPosition;
                 //move player forward 
             }
             if (state.IsKeyDown(Keys.Down))
             {
-                playerPosition.Y = playerPosition.Y + 5;
+                float newPosition = playerPosition.Y + 5;
+                if(newPosition > 320)
+                {
+                    newPosition = 300;
+                }
+                playerPosition.Y = newPosition;
                 //move player backwards
             }
             base.Update(gameTime);
@@ -82,7 +101,6 @@ namespace TRNBulletHell
 
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.DrawString(gameFont, "Hello World", new Vector2(100, 100), Color.White);
             _spriteBatch.Draw(enemySprite, new Vector2(300, 300), Color.White);
             _spriteBatch.Draw(playerSprite, playerPosition, Color.White);
             
