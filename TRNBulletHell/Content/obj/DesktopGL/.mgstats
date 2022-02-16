@@ -1,0 +1,4 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/background.png","C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/bin/DesktopGL/background.xnb","TextureProcessor","Texture2DContent",1218310,3065049,0.1888518
+"C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/enemyA.png","C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/bin/DesktopGL/enemyA.xnb","TextureProcessor","Texture2DContent",5936,32485,0.0032207
+"C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/player.png","C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/bin/DesktopGL/player.xnb","TextureProcessor","Texture2DContent",3746,32485,0.0025137
