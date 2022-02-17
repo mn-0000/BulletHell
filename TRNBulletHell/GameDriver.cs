@@ -8,6 +8,8 @@ namespace TRNBulletHell
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+
         Texture2D enemySprite;
         Texture2D playerSprite;
         Texture2D backgroundSprite;
@@ -42,34 +44,15 @@ namespace TRNBulletHell
 
         protected override void Update(GameTime gameTime)
         {
-          
-
             KeyboardState state = Keyboard.GetState();
 
-            if (state.IsKeyDown(Keys.Escape) )
+            if (state.IsKeyDown(Keys.Escape))
             {
                 Exit();
             }
-            if (state.IsKeyDown(Keys.Left))
-            {
-                player.moveLeft();
-                //move player left
-            }
-            if (state.IsKeyDown(Keys.Right))
-            {
-                player.moveRight();
-                //move player right
-            }
-            if (state.IsKeyDown(Keys.Up))
-            {
-                player.moveUp();
-                //move player forward 
-            }
-            if (state.IsKeyDown(Keys.Down))
-            {
-                player.moveDown();
-                //move player backwards
-            }
+
+            player.checkIfPlayersMoving(state);
+            
             base.Update(gameTime);
         }
 

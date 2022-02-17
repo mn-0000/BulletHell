@@ -66,6 +66,31 @@ namespace TRNBulletHell.Game.Entity.Player
             position.Y = newPosition;
         }
 
+        public void checkIfPlayersMoving(KeyboardState state )
+        {
+            
+
+            if (state.IsKeyDown(Keys.Left))
+            {
+                this.moveLeft();
+                //move player left
+            }
+            if (state.IsKeyDown(Keys.Right))
+            {
+                this.moveRight();
+                //move player right
+            }
+            if (state.IsKeyDown(Keys.Up))
+            {
+                this.moveUp();
+                //move player forward 
+            }
+            if (state.IsKeyDown(Keys.Down))
+            {
+                this.moveDown();
+                //move player backwards
+            }
+        }
        
     }
 }
