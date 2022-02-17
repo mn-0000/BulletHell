@@ -23,10 +23,10 @@ namespace TRNBulletHell.Game.Entity.Player
         }
 
 
-        public void moveLeft()
+        public void moveLeft(int speed)
         {
 
-            float newPosition = position.X + -5;
+            float newPosition = position.X + -speed;
             if (newPosition < 0)
             {
                 newPosition = 0;
@@ -35,9 +35,9 @@ namespace TRNBulletHell.Game.Entity.Player
    
         }
 
-        public void moveRight()
+        public void moveRight(int speed)
         {
-            float newPosition = position.X + 5;
+            float newPosition = position.X + speed;
             if (newPosition > 750)
             {
                 newPosition = 750;
@@ -45,9 +45,9 @@ namespace TRNBulletHell.Game.Entity.Player
             position.X = newPosition;
         }
 
-        public void moveUp()
+        public void moveUp(int speed)
         {
-            float newPosition = position.Y + -5;
+            float newPosition = position.Y + -speed;
             if (newPosition < 0)
             {
                 newPosition = 0;
@@ -56,9 +56,9 @@ namespace TRNBulletHell.Game.Entity.Player
 
         }
 
-        public void moveDown()
+        public void moveDown(int speed)
         {
-            float newPosition = position.Y + 5;
+            float newPosition = position.Y + speed;
             if (newPosition > 400)
             {
                 newPosition = 400;
@@ -68,26 +68,30 @@ namespace TRNBulletHell.Game.Entity.Player
 
         public void checkIfPlayersMoving(KeyboardState state )
         {
-            
+            int speed = 5;
+            if(state.IsKeyDown(Keys.LeftShift) || state.IsKeyDown(Keys.RightShift))
+            {
+                speed = 2;
+            }
 
             if (state.IsKeyDown(Keys.Left))
             {
-                this.moveLeft();
+                this.moveLeft(speed);
                 //move player left
             }
             if (state.IsKeyDown(Keys.Right))
             {
-                this.moveRight();
+                this.moveRight(speed);
                 //move player right
             }
             if (state.IsKeyDown(Keys.Up))
             {
-                this.moveUp();
+                this.moveUp(speed);
                 //move player forward 
             }
             if (state.IsKeyDown(Keys.Down))
             {
-                this.moveDown();
+                this.moveDown(speed);
                 //move player backwards
             }
         }
