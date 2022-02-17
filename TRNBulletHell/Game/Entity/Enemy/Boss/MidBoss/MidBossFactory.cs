@@ -6,5 +6,11 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss.MidBoss
 {
     class MidBossFactory : BossFactory
     {
+        override
+      public Entity CreateEnemy()
+        {
+            MidBoss spawn = new MidBoss();
+            return spawn;
+        }
     }
 }

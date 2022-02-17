@@ -10,12 +10,12 @@ namespace TRNBulletHell
         private SpriteBatch _spriteBatch;
 
 
-        Texture2D enemySprite;
+        Texture2D enemyASprite;
         Texture2D playerSprite;
         Texture2D backgroundSprite;
 
 
-        Player player = new Player();
+        Player player;
        
 
         public GameDriver()
@@ -27,6 +27,7 @@ namespace TRNBulletHell
 
         protected override void Initialize()
         {
+            player = new Player(Content.Load<Texture2D>("player"));
             // TODO: Add your initialization logic here
             
             base.Initialize();
@@ -34,9 +35,10 @@ namespace TRNBulletHell
 
         protected override void LoadContent()
         {
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            enemySprite = Content.Load<Texture2D>("enemyA");
-            playerSprite = Content.Load<Texture2D>("player");
+            enemyASprite = Content.Load<Texture2D>("enemyA");
+            playerSprite = player.getImage();
             backgroundSprite = Content.Load<Texture2D>("background");
 
             // TODO: use this.Content to load your game content here
@@ -62,7 +64,7 @@ namespace TRNBulletHell
 
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(enemySprite, new Vector2(300, 0), Color.White);
+            _spriteBatch.Draw(enemyASprite, new Vector2(300, 0), Color.White);
             _spriteBatch.Draw(playerSprite, player.getPosition(), Color.White);
             
             _spriteBatch.End();

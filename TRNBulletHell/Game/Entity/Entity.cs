@@ -8,6 +8,7 @@ namespace TRNBulletHell.Game.Entity
 {
     abstract class Entity
     {
+        protected Texture2D texture;
         protected Vector2 position;
         protected float Xposition;
         protected float Yposition;
@@ -15,6 +16,11 @@ namespace TRNBulletHell.Game.Entity
         public Vector2 getPosition()
         {
             return this.position;
+        }
+
+        public Texture2D getImage()
+        {
+            return this.texture;
         }
     }
 }

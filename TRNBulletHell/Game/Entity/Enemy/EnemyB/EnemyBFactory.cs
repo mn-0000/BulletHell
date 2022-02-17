@@ -6,5 +6,11 @@ namespace TRNBulletHell.Game.Entity.Enemy.EnemyB
 {
     class EnemyBFactory : EnemyFactory 
     {
+        override
+      public Entity CreateEnemy()
+        {
+            EnemyB spawn = new EnemyB();
+            return spawn;
+        }
     }
 }
