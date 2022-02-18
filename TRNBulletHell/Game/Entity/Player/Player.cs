@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace TRNBulletHell.Game.Entity.Player
 {
-    class Player : Entity
+    class Player : AbstractEntity
     {
         
         

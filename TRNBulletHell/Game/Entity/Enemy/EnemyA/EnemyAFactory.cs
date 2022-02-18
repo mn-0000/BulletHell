@@ -7,7 +7,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
     class EnemyAFactory : EnemyFactory
     {
         override
-        public Entity CreateEnemy()
+        public AbstractEntity CreateEnemy()
         {
             EnemyA spawn = new EnemyA();
             return spawn;

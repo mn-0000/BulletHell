@@ -6,6 +6,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
 {
     abstract class EnemyFactory : EntityFactory
     {
-        public abstract Entity CreateEnemy();
+        AbstractEntity enemy;
+        public abstract AbstractEntity CreateEnemy();
     }
 }

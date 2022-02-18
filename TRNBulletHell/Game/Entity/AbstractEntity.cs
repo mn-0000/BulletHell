@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace TRNBulletHell.Game.Entity
 {
-    abstract class Entity
+    abstract class AbstractEntity
     {
         protected Texture2D texture;
         protected Vector2 position;
