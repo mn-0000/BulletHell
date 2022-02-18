@@ -7,12 +7,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace TRNBulletHell.Game.Entity.Player
 {
-    class Player : Entity
+    class Player : AbstractEntity
     {
         
         
-        public Player()
+        public Player(Texture2D image)
         {
+            this.texture = image;
             // Initialize starting position at the bottom of the screen.
             this.Xposition = 300;
             this.Yposition = 300;
@@ -23,7 +24,7 @@ namespace TRNBulletHell.Game.Entity.Player
         }
 
 
-        public void moveLeft(int speed)
+        private void moveLeft(int speed)
         {
 
             float newPosition = position.X + -speed;
@@ -35,7 +36,7 @@ namespace TRNBulletHell.Game.Entity.Player
    
         }
 
-        public void moveRight(int speed)
+        private void moveRight(int speed)
         {
             float newPosition = position.X + speed;
             if (newPosition > 750)
@@ -45,7 +46,7 @@ namespace TRNBulletHell.Game.Entity.Player
             position.X = newPosition;
         }
 
-        public void moveUp(int speed)
+        private void moveUp(int speed)
         {
             float newPosition = position.Y + -speed;
             if (newPosition < 0)
@@ -56,7 +57,7 @@ namespace TRNBulletHell.Game.Entity.Player
 
         }
 
-        public void moveDown(int speed)
+        private void moveDown(int speed)
         {
             float newPosition = position.Y + speed;
             if (newPosition > 400)

@@ -5,10 +5,14 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/background.png</File>
+    <File>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/bullet.png</File>
     <File>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/enemyA.png</File>
+    <File>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/enemyB.png</File>
     <File>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/player.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TRNBulletHell.Game.Entity.Enemy;
+using TRNBulletHell.Game.Entity.Enemy.EnemyA;
 using TRNBulletHell.Game.Entity.Player;
 namespace TRNBulletHell
 {
@@ -10,12 +12,13 @@ namespace TRNBulletHell
         private SpriteBatch _spriteBatch;
 
 
-        Texture2D enemySprite;
+        Texture2D enemyASprite;
         Texture2D playerSprite;
         Texture2D backgroundSprite;
+        Texture2D bullet;
+        Texture2D enemyB;
 
-
-        Player player = new Player();
+        Player player;
        
 
         public GameDriver()
@@ -27,6 +30,7 @@ namespace TRNBulletHell
 
         protected override void Initialize()
         {
+            player = new Player(Content.Load<Texture2D>("player"));
             // TODO: Add your initialization logic here
             
             base.Initialize();
@@ -34,9 +38,12 @@ namespace TRNBulletHell
 
         protected override void LoadContent()
         {
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            enemySprite = Content.Load<Texture2D>("enemyA");
-            playerSprite = Content.Load<Texture2D>("player");
+            enemyASprite = Content.Load<Texture2D>("enemyA");
+            enemyB = Content.Load<Texture2D>("enemyB");
+            bullet = Content.Load<Texture2D>("bullet");
+            playerSprite = player.getImage();
             backgroundSprite = Content.Load<Texture2D>("background");
 
             // TODO: use this.Content to load your game content here
@@ -53,6 +60,14 @@ namespace TRNBulletHell
 
             player.checkIfPlayersMoving(state);
             
+            /*Create enemies A/B during this time frame?
+            if(gameTime.TotalGameTime.TotalSeconds <= 0.48)
+            {
+                EnemyA enemyA 
+                EnemyFactory.CreateEnemy(enemyA);
+            }*/
+
+
             base.Update(gameTime);
         }
 
@@ -62,7 +77,10 @@ namespace TRNBulletHell
 
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(enemySprite, new Vector2(300, 0), Color.White);
+            _spriteBatch.Draw(enemyASprite, new Vector2(300, 0), Color.White);
+            _spriteBatch.Draw(enemyB, new Vector2(150, 150), Color.White);
+            _spriteBatch.Draw(bullet, new Vector2(400, 200), Color.White);
+            _spriteBatch.Draw(enemyASprite, new Vector2(300, 0), Color.White);
             _spriteBatch.Draw(playerSprite, player.getPosition(), Color.White);
             
             _spriteBatch.End();

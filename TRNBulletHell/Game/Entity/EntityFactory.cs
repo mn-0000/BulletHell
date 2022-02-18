@@ -6,5 +6,6 @@ namespace TRNBulletHell.Game.Entity
 {
     abstract class EntityFactory
     {
+        
     }
 }
