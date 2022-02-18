@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/player.png</SourceFile>
-  <SourceTime>2022-02-16T16:02:11.3139581-08:00</SourceTime>
-  <DestFile>C:/Users/miran/OneDrive/Desktop/HellShooterGame/teamreptileninjas/TRNBulletHell/Content/bin/DesktopGL/player.xnb</DestFile>
-  <DestTime>2022-02-17T16:59:47.3679794-08:00</DestTime>
+  <SourceFile>C:/Users/miran/OneDrive/Desktop/projects/teamreptileninjas/TRNBulletHell/Content/player.png</SourceFile>
+  <SourceTime>2022-02-18T12:06:25.7706862-08:00</SourceTime>
+  <DestFile>C:/Users/miran/OneDrive/Desktop/projects/teamreptileninjas/TRNBulletHell/Content/bin/DesktopGL/player.xnb</DestFile>
+  <DestTime>2022-02-18T13:06:49.4495883-08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T09:17:54-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

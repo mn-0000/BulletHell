@@ -9,7 +9,7 @@ namespace TRNBulletHell.Game.Entity
     abstract class AbstractEntity
     {
         protected Texture2D texture;
-        protected Vector2 position;
+        public Vector2 position;
         protected float Xposition;
         protected float Yposition;
 
