@@ -9,7 +9,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
     class EnemyA : Enemy
     {
         public float Speed;
-
+        public int Step;
         public EnemyA(Texture2D texture) { 
          
             this.texture = texture;
@@ -23,36 +23,39 @@ namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
         }
         public void firstAttack()
         {
-
-            if (this.position.X < 230)
-            {
-                this.position.X += Speed;
-            }
-            else if (this.position.Y < 150)
-            {
-                this.position.Y += Speed;
-            }
-            else if (this.position.X < 375)
-            {
-                this.position.X += Speed;
-            }
-            else if (this.position.Y < 300)
-            {
-                this.position.Y += Speed;
-            }
-            else if (this.position.X < 750)
-            {
-                this.position.X += Speed;
-            }
-
-            /*Cant move the enemy up or left.
-             * 
-             * else if (this.position.Y > 500){
-             *      this.position.Y -= Speed
-             * }
-             * 
-             */
-            
+                switch (Step)
+                {
+                    case 0:
+                        this.position.X += Speed;
+                        if (this.position.X == 230) Step++;
+                        break;
+                    case 1:
+                        this.position.Y += Speed;
+                        if (this.position.Y == 150) Step++;
+                        break;
+                    case 2:
+                        this.position.X += Speed;
+                        if (this.position.X == 400) Step++;
+                        break;
+                    case 3:
+                        this.position.Y += Speed;
+                        if (this.position.Y == 300) Step++;
+                        break;
+                    case 4:
+                        this.position.X += Speed;
+                        if (this.position.X == 500) Step++;
+                        break;
+                    case 5:
+                        this.position.Y -= Speed;
+                        if (this.position.Y == 100) Step++;
+                        break;
+                    case 6:
+                        this.position.X -= Speed;
+                        if (this.position.X == 100) Step++;
+                        break;
+                    default:
+                        break;
+                }
         }
     }
 }
