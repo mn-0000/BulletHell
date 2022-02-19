@@ -95,6 +95,32 @@ namespace TRNBulletHell.Game.Entity.Player
                 this.moveDown(speed);
                 //move player backwards
             }
+
+            /**
+             * Alternatively if a character chooses to use the WASD keys
+             * the codes below should work perfect.
+             * 
+             **/
+
+            if (state.IsKeyDown(Keys.W))
+            {
+                this.moveUp(speed);
+            }
+
+            if (state.IsKeyDown(Keys.S))
+            {
+                this.moveDown(speed);
+            }
+
+            if (state.IsKeyDown(Keys.A))
+            {
+                this.moveLeft(speed);
+            }
+
+            if (state.IsKeyDown(Keys.D))
+            {
+                this.moveRight(speed);
+            }
         }
        
     }
