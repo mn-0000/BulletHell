@@ -6,10 +6,12 @@ using Microsoft.Xna.Framework;
 
 namespace TRNBulletHell.Game.Entity
 {
-    abstract class AbstractEntity
+    public abstract class AbstractEntity
     {
         protected Texture2D texture;
         public Vector2 position;
+        public Vector2 origin;
+        public Vector2 direction;
         protected float Xposition;
         protected float Yposition;
 

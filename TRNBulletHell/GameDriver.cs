@@ -2,6 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
+using TRNBulletHell.Game.Bullet;
+using TRNBulletHell.Game.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.Enemy;
 using TRNBulletHell.Game.Entity.Enemy.EnemyA;
 using TRNBulletHell.Game.Entity.Player;
@@ -21,6 +24,7 @@ namespace TRNBulletHell
         Player player;
         EnemyA enemyA;
         SpriteFont font;
+        private List<BulletA> Bullets;
 
         public GameDriver()
         {
@@ -34,7 +38,7 @@ namespace TRNBulletHell
             player = new Player(Content.Load<Texture2D>("player"));
             enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
             // TODO: Add your initialization logic here
-            
+
             base.Initialize();
         }
 
@@ -63,7 +67,9 @@ namespace TRNBulletHell
 
             player.checkIfPlayersMoving(state);
 
-            enemyA.firstAttack();
+            //enemyA.firstAttack();
+
+            enemyA.Update(gameTime, Bullets);
       
             base.Update(gameTime);
         }

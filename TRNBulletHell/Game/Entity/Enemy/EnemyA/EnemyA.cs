@@ -3,12 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TRNBulletHell.Game.Bullet.BulletA;
 
 namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
 {
     class EnemyA : Enemy
     {
         public float Speed;
+        public BulletA Bullet;
 
         public EnemyA(Texture2D texture) { 
          
@@ -52,7 +54,18 @@ namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
              * }
              * 
              */
-            
+        }
+
+        public void Update(GameTime gameTime, List<BulletA> bullets)
+        {
+            firstAttack();
+
+            var bullet = new BulletA(texture);
+            bullet.Direction = this.direction;
+            bullet.Position = this.position;
+            bullet.LinearVelocity = this.Speed * 2;
+            bullets.Add(bullet);
+
         }
     }
 }
