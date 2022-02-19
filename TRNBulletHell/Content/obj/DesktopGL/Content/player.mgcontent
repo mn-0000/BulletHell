@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<<<<<<< HEAD
   <SourceFile>C:/Users/colinwillis/Desktop/teamreptileninjas/TRNBulletHell/Content/player.png</SourceFile>
   <SourceTime>2022-02-18T17:20:43.8368389-08:00</SourceTime>
   <DestFile>C:/Users/colinwillis/Desktop/teamreptileninjas/TRNBulletHell/Content/bin/DesktopGL/Content/player.xnb</DestFile>
   <DestTime>2022-02-18T17:23:50.8879101-08:00</DestTime>
+=======
+  <SourceFile>C:/Users/ddeni/OneDrive/Desktop/teamreptileninjas/TRNBulletHell/Content/player.png</SourceFile>
+  <SourceTime>2022-02-18T21:29:46.4059446-08:00</SourceTime>
+  <DestFile>C:/Users/ddeni/OneDrive/Desktop/teamreptileninjas/TRNBulletHell/Content/bin/DesktopGL/Content/player.xnb</DestFile>
+  <DestTime>2022-02-18T21:31:15.2544389-08:00</DestTime>
+>>>>>>> 3b7cc5ea9f6b60b54bf170c27e44184d5166dc1f
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T09:17:54-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
