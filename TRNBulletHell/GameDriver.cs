@@ -2,6 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
+using TRNBulletHell.Game.Bullet;
+using TRNBulletHell.Game.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.Enemy;
 using TRNBulletHell.Game.Entity;
 namespace TRNBulletHell
@@ -12,14 +15,16 @@ namespace TRNBulletHell
         private SpriteBatch _spriteBatch;
 
 
-        Texture2D enemyASprite;
+        Texture2D enemyATexture;
         Texture2D playerSprite;
         Texture2D backgroundSprite;
-        Texture2D bullet;
+        //Texture2D bulletTexture;
         Texture2D enemyB;
         Player player;
         EnemyA enemyA;
         SpriteFont font;
+        //BulletA bulletA;
+        private List<AbstractEntity> entities;
 
         public GameDriver()
         {
@@ -33,7 +38,8 @@ namespace TRNBulletHell
             player = new Player(Content.Load<Texture2D>("player"));
             enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
             // TODO: Add your initialization logic here
-            
+
+
             base.Initialize();
         }
 
@@ -41,12 +47,22 @@ namespace TRNBulletHell
         {
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            enemyASprite = Content.Load<Texture2D>("enemyA");
+            //enemyASprite = Content.Load<Texture2D>("enemyA");
             enemyB = Content.Load<Texture2D>("enemyB");
-            bullet = Content.Load<Texture2D>("bullet");
             playerSprite = player.getImage();
             font = Content.Load<SpriteFont>("galleryFont");
             backgroundSprite = Content.Load<Texture2D>("background");
+
+            enemyATexture = Content.Load<Texture2D>("enemyA");
+
+            entities = new List<AbstractEntity>
+            {
+                new EnemyA(enemyATexture)
+                {
+                    position = new Vector2(100, 100),
+                    BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
+                }
+            };
 
             // TODO: use this.Content to load your game content here
         }
@@ -62,9 +78,27 @@ namespace TRNBulletHell
 
             player.checkIfPlayersMoving(state);
 
-            enemyA.firstAttack();
-      
+            foreach (var entity in entities.ToArray())
+            {
+                entity.Update(gameTime, entities);
+            }
+
+            EntityUpdate();
+
+
             base.Update(gameTime);
+        }
+
+        private void EntityUpdate()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].isRemoved)
+                {
+                    entities.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -72,13 +106,20 @@ namespace TRNBulletHell
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
+
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(enemyASprite, enemyA.position, Color.White);
+            //_spriteBatch.Draw(enemyATexture, enemyA.position, Color.White);
             _spriteBatch.Draw(enemyB, new Vector2(150, 150), Color.White);
-            _spriteBatch.Draw(bullet, new Vector2(400, 200), Color.White);
+            //_spriteBatch.Draw(enemyA.Bullet.Texture, enemyA.Bullet.Position, Color.White);
             //_spriteBatch.Draw(enemyASprite, new Vector2(300, 0), Color.White);
             _spriteBatch.Draw(playerSprite, player.getPosition(), Color.White);
             _spriteBatch.DrawString(font, player.position.ToString(), new Vector2(150, 0), Color.White);
+
+            foreach (var entity in entities)
+            {
+                entity.Draw(_spriteBatch);
+            }
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TRNBulletHell.Game.Bullet.BulletB
 {
-    class BulletB : Bullet
+    public class BulletB : Bullet
     {
         public BulletB(Texture2D texture) : base(texture)
         {
