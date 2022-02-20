@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using TRNBulletHell.Game.Bullet.BulletA;
 
-namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
+namespace TRNBulletHell.Game.Entity.Enemy
 {
     class EnemyA : Enemy
     {
@@ -13,18 +13,18 @@ namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
         public int Step;
         public BulletA Bullet;
 
-        public EnemyA(Texture2D texture) { 
-         
-            this.texture = texture;
-        
-       
-            Speed = 2f;
-        }
-        public EnemyA()
+        public EnemyA(Texture2D texture) : base(texture)
         {
 
+
+            Speed = 2f;
         }
+<<<<<<< HEAD:TRNBulletHell/Game/Entity/Enemy/EnemyA/EnemyA.cs
         public void firstAttack(GameTime gameTime)
+=======
+
+        public void firstAttack()
+>>>>>>> 2-FactoryClasses:TRNBulletHell/Game/Entity/Enemy/EnemyA.cs
         {
                 switch (Step)
                 {

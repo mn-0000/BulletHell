@@ -6,8 +6,8 @@ namespace TRNBulletHell.Game
 {
     class Game
     {
-        private int timer;
-        private int score;
+        //private int timer;
+        //private int score;
 
     }
 }

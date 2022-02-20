@@ -1,5 +1,9 @@
+<<<<<<< HEAD:TRNBulletHell/Game/Bullet/BulletB/BulletB.cs
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+=======
+﻿using Microsoft.Xna.Framework.Graphics;
+>>>>>>> 2-FactoryClasses:TRNBulletHell/Game/Entity/Bullet/BulletB.cs
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +16,7 @@ namespace TRNBulletHell.Game.Bullet.BulletB
         {
 
         }
+<<<<<<< HEAD:TRNBulletHell/Game/Bullet/BulletB/BulletB.cs
 
         public override void Update(GameTime gameTime)
         {
@@ -22,5 +27,7 @@ namespace TRNBulletHell.Game.Bullet.BulletB
         {
             spriteBatch.Draw(Texture, Position, Color.White);
         }
+=======
+>>>>>>> 2-FactoryClasses:TRNBulletHell/Game/Entity/Bullet/BulletB.cs
     }
 }

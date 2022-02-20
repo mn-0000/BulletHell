@@ -6,8 +6,11 @@ using System.Collections.Generic;
 using TRNBulletHell.Game.Bullet;
 using TRNBulletHell.Game.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.Enemy;
+<<<<<<< HEAD
 using TRNBulletHell.Game.Entity.Enemy.EnemyA;
 using TRNBulletHell.Game.Entity.Player;
+=======
+>>>>>>> 2-FactoryClasses
 using TRNBulletHell.Game.Entity;
 namespace TRNBulletHell
 {
