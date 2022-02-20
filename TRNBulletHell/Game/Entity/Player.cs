@@ -3,17 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-namespace TRNBulletHell.Game.Entity.Player
+namespace TRNBulletHell.Game.Entity
 {
     class Player : AbstractEntity
     {
+        public bool hasDied = false;
         
-        
-        public Player(Texture2D image)
+        public Player(Texture2D image) : base(image)
         {
-            this.texture = image;
             // Initialize starting position at the bottom of the screen.
             this.Xposition = 300;
             this.Yposition = 300;
@@ -23,6 +21,18 @@ namespace TRNBulletHell.Game.Entity.Player
             position.Y = this.Yposition;
         }
 
+        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        {
+            // runs through the list of entities and kills the player if touching bullet/enemy
+            foreach(var entity in entities)
+            {
+                if (entity == this) continue;
+                if(entity.Rectangle.Intersects(this.Rectangle))
+                {
+                    this.hasDied = true;
+                }
+            }
+        }
 
         private void moveLeft(int speed)
         {

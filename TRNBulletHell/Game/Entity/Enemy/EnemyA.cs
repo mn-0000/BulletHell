@@ -4,11 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
+namespace TRNBulletHell.Game.Entity.Enemy
 {
     class EnemyA : Enemy
     {
         public float Speed;
+<<<<<<< HEAD:TRNBulletHell/Game/Entity/Enemy/EnemyA/EnemyA.cs
         public int Step;
         public EnemyA(Texture2D texture) { 
          
@@ -18,9 +19,16 @@ namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
             Speed = 2f;
         }
         public EnemyA()
+=======
+
+        public EnemyA(Texture2D texture) : base(texture)
+>>>>>>> 2-FactoryClasses:TRNBulletHell/Game/Entity/Enemy/EnemyA.cs
         {
 
+
+            Speed = 2f;
         }
+
         public void firstAttack()
         {
                 switch (Step)

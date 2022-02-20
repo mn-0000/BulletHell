@@ -3,8 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using TRNBulletHell.Game.Entity.Enemy;
-using TRNBulletHell.Game.Entity.Enemy.EnemyA;
-using TRNBulletHell.Game.Entity.Player;
+using TRNBulletHell.Game.Entity;
 namespace TRNBulletHell
 {
     public class GameDriver : Microsoft.Xna.Framework.Game

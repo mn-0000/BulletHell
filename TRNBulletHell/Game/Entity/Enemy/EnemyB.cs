@@ -6,15 +6,9 @@ using System.Text;
 
 namespace TRNBulletHell.Game.Entity.Enemy
 {
-    abstract class Enemy : AbstractEntity
+    class EnemyB : Enemy 
     {
-     
-        public Enemy(Texture2D texture) :base(texture)
-        {
-
-        }
-
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public EnemyB(Texture2D texture) : base(texture)
         {
 
         }

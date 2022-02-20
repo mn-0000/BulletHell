@@ -5,9 +5,9 @@ using System.Text;
 
 namespace TRNBulletHell.Game.Entity.Enemy.Boss
 {
-    abstract class Boss : Enemy
+    class MidBoss : Boss
     {
-        public Boss(Texture2D texture) : base(texture)
+        public MidBoss(Texture2D texture) : base(texture)
         {
 
         }
