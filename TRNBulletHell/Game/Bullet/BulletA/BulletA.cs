@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TRNBulletHell.Game.Entity;
 
 namespace TRNBulletHell.Game.Bullet.BulletA
 {
@@ -14,9 +15,9 @@ namespace TRNBulletHell.Game.Bullet.BulletA
 
         }
 
-        public override void Update(GameTime gameTime, List<Bullet> bullets)
+        public override void Update(GameTime gameTime)
         {
-            Position += Direction * LinearVelocity;
+           Position += Direction * LinearVelocity;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

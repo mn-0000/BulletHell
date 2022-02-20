@@ -4,21 +4,12 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-<<<<<<< HEAD
-    <File>C:/Users/colinwillis/Desktop/teamreptileninjas/TRNBulletHell/Content/background.png</File>
-    <File>C:/Users/colinwillis/Desktop/teamreptileninjas/TRNBulletHell/Content/bullet.png</File>
-    <File>C:/Users/colinwillis/Desktop/teamreptileninjas/TRNBulletHell/Content/enemyA.png</File>
-    <File>C:/Users/colinwillis/Desktop/teamreptileninjas/TRNBulletHell/Content/enemyB.png</File>
-    <File>C:/Users/colinwillis/Desktop/teamreptileninjas/TRNBulletHell/Content/galleryFont.spritefont</File>
-    <File>C:/Users/colinwillis/Desktop/teamreptileninjas/TRNBulletHell/Content/player.png</File>
-=======
-    <File>C:/Users/ddeni/OneDrive/Desktop/teamreptileninjas/TRNBulletHell/Content/background.png</File>
-    <File>C:/Users/ddeni/OneDrive/Desktop/teamreptileninjas/TRNBulletHell/Content/bullet.png</File>
-    <File>C:/Users/ddeni/OneDrive/Desktop/teamreptileninjas/TRNBulletHell/Content/enemyA.png</File>
-    <File>C:/Users/ddeni/OneDrive/Desktop/teamreptileninjas/TRNBulletHell/Content/enemyB.png</File>
-    <File>C:/Users/ddeni/OneDrive/Desktop/teamreptileninjas/TRNBulletHell/Content/galleryFont.spritefont</File>
-    <File>C:/Users/ddeni/OneDrive/Desktop/teamreptileninjas/TRNBulletHell/Content/player.png</File>
->>>>>>> 3b7cc5ea9f6b60b54bf170c27e44184d5166dc1f
+    <File>C:/Users/Colin Willis/Desktop/teamreptileninjas/TRNBulletHell/Content/background.png</File>
+    <File>C:/Users/Colin Willis/Desktop/teamreptileninjas/TRNBulletHell/Content/bullet.png</File>
+    <File>C:/Users/Colin Willis/Desktop/teamreptileninjas/TRNBulletHell/Content/enemyA.png</File>
+    <File>C:/Users/Colin Willis/Desktop/teamreptileninjas/TRNBulletHell/Content/enemyB.png</File>
+    <File>C:/Users/Colin Willis/Desktop/teamreptileninjas/TRNBulletHell/Content/galleryFont.spritefont</File>
+    <File>C:/Users/Colin Willis/Desktop/teamreptileninjas/TRNBulletHell/Content/player.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

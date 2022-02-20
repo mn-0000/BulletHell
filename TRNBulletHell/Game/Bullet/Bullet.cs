@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TRNBulletHell.Game.Bullet
 {
-    public abstract class Bullet
+    public abstract class Bullet : ICloneable
     {
         // The sprite
         public Texture2D Texture;
@@ -23,10 +23,13 @@ namespace TRNBulletHell.Game.Bullet
             Texture = texture;
         }
 
-        public abstract void Update(GameTime gameTime, List<Bullet> bullets);
+        public abstract void Update(GameTime gameTime);
 
         public abstract void Draw(SpriteBatch spriteBatch);
 
-
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

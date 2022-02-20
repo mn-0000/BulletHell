@@ -14,6 +14,17 @@ namespace TRNBulletHell.Game.Entity
         public Vector2 direction;
         protected float Xposition;
         protected float Yposition;
+        protected float speed;
+
+
+        //public AbstractEntity(Texture2D texture)
+        //{
+
+        //}
+
+        //public abstract void Update(GameTime gameTime, List<AbstractEntity> entities);
+
+        //public abstract void Draw(SpriteBatch spriteBatch);
 
         public Vector2 getPosition()
         {

@@ -11,6 +11,8 @@ namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
     {
         public float Speed;
         public int Step;
+        public BulletA Bullet;
+
         public EnemyA(Texture2D texture) { 
          
             this.texture = texture;
@@ -22,12 +24,15 @@ namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
         {
 
         }
-        public void firstAttack()
+        public void firstAttack(GameTime gameTime)
         {
                 switch (Step)
                 {
                     case 0:
                         this.position.X += Speed;
+                        //Bullet = AddBullet();
+                   
+                        //Bullet.Update(gameTime);
                         if (this.position.X == 230) Step++;
                         break;
                     case 1:
@@ -58,5 +63,22 @@ namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
                         break;
                 }
         }
+
+        public void Update(GameTime gameTime)
+        {
+            firstAttack(gameTime);
+            AddBullet();
+        }
+
+        private void AddBullet()
+        {
+            var bullet = Bullet.Clone() as BulletA;
+            bullet.Direction = new Vector2(this.direction.X, 100);
+            bullet.Position = this.position;
+            bullet.LinearVelocity = this.Speed * 2;
+            //return bullet;
+        }
+
+
     }
 }

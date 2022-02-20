@@ -13,7 +13,7 @@ namespace TRNBulletHell.Game.Bullet.BulletB
 
         }
 
-        public override void Update(GameTime gameTime, List<Bullet> bullets)
+        public override void Update(GameTime gameTime)
         {
             Position += Direction * LinearVelocity;
         }
