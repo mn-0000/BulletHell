@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/miran/OneDrive/Desktop/projects/teamreptileninjas/TRNBulletHell/Content/player.png</SourceFile>
-  <SourceTime>2022-02-18T12:06:25.7706862-08:00</SourceTime>
-  <DestFile>C:/Users/miran/OneDrive/Desktop/projects/teamreptileninjas/TRNBulletHell/Content/bin/DesktopGL/Content/player.xnb</DestFile>
-  <DestTime>2022-02-18T12:06:58.3859763-08:00</DestTime>
+  <SourceFile>C:/Users/Tanner/Documents/School/WSU/Senior Year/Spring 2022/CPTS_487/teamreptileninjas/TRNBulletHell/Content/player.png</SourceFile>
+  <SourceTime>2022-02-18T16:55:59.0815759-08:00</SourceTime>
+  <DestFile>C:/Users/Tanner/Documents/School/WSU/Senior Year/Spring 2022/CPTS_487/teamreptileninjas/TRNBulletHell/Content/bin/DesktopGL/Content/player.xnb</DestFile>
+  <DestTime>2022-02-18T16:59:19.7109673-08:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2020-08-10T16:17:54-07:00</ImporterTime>
+  <ImporterTime>2020-08-10T09:17:54-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2020-08-10T16:17:54-07:00</ProcessorTime>
+  <ProcessorTime>2020-08-10T09:17:54-07:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

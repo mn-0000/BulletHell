@@ -4,23 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TRNBulletHell.Game.Entity.Enemy.EnemyA
+namespace TRNBulletHell.Game.Entity.Enemy
 {
     class EnemyA : Enemy
     {
         public float Speed;
 
-        public EnemyA(Texture2D texture) { 
-         
-            this.texture = texture;
-        
-       
-            Speed = 2f;
-        }
-        public EnemyA()
+        public EnemyA(Texture2D texture) : base(texture)
         {
 
+
+            Speed = 2f;
         }
+
         public void firstAttack()
         {
 
