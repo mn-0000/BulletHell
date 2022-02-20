@@ -7,8 +7,10 @@ using TRNBulletHell.Game.Entity;
 
 namespace TRNBulletHell.Game.Bullet
 {
-    abstract class Bullet : AbstractEntity
+    public abstract class Bullet : AbstractEntity
     {
+        protected float life = 0f;
+
         public Bullet(Texture2D texture) : base(texture)
         {
 
@@ -18,6 +20,7 @@ namespace TRNBulletHell.Game.Bullet
         {
 
         }
+
     }
 
 }

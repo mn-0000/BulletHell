@@ -6,11 +6,6 @@ using System.Collections.Generic;
 using TRNBulletHell.Game.Bullet;
 using TRNBulletHell.Game.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.Enemy;
-<<<<<<< HEAD
-using TRNBulletHell.Game.Entity.Enemy.EnemyA;
-using TRNBulletHell.Game.Entity.Player;
-=======
->>>>>>> 2-FactoryClasses
 using TRNBulletHell.Game.Entity;
 namespace TRNBulletHell
 {
@@ -65,15 +60,9 @@ namespace TRNBulletHell
                 new EnemyA(enemyATexture)
                 {
                     position = new Vector2(100, 100),
-                    Bullet = new BulletA(Content.Load<Texture2D>("bullet")),
+                    BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
                 }
             };
-
-
-            //enemyA.Bullet = new BulletA(Content.Load<Texture2D>("bullet"));
-
-
-
 
             // TODO: use this.Content to load your game content here
         }
@@ -87,17 +76,29 @@ namespace TRNBulletHell
                 Exit();
             }
 
-            //player.checkIfPlayersMoving(state);
-            //enemyA.firstAttack(gameTime);
+            player.checkIfPlayersMoving(state);
 
             foreach (var entity in entities.ToArray())
             {
-                entity.Update(gameTime);
+                entity.Update(gameTime, entities);
             }
 
+            EntityUpdate();
 
 
             base.Update(gameTime);
+        }
+
+        private void EntityUpdate()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].isRemoved)
+                {
+                    entities.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -105,13 +106,20 @@ namespace TRNBulletHell
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            //_spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
+
+            _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
             //_spriteBatch.Draw(enemyATexture, enemyA.position, Color.White);
-            //_spriteBatch.Draw(enemyB, new Vector2(150, 150), Color.White);
+            _spriteBatch.Draw(enemyB, new Vector2(150, 150), Color.White);
             //_spriteBatch.Draw(enemyA.Bullet.Texture, enemyA.Bullet.Position, Color.White);
             //_spriteBatch.Draw(enemyASprite, new Vector2(300, 0), Color.White);
-            //_spriteBatch.Draw(playerSprite, player.getPosition(), Color.White);
-            //_spriteBatch.DrawString(font, player.position.ToString(), new Vector2(150, 0), Color.White);
+            _spriteBatch.Draw(playerSprite, player.getPosition(), Color.White);
+            _spriteBatch.DrawString(font, player.position.ToString(), new Vector2(150, 0), Color.White);
+
+            foreach (var entity in entities)
+            {
+                entity.Draw(_spriteBatch);
+            }
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }

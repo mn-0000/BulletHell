@@ -1,9 +1,5 @@
-<<<<<<< HEAD:TRNBulletHell/Game/Bullet/BulletA/BulletA.cs
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-=======
-﻿using Microsoft.Xna.Framework.Graphics;
->>>>>>> 2-FactoryClasses:TRNBulletHell/Game/Entity/Bullet/BulletA.cs
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,27 +9,20 @@ namespace TRNBulletHell.Game.Bullet.BulletA
 {
     public class BulletA : Bullet
     {
-<<<<<<< HEAD:TRNBulletHell/Game/Bullet/BulletA/BulletA.cs
-
-=======
->>>>>>> 2-FactoryClasses:TRNBulletHell/Game/Entity/Bullet/BulletA.cs
         public BulletA(Texture2D texture) : base(texture)
         {
-
+            
         }
-<<<<<<< HEAD:TRNBulletHell/Game/Bullet/BulletA/BulletA.cs
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
-           Position += Direction * LinearVelocity;
-        }
+            if (this.position.Y > 450)
+            {
+                isRemoved = true;
+            }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(Texture, Position, Color.White);
+            position += direction * speed;
         }
-=======
->>>>>>> 2-FactoryClasses:TRNBulletHell/Game/Entity/Bullet/BulletA.cs
     }
 
 }
