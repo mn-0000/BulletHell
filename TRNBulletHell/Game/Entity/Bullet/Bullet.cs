@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TRNBulletHell.Game.Entity;
 
-namespace TRNBulletHell.Game.Entity.Enemy
+namespace TRNBulletHell.Game.Bullet
 {
-    abstract class Enemy : AbstractEntity
+    abstract class Bullet : AbstractEntity
     {
-     
-        public Enemy(Texture2D texture) :base(texture)
+        public Bullet(Texture2D texture) : base(texture)
         {
 
         }
@@ -19,4 +19,5 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         }
     }
+
 }

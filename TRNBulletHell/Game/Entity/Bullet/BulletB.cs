@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TRNBulletHell.Game.Entity.Enemy.Boss
+namespace TRNBulletHell.Game.Bullet.BulletB
 {
-    abstract class Boss : Enemy
+    class BulletB : Bullet
     {
-        public Boss(Texture2D texture) : base(texture)
+        public BulletB(Texture2D texture) : base(texture)
         {
 
         }
