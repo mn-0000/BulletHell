@@ -364,3 +364,8 @@ FodyWeavers.xsd
 /MapInterface.rar
 /BusinessSearchDiagram.vsdx
 /MapInterface
+
+#VS folders
+TRNBulletHell/Content/bin
+TRNBulletHell/Content/obj
+
