@@ -60,7 +60,7 @@ namespace TRNBulletHell
                 Exit();
             }
 
-            player.checkIfPlayersMoving(state);
+            //player.checkIfPlayersMoving(state);
 
             enemyA.firstAttack();
       

@@ -23,6 +23,8 @@ namespace TRNBulletHell.Game.Entity
 
         public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
+            checkIfPlayersMoving(Keyboard.GetState());
+
             // runs through the list of entities and kills the player if touching bullet/enemy
             foreach(var entity in entities)
             {
