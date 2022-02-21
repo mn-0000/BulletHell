@@ -48,23 +48,26 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
                 case 4:
                     this.position.X += Speed;
                     shootBullet(entities);
-                    if (this.position.X >= 480) Step++;
+                    if (this.position.X >= 500) Step++;
                     break;
                 case 5:
-                    this.position.X -= 0.6f * Speed;
-                    this.position.Y += Speed;
-                    if (this.position.Y == 250) Step++;
+                    this.position.X -= 0.8f * Speed;
+                    this.position.Y += 0.6f * Speed;
+                    if (this.position.Y >= 280) Step++;
                     break;
                 case 6:
-                    this.position.X += 0.8f * Speed;
-                    this.position.Y += Speed;
+                    this.position.X += Speed;
+                    this.position.Y -= 0.75f * Speed;
                     shootBullet(entities);
-                    if (this.position.X == 100) Step++;
+                    if (this.position.Y <= 180) Step++;
+                    break;
+                case 7:
+                    this.position.Y -= 0.2f * Speed;
+                    if (this.position.Y <= 100) Step++;
                     break;
                 default:
                     break;
             }
-        }
 
         public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
