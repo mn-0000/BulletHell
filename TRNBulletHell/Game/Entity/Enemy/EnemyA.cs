@@ -54,7 +54,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
                     case 6:
                         this.position.X -= Speed;
                     shootBullet(entities);
-                    if (this.position.X == 100) Step++;
+                    if (this.position.X == -5) Step++;
                         break;
                     default:
                         break;
