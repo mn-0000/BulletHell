@@ -31,6 +31,8 @@ namespace TRNBulletHell
             _graphics = new GraphicsDeviceManager(this);           
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
+            _graphics.IsFullScreen = false;
+
         }
 
         protected override void Initialize()
@@ -38,9 +40,11 @@ namespace TRNBulletHell
             player = new Player(Content.Load<Texture2D>("player"));
             enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
             // TODO: Add your initialization logic here
-
+            
 
             base.Initialize();
+            _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+            _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
         }
 
         protected override void LoadContent()
