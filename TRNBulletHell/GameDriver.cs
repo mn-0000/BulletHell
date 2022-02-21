@@ -7,6 +7,8 @@ using TRNBulletHell.Game.Bullet;
 using TRNBulletHell.Game.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.Enemy;
 using TRNBulletHell.Game.Entity;
+using TRNBulletHell.Game.Entity.Enemy.Boss;
+
 namespace TRNBulletHell
 {
     public class GameDriver : Microsoft.Xna.Framework.Game
@@ -22,6 +24,8 @@ namespace TRNBulletHell
         Texture2D enemyB;
         Player player;
         EnemyA enemyA;
+        MidBoss midBoss;
+        FinalBoss finalBoss;
         SpriteFont font;
         //BulletA bulletA;
         private List<AbstractEntity> entities;
@@ -37,6 +41,8 @@ namespace TRNBulletHell
         {
             player = new Player(Content.Load<Texture2D>("player"));
             enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
+            midBoss = new MidBoss(Content.Load<Texture2D>("midboss"));
+            finalBoss = new FinalBoss(Content.Load<Texture2D>("boss"));
             // TODO: Add your initialization logic here
 
 
@@ -108,7 +114,8 @@ namespace TRNBulletHell
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            //_spriteBatch.Draw(enemyATexture, enemyA.position, Color.White);
+            _spriteBatch.Draw(midBoss.getImage(), new Vector2(50, 120), Color.White);
+            _spriteBatch.Draw(finalBoss.getImage(), new Vector2(50, 300), Color.White);
             _spriteBatch.Draw(enemyB, new Vector2(150, 150), Color.White);
             //_spriteBatch.Draw(enemyA.Bullet.Texture, enemyA.Bullet.Position, Color.White);
             //_spriteBatch.Draw(enemyASprite, new Vector2(300, 0), Color.White);
