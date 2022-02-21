@@ -68,6 +68,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
                 default:
                     break;
             }
+        }
 
         public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
