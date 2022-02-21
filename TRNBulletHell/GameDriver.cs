@@ -36,14 +36,18 @@ namespace TRNBulletHell
             _graphics = new GraphicsDeviceManager(this);           
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
+            _graphics.IsFullScreen = false;
+
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            
 
             base.Initialize();
+            _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+            _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
         }
 
         protected override void LoadContent()
