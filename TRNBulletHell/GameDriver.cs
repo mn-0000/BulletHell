@@ -37,17 +37,17 @@ namespace TRNBulletHell
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
             _graphics.IsFullScreen = false;
-
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
-
             base.Initialize();
-            _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
-            _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+
+            // Change window size (to be incorporated later)
+            //_graphics.PreferredBackBufferWidth = 960;
+            //_graphics.PreferredBackBufferHeight = 540;
+            //_graphics.ApplyChanges();
         }
 
         protected override void LoadContent()

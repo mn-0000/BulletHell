@@ -17,8 +17,8 @@ namespace TRNBulletHell.Game.Entity
         public Player(GraphicsDevice graphics,Texture2D image) : base(image)
         {
             // Initialize starting position at the bottom of the screen.
-            this.Xposition = 300;
-            this.Yposition = 300;
+            this.Xposition = 320;
+            this.Yposition = 320;
 
             position = new Vector2(0, 0);
             position.X = this.Xposition;
@@ -73,9 +73,9 @@ namespace TRNBulletHell.Game.Entity
         {
 
             float newPosition = position.X + -speed;
-            if (newPosition < 0)
+            if (newPosition < 25)
             {
-                newPosition = 0;
+                newPosition = 25;
             }
             position.X = newPosition;
    
@@ -84,9 +84,9 @@ namespace TRNBulletHell.Game.Entity
         private void moveRight(int speed)
         {
             float newPosition = position.X + speed;
-            if (newPosition > 750)
+            if (newPosition > 775)
             {
-                newPosition = 750;
+                newPosition = 775;
             }
             position.X = newPosition;
         }
@@ -94,9 +94,9 @@ namespace TRNBulletHell.Game.Entity
         private void moveUp(int speed)
         {
             float newPosition = position.Y + -speed;
-            if (newPosition < 0)
+            if (newPosition < 350)
             {
-                newPosition = 0;
+                newPosition = 350;
             }
             position.Y = newPosition;
 
@@ -105,9 +105,9 @@ namespace TRNBulletHell.Game.Entity
         private void moveDown(int speed)
         {
             float newPosition = position.Y + speed;
-            if (newPosition > 400)
+            if (newPosition > 450)
             {
-                newPosition = 400;
+                newPosition = 450;
             }
             position.Y = newPosition;
         }
