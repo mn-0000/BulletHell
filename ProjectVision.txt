@@ -1,0 +1,16 @@
+Team Reptile Ninjas Project Vision
+
+The first stage of the game is fighting enemy A. This enemy will last 20 seconds unless it is defeated. There will be 5 enemy A’s that are released 2 seconds apart. Enemy A will give 10 points if defeated. 
+
+The second stage of the game is fighting the mid boss. This enemy will last 30 seconds unless it is defeated. The mid boss will give 30 points if defeated.
+
+The third stage of the game is fighting the enemy B. This enemy will last 20 seconds unless it is defeated. 
+There will be 5 enemy B’s that are released 2 seconds apart. Enemy B will give 10 points if defeated.
+
+The final stage of the game is fighting the final boss. This enemy will last 1 minute unless it is defeated. The final boss will give 50 points if defeated.
+
+The player will start with three lives. The player can pick up extra lives that drop.
+
+Enemy A and enemy B will have 25 HP. The mid boss will have 50 HP and the final boss will have 100 HP.
+
+Our first type bullet will deal 5 damage and the second bullet type will deal 10 damage.
