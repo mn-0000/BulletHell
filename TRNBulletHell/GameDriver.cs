@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using TRNBulletHell.Game;
 using TRNBulletHell.Game.Bullet;
 using TRNBulletHell.Game.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.Enemy;
@@ -16,20 +17,19 @@ namespace TRNBulletHell
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
-
         Texture2D enemyATexture;
         Texture2D playerSprite;
         Texture2D backgroundSprite;
-        //Texture2D bulletTexture;
         Texture2D enemyB;
         Player player;
         EnemyA enemyA;
         MidBoss midBoss;
         FinalBoss finalBoss;
         SpriteFont font;
-        //BulletA bulletA;
         private List<AbstractEntity> entities;
+        protected int minutes;
+        protected int seconds;
+
 
         public GameDriver()
         {
@@ -37,15 +37,13 @@ namespace TRNBulletHell
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
             _graphics.IsFullScreen = false;
-
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            base.Initialize();
             
 
-            base.Initialize();
             _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
         }
@@ -82,6 +80,9 @@ namespace TRNBulletHell
 
         protected override void Update(GameTime gameTime)
         {
+            minutes = gameTime.TotalGameTime.Minutes;
+            seconds = gameTime.TotalGameTime.Seconds;
+
             KeyboardState state = Keyboard.GetState();
 
             if (state.IsKeyDown(Keys.Escape))
@@ -113,19 +114,23 @@ namespace TRNBulletHell
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
             _spriteBatch.Begin();
-
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
+
+            if (seconds < 10)
+            {
+                _spriteBatch.DrawString(font, $"{minutes + " : 0" + seconds}", new Vector2(700, 0), Color.White);
+            }
+            else
+            {
+                _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 10), Color.White);
+            }
+
+
             _spriteBatch.Draw(midBoss.getImage(), new Vector2(50, 120), Color.White);
             _spriteBatch.Draw(finalBoss.getImage(), new Vector2(50, 300), Color.White);
             _spriteBatch.Draw(enemyB, new Vector2(150, 150), Color.White);
-            //_spriteBatch.Draw(enemyA.Bullet.Texture, enemyA.Bullet.Position, Color.White);
-            //_spriteBatch.Draw(enemyASprite, new Vector2(300, 0), Color.White);
-            //_spriteBatch.Draw(playerSprite, player.getPosition(), Color.White);
-
-
+           
             foreach (var entity in entities)
             {
                 entity.Draw(_spriteBatch, entities);

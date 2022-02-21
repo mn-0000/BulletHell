@@ -10,8 +10,8 @@ namespace TRNBulletHell.Game.Entity
 {
     class Player : AbstractEntity
     {
-        public bool hasDied = false;
         protected Texture2D rectangleTexture;
+        public bool hasDied = false;
         public bool ShowHitbox = false;
 
         public Player(GraphicsDevice graphics,Texture2D image) : base(image)
@@ -24,9 +24,9 @@ namespace TRNBulletHell.Game.Entity
             position.X = this.Xposition;
             position.Y = this.Yposition;
 
+            // texture for drawing hitbox
             rectangleTexture = new Texture2D(graphics, 1, 1, false, SurfaceFormat.Color);
             rectangleTexture.SetData<Color>(new Color[] { Color.White });
-
         }
 
         public override Rectangle Rectangle
@@ -40,6 +40,7 @@ namespace TRNBulletHell.Game.Entity
         public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
             checkIfPlayersMoving(Keyboard.GetState());
+
             // runs through the list of entities and kills the player if touching bullet/enemy
             foreach (var entity in entities)
             {
@@ -51,6 +52,7 @@ namespace TRNBulletHell.Game.Entity
                 }
             }
         }
+
         public override void Draw(SpriteBatch spriteBatch, List<AbstractEntity> entities)
         {
             spriteBatch.Draw(texture, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 0);

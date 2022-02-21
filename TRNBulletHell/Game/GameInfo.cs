@@ -4,10 +4,9 @@ using System.Text;
 
 namespace TRNBulletHell.Game
 {
-    class Game
+    public class GameInfo
     {
-        //private int timer;
-        //private int score;
+        public int score;
 
     }
 }
