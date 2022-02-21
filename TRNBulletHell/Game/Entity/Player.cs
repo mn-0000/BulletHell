@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
+
 namespace TRNBulletHell.Game.Entity
 {
     class Player : AbstractEntity
     {
         public bool hasDied = false;
-        
-        public Player(Texture2D image) : base(image)
+        protected Texture2D rectangleTexture;
+        public bool ShowHitbox = false;
+
+        public Player(GraphicsDevice graphics,Texture2D image) : base(image)
         {
             // Initialize starting position at the bottom of the screen.
             this.Xposition = 300;
@@ -19,17 +23,48 @@ namespace TRNBulletHell.Game.Entity
             position = new Vector2(0, 0);
             position.X = this.Xposition;
             position.Y = this.Yposition;
+
+            rectangleTexture = new Texture2D(graphics, 1, 1, false, SurfaceFormat.Color);
+            rectangleTexture.SetData<Color>(new Color[] { Color.White });
+
+        }
+
+        public override Rectangle Rectangle
+        {
+            get
+            {
+                return new Rectangle((int)position.X - 1, (int)position.Y - 14, 5, 5);
+            }
         }
 
         public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
+            checkIfPlayersMoving(Keyboard.GetState());
             // runs through the list of entities and kills the player if touching bullet/enemy
-            foreach(var entity in entities)
+            foreach (var entity in entities)
             {
                 if (entity == this) continue;
                 if(entity.Rectangle.Intersects(this.Rectangle))
                 {
                     this.hasDied = true;
+                    Debug.WriteLine("player died");
+                }
+            }
+        }
+        public override void Draw(SpriteBatch spriteBatch, List<AbstractEntity> entities)
+        {
+            spriteBatch.Draw(texture, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 0);
+
+            if (ShowHitbox)
+            {
+                Debug.WriteLine("show hit box");
+                foreach (var entity in entities)
+                {
+                    if (entity == this)
+                    {
+                        spriteBatch.Draw(rectangleTexture, new Rectangle((int)position.X - 1, (int)position.Y - 14, 5, 5), Color.Black);
+                    }
+
                 }
             }
         }
@@ -79,10 +114,16 @@ namespace TRNBulletHell.Game.Entity
 
         public void checkIfPlayersMoving(KeyboardState state )
         {
-            int speed = 5;
-            if(state.IsKeyDown(Keys.LeftShift) || state.IsKeyDown(Keys.RightShift))
+
+            int speed = 8;
+            if (state.IsKeyDown(Keys.LeftShift) || state.IsKeyDown(Keys.RightShift))
             {
-                speed = 2;
+                speed = 5;
+                ShowHitbox = true;
+            }
+            else
+            {
+                ShowHitbox = false;
             }
 
             if (state.IsKeyDown(Keys.Left))
