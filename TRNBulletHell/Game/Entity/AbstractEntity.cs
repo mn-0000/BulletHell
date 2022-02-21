@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace TRNBulletHell.Game.Entity
 {
@@ -19,7 +20,7 @@ namespace TRNBulletHell.Game.Entity
         public bool isRemoved = false;
         public int counter = 0;
 
-        public Rectangle Rectangle
+        public virtual Rectangle Rectangle
         {
             get
             {
@@ -31,9 +32,17 @@ namespace TRNBulletHell.Game.Entity
         {
             texture = image;
             origin = new Vector2(texture.Width / 2, texture.Height / 2);
+
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public AbstractEntity(GraphicsDevice graphics,Texture2D image)
+        {
+            texture = image;
+            origin = new Vector2(texture.Width / 2, texture.Height / 2);
+
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch, List<AbstractEntity> entities)
         {
             spriteBatch.Draw(texture, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 0);
         }
