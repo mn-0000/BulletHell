@@ -10,63 +10,61 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
     class MidBoss : Boss
     {
         public float Speed;
-
         public int Step;
         public BulletA BulletClone;
+        public float timer;
 
         public MidBoss(Texture2D texture) : base(texture)
         {
+            timer = 0f;
             Speed = 2f;
         }
 
         public void firstAttack(GameTime gameTime, List<AbstractEntity> entities)
         {
-            switch (Step)
+            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (timer > 22)
             {
-                case 0:
-                    this.position.X += 0.8f * Speed;
-                    this.position.Y += Speed;
-                    shootBullet(entities);
-                    if (this.position.Y == 250) Step++;
-                    break;
-                case 1:
-                    this.position.X += 0.8f * Speed;
-                    this.position.Y -= Speed;
-                    if (this.position.Y <= 200 && this.position.X >= 360) Step++;
-                    break;
-                case 2:
-                    this.position.Y += Speed;
-                    this.position.X += 0.8f * Speed;
-                    shootBullet(entities);
-                    if (this.position.Y >= 250) Step++;
-                    break;
-                case 3:
-                    this.position.X -= Speed;
-                    this.position.Y -= 0.6f * Speed;
-                    if (this.position.Y <= 100) Step++;
-                    break;
-                case 4:
-                    this.position.X += Speed;
-                    shootBullet(entities);
-                    if (this.position.X >= 500) Step++;
-                    break;
-                case 5:
-                    this.position.X -= 0.8f * Speed;
-                    this.position.Y += 0.6f * Speed;
-                    if (this.position.Y >= 280) Step++;
-                    break;
-                case 6:
-                    this.position.X += Speed;
-                    this.position.Y -= 0.75f * Speed;
-                    shootBullet(entities);
-                    if (this.position.Y <= 180) Step++;
-                    break;
-                case 7:
-                    this.position.Y -= 0.2f * Speed;
-                    if (this.position.Y <= 100) Step++;
-                    break;
-                default:
-                    break;
+                switch (Step)
+                {
+                    case 0:
+                        this.position.X += Speed;
+                        shootBullet(entities);
+                        if (this.position.X >= 100) Step++;
+                        break;
+                    case 1:
+                        this.position.Y += Speed;
+                        if (this.position.Y >= 150) Step++;
+                        break;
+                    case 2:
+                        this.position.Y -= 0.4f * Speed;
+                        this.position.X += Speed;
+                        shootBullet(entities);
+                        if (this.position.Y <= 30) Step++;
+                        break;
+                    case 3:
+                        this.position.Y += Speed;
+                        if (this.position.Y >= 120) Step++;
+                        break;
+                    case 4:
+                        this.position.X -= Speed;
+                        shootBullet(entities);
+                        if (this.position.X <= 100) Step++;
+                        break;
+                    case 5:
+                        shootBullet(entities);
+                        this.position.X += 0.8f * Speed;
+                        if (this.position.X >= 300) Step++;
+                        break;
+                    case 6:
+                        this.position.Y -= 0.9f * Speed;
+                        if (this.position.Y == -5) Step++;
+                        break;
+                    default:
+                        break;
+                }
+
             }
         }
 

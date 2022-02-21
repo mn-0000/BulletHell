@@ -18,11 +18,14 @@ namespace TRNBulletHell
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Texture2D enemyATexture;
+        Texture2D enemyBTexture;
+        Texture2D midBossTexture;
+        Texture2D finalBossTexture;
         Texture2D playerSprite;
         Texture2D backgroundSprite;
-        Texture2D enemyB;
         Player player;
         EnemyA enemyA;
+        EnemyB enemyB;
         MidBoss midBoss;
         FinalBoss finalBoss;
         SpriteFont font;
@@ -53,26 +56,47 @@ namespace TRNBulletHell
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             player = new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"));
             enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
+            enemyB = new EnemyB(Content.Load<Texture2D>("enemyB"));
             midBoss = new MidBoss(Content.Load<Texture2D>("midboss"));
             finalBoss = new FinalBoss(Content.Load<Texture2D>("boss"));
-            enemyB = Content.Load<Texture2D>("enemyB");
             playerSprite = player.getImage();
             font = Content.Load<SpriteFont>("galleryFont");
             backgroundSprite = Content.Load<Texture2D>("background");
 
             enemyATexture = Content.Load<Texture2D>("enemyA");
+            enemyBTexture = Content.Load<Texture2D>("enemyB");
+            midBossTexture = Content.Load<Texture2D>("midBoss");
+            finalBossTexture = Content.Load<Texture2D>("boss");
 
             entities = new List<AbstractEntity>
             {
                 new EnemyA(enemyATexture)
                 {
-                    position = new Vector2(100, 100),
+                    position = new Vector2(-50, 100),
                     BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
                 },
                 new Player(_graphics.GraphicsDevice ,Content.Load<Texture2D>("player"))
                 {
 
-                }
+                },
+
+                new EnemyB(enemyBTexture)
+                {
+                    position = new Vector2(200, -100),
+                    BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
+                },
+
+                new MidBoss(midBossTexture)
+                {
+                    position = new Vector2(400, -100),
+                    BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
+                },
+
+                new FinalBoss(finalBossTexture)
+                {
+                    position = new Vector2(300, -100),
+                    BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
+                },
             };
 
             // TODO: use this.Content to load your game content here
@@ -125,11 +149,6 @@ namespace TRNBulletHell
             {
                 _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 10), Color.White);
             }
-
-
-            _spriteBatch.Draw(midBoss.getImage(), new Vector2(50, 120), Color.White);
-            _spriteBatch.Draw(finalBoss.getImage(), new Vector2(50, 300), Color.White);
-            _spriteBatch.Draw(enemyB, new Vector2(150, 150), Color.White);
            
             foreach (var entity in entities)
             {
