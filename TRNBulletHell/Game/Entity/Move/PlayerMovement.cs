@@ -6,11 +6,9 @@ public class PlayerMovement : Movement
 {
     public PlayerMovement()
     {
-        int start = 320;
-
-        position = new Vector2(0, 0);
-        position.X = start;
-        position.Y = start;
+        // Starting position
+        position = new Vector2(320, 320);
+    
     }
 	
         override
@@ -18,10 +16,10 @@ public class PlayerMovement : Movement
         {
         KeyboardState state = Keyboard.GetState();
 
-            int speed = 8;
+            int speed = 5;
             if (state.IsKeyDown(Keys.LeftShift) || state.IsKeyDown(Keys.RightShift))
             {
-                speed = 5;
+                speed = 1;
               //  ShowHitbox = true;
             }
             else

@@ -14,7 +14,6 @@ namespace TRNBulletHell.Game.Entity
         public bool isRemoved = false;
         public int counter = 0;
         public Movement movement;
-        private Color color = Color.Transparent;
 
         public virtual Rectangle Rectangle
         {
