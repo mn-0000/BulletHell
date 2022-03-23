@@ -68,37 +68,6 @@ namespace TRNBulletHell
             midBossTexture = Content.Load<Texture2D>("midBoss");
             finalBossTexture = Content.Load<Texture2D>("boss");
 
-            entities = new List<AbstractEntity>
-            {
-                new EnemyA(enemyATexture)
-                {
-                    position = new Vector2(-50, 100),
-                    BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
-                },
-                new Player(_graphics.GraphicsDevice ,Content.Load<Texture2D>("player"))
-                {
-
-                },
-
-                new EnemyB(enemyBTexture)
-                {
-                    position = new Vector2(200, -100),
-                    BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
-                },
-
-                new MidBoss(midBossTexture)
-                {
-                    position = new Vector2(400, -100),
-                    BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
-                },
-
-                new FinalBoss(finalBossTexture)
-                {
-                    position = new Vector2(300, -100),
-                    BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
-                },
-            };
-
             // TODO: use this.Content to load your game content here
         }
 
@@ -113,34 +82,19 @@ namespace TRNBulletHell
             {
                 Exit();
             }
-
-            foreach (var entity in entities.ToArray())
-            {
-                entity.Update(gameTime, entities);
-            }
-            EntityUpdate();
+            player.Update();
+      
 
 
             base.Update(gameTime);
         }
 
-        private void EntityUpdate()
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                if (entities[i].isRemoved)
-                {
-                    entities.RemoveAt(i);
-                    i--;
-                }
-            }
-        }
 
         protected override void Draw(GameTime gameTime)
         {
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-
+            player.Draw(_spriteBatch);
             if (seconds < 10)
             {
                 _spriteBatch.DrawString(font, $"{minutes + " : 0" + seconds}", new Vector2(700, 0), Color.White);
@@ -149,11 +103,7 @@ namespace TRNBulletHell
             {
                 _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 10), Color.White);
             }
-           
-            foreach (var entity in entities)
-            {
-                entity.Draw(_spriteBatch, entities);
-            }
+
 
             _spriteBatch.End();
             base.Draw(gameTime);
