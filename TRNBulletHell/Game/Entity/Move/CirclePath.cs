@@ -7,34 +7,27 @@ namespace TRNBulletHell.Game.Entity.Move
 {
     class CirclePath : Movement
     {
-       
-        public CirclePath()
-        
-       {
-                int start = 320;
-
-                position = new Vector2(0, 0);
-                position.X = start;
-                position.Y = start;
-            
-        }
-        double radius = 40;
+        double radius = 100;
         float angle = 0;
+        float originX = 300;
+        float originY = 175;
+        public CirclePath()
+    
+       {
+            position = new Vector2(300, 0);
+
+        }
+        
 
         public override void Moving()
         {
-            while (angle <= 360)
-            {
-
-                // xn = r * cos(a) and yn = r * sin(a)
-
-                position.X = position.X + (float)(radius * Math.Cos(2 * Math.PI));
-                position.Y = position.Y + (float)(radius * Math.Sin(2 * Math.PI));
-                angle++;
-            }
+                 
+     
+                  position.X = originX + (float)(radius * Math.Cos(angle));
+                  position.Y = originY + (float)(radius * Math.Sin(angle));
+                  angle = (float)(angle + 0.03);
            
+
         }
-
-
     }
 }

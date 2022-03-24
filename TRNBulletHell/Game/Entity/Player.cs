@@ -24,7 +24,7 @@ namespace TRNBulletHell.Game.Entity
             // texture for drawing hitbox
             rectangleTexture = new Texture2D(graphics, 1, 1, false, SurfaceFormat.Color);
             rectangleTexture.SetData<Color>(new Color[] { Color.White });
-            this.movement = new PlayerMovement();
+            this.movement = new ZigZagPath();
         }
 
         public override Rectangle Rectangle
