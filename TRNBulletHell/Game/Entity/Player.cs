@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
+using TRNBulletHell.Game.Entity.Move;
 
 namespace TRNBulletHell.Game.Entity
 {
@@ -14,166 +15,30 @@ namespace TRNBulletHell.Game.Entity
         public bool hasDied = false;
         public bool ShowHitbox = false;
 
+
         public Player(GraphicsDevice graphics,Texture2D image) : base(image)
         {
             // Initialize starting position at the bottom of the screen.
-            this.Xposition = 320;
-            this.Yposition = 320;
 
-            position = new Vector2(0, 0);
-            position.X = this.Xposition;
-            position.Y = this.Yposition;
 
             // texture for drawing hitbox
             rectangleTexture = new Texture2D(graphics, 1, 1, false, SurfaceFormat.Color);
             rectangleTexture.SetData<Color>(new Color[] { Color.White });
+            this.movement = new PlayerMovement();
         }
 
         public override Rectangle Rectangle
         {
             get
             {
-                return new Rectangle((int)position.X - 1, (int)position.Y - 14, 5, 5);
+                return new Rectangle((int)movement.position.X - 1, (int)movement.position.Y - 14, 5, 5);
             }
         }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public void Update()
         {
-            checkIfPlayersMoving(Keyboard.GetState());
+            this.movement.Moving();
 
-            // runs through the list of entities and kills the player if touching bullet/enemy
-            foreach (var entity in entities)
-            {
-                if (entity == this) continue;
-                if(entity.Rectangle.Intersects(this.Rectangle))
-                {
-                    this.hasDied = true;
-                    Debug.WriteLine("player died");
-                }
-            }
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, List<AbstractEntity> entities)
-        {
-            spriteBatch.Draw(texture, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 0);
-
-            if (ShowHitbox)
-            {
-                Debug.WriteLine("show hit box");
-                foreach (var entity in entities)
-                {
-                    if (entity == this)
-                    {
-                        spriteBatch.Draw(rectangleTexture, new Rectangle((int)position.X - 1, (int)position.Y - 14, 5, 5), Color.Black);
-                    }
-
-                }
-            }
-        }
-
-        private void moveLeft(int speed)
-        {
-
-            float newPosition = position.X + -speed;
-            if (newPosition < 25)
-            {
-                newPosition = 25;
-            }
-            position.X = newPosition;
-   
-        }
-
-        private void moveRight(int speed)
-        {
-            float newPosition = position.X + speed;
-            if (newPosition > 775)
-            {
-                newPosition = 775;
-            }
-            position.X = newPosition;
-        }
-
-        private void moveUp(int speed)
-        {
-            float newPosition = position.Y + -speed;
-            if (newPosition < 350)
-            {
-                newPosition = 350;
-            }
-            position.Y = newPosition;
-
-        }
-
-        private void moveDown(int speed)
-        {
-            float newPosition = position.Y + speed;
-            if (newPosition > 450)
-            {
-                newPosition = 450;
-            }
-            position.Y = newPosition;
-        }
-
-        public void checkIfPlayersMoving(KeyboardState state )
-        {
-
-            int speed = 8;
-            if (state.IsKeyDown(Keys.LeftShift) || state.IsKeyDown(Keys.RightShift))
-            {
-                speed = 5;
-                ShowHitbox = true;
-            }
-            else
-            {
-                ShowHitbox = false;
-            }
-
-            if (state.IsKeyDown(Keys.Left))
-            {
-                this.moveLeft(speed);
-                //move player left
-            }
-            if (state.IsKeyDown(Keys.Right))
-            {
-                this.moveRight(speed);
-                //move player right
-            }
-            if (state.IsKeyDown(Keys.Up))
-            {
-                this.moveUp(speed);
-                //move player forward 
-            }
-            if (state.IsKeyDown(Keys.Down))
-            {
-                this.moveDown(speed);
-                //move player backwards
-            }
-
-            /**
-             * Alternatively if a character chooses to use the WASD keys
-             * the codes below should work perfect.
-             * 
-             **/
-
-            if (state.IsKeyDown(Keys.W))
-            {
-                this.moveUp(speed);
-            }
-
-            if (state.IsKeyDown(Keys.S))
-            {
-                this.moveDown(speed);
-            }
-
-            if (state.IsKeyDown(Keys.A))
-            {
-                this.moveLeft(speed);
-            }
-
-            if (state.IsKeyDown(Keys.D))
-            {
-                this.moveRight(speed);
-            }
         }
        
     }

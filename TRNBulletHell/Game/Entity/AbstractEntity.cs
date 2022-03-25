@@ -11,40 +11,33 @@ namespace TRNBulletHell.Game.Entity
     public abstract class AbstractEntity : ICloneable
     {
         protected Texture2D texture;
-        public Vector2 position;
-        public Vector2 origin;
-        public Vector2 direction;
-        protected float Xposition;
-        protected float Yposition;
-        public float speed = 2f;
         public bool isRemoved = false;
         public int counter = 0;
+        public Movement movement;
 
         public virtual Rectangle Rectangle
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+                return new Rectangle((int)movement.position.X, (int)movement.position.Y, texture.Width, texture.Height);
             }
         }
 
         public AbstractEntity(Texture2D image)
         {
             texture = image;
-            origin = new Vector2(texture.Width / 2, texture.Height / 2);
 
         }
 
         public AbstractEntity(GraphicsDevice graphics,Texture2D image)
         {
             texture = image;
-            origin = new Vector2(texture.Width / 2, texture.Height / 2);
 
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, List<AbstractEntity> entities)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, movement.position, null, Color.White, 0, movement.origin, 1, SpriteEffects.None, 0);
         }
 
         public virtual void Update(GameTime gameTime, List<AbstractEntity> entities)
@@ -52,10 +45,6 @@ namespace TRNBulletHell.Game.Entity
 
         }
 
-        public Vector2 getPosition()
-        {
-            return this.position;
-        }
 
         public Texture2D getImage()
         {

@@ -23,7 +23,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
 
         public void firstAttack(GameTime gameTime, List<AbstractEntity> entities)
         {
-            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+           /* timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (timer > 33)
             {
@@ -66,7 +66,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
                         break;
                 }
 
-            }
+            }*/
         }
         
 
@@ -85,13 +85,13 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
         }
 
         private void AddBullet(List<AbstractEntity> entities)
-        {
+        {/*
             var bullet = BulletClone.Clone() as BulletA;
             bullet.direction = new Vector2(0, 1);
             bullet.position = this.position;
             bullet.speed = this.Speed * 2;
             entities.Add(bullet);
-            counter++;
+            counter++;*/
         }
     }
 }
