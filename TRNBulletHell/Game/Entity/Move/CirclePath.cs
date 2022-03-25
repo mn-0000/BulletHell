@@ -37,7 +37,7 @@ namespace TRNBulletHell.Game.Entity.Move
             {
                 position.X = originX + (float)(radius * Math.Cos(angle));
                 position.Y = originY + (float)(radius * Math.Sin(angle));
-                angle = (float)(angle + 0.02);
+                angle = (float)(angle + 0.09);
                 
             }
             this.outsideWidthBoundary();
