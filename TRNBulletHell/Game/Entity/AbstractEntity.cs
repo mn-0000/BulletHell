@@ -55,5 +55,10 @@ namespace TRNBulletHell.Game.Entity
         {
             return this.MemberwiseClone();
         }
+
+        public Boolean Removed()
+        {
+            return this.isRemoved;
+        }
     }
 }

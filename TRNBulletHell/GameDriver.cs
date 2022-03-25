@@ -30,6 +30,7 @@ namespace TRNBulletHell
         FinalBoss finalBoss;
         SpriteFont font;
         private List<AbstractEntity> entities;
+        private List<Enemy> enemies = new List<Enemy>();
         protected int minutes;
         protected int seconds;
 
@@ -69,6 +70,8 @@ namespace TRNBulletHell
             finalBossTexture = Content.Load<Texture2D>("boss");
 
             // TODO: use this.Content to load your game content here
+
+            enemies.Add(enemyA);
         }
 
         protected override void Update(GameTime gameTime)
@@ -83,8 +86,18 @@ namespace TRNBulletHell
                 Exit();
             }
             player.Update();
-            enemyA.Update();
+           // enemyA.Update();
 
+            foreach (var enemy in enemies.ToArray())
+            {
+                enemy.Update();
+                if (enemy.isRemoved)
+                {
+                    //Removing enemy from list once movemet is finished?
+                    // what should our logic be once the enemies are off screen?
+                    enemies.Remove(enemy);
+                }
+            }
 
             base.Update(gameTime);
         }

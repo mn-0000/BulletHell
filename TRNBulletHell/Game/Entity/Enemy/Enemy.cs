@@ -11,6 +11,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         //List of movements enemy will perform.
         public  List<Movement> movements = new List<Movement>();
+        int counter = 0;
         public Enemy(Texture2D texture) :base(texture)
         {
 
@@ -24,10 +25,16 @@ namespace TRNBulletHell.Game.Entity.Enemy
         {
             this.movement.Moving();
 
-            if (this.movement.isComplete() && movements.Count > 0)
+            
+            if (this.movement.isComplete() && counter < movements.Count)
             {
-                this.movement = movements[0];
-                movements.RemoveAt(0);
+                this.movement = movements[counter];
+                counter++;
+            }
+
+            if(movements[movements.Count-1].isComplete())
+            {
+                this.isRemoved = true;
             }
         }
 
