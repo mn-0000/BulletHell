@@ -83,7 +83,7 @@ namespace TRNBulletHell
                 Exit();
             }
             player.Update();
-      
+            enemyA.Update();
 
 
             base.Update(gameTime);
@@ -94,7 +94,9 @@ namespace TRNBulletHell
         {
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
+            _spriteBatch.DrawString(font, enemyA.movement.position.X.ToString() , new Vector2(100, 0), Color.White);
             player.Draw(_spriteBatch);
+            enemyA.Draw(_spriteBatch);
             if (seconds < 10)
             {
                 _spriteBatch.DrawString(font, $"{minutes + " : 0" + seconds}", new Vector2(700, 0), Color.White);

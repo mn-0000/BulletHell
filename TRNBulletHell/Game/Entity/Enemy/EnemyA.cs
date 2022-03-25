@@ -5,24 +5,28 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TRNBulletHell.Game.Bullet.BulletA;
+using TRNBulletHell.Game.Entity.Move;
 
 namespace TRNBulletHell.Game.Entity.Enemy
 {
     class EnemyA : Enemy
     {
-        public float Speed;
-        public int Step;
         public BulletA BulletClone;
 
         public EnemyA(Texture2D texture) : base(texture)
         {
-            Speed = 2f;
+            // choose the movements when you are creating the waves or we could choose the movements in the JSON and parse that way. 
+            // Use builder pattern to create enemies.
+            // Must instatiate this.movement in order to .Draw().
+            this.movement = new CirclePath();
+             Movement first = new AcrossScreen();
+             Movement second = new ZigZagPath();
+
+
+            this.addMove(first);
+            this.addMove(second);
         }
-
-    
-
-
-       
 
     }
 }
+

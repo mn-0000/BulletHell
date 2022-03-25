@@ -9,7 +9,7 @@ namespace TRNBulletHell.Game.Entity.Move
     {
         public AcrossScreen()
         {
-            position = new Vector2(0, 100);
+            position = new Vector2(-100, 100);
 
         }
 
@@ -23,6 +23,8 @@ namespace TRNBulletHell.Game.Entity.Move
             {
                 this.speed.X = (-this.speed.X)*2;
             }
+
+            this.outsideWidthBoundary();
         }
     }
 }

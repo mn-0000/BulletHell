@@ -9,7 +9,7 @@ namespace TRNBulletHell.Game.Entity.Move
     {
         public ZigZagPath()
         {
-            position = new Vector2(0, 0);
+            position = new Vector2(-10, 0);
 
         }
         float topBoundary = 0;
@@ -36,6 +36,8 @@ namespace TRNBulletHell.Game.Entity.Move
             {
                 this.speed.Y = -this.speed.Y;
             }
+
+            this.outsideWidthBoundary();
         }
     }
 }
