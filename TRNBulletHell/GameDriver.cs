@@ -37,11 +37,15 @@ namespace TRNBulletHell
         EnemyFactory enemyFactory = new EnemyFactory();
         BulletFactory bulletFactory = new BulletFactory();
         MovementCreator movementCreator = new MovementCreator();
+        private const float _delay = 2; // seconds
+        private float _remainingDelay = _delay;
+        private int enemyACount = 0;
+        private int enemyBCount = 0;
 
 
         public GameDriver()
         {
-            _graphics = new GraphicsDeviceManager(this);           
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
             _graphics.IsFullScreen = false;
@@ -50,7 +54,7 @@ namespace TRNBulletHell
         protected override void Initialize()
         {
             base.Initialize();
-            
+
 
             _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
@@ -75,16 +79,38 @@ namespace TRNBulletHell
 
             // TODO: use this.Content to load your game content here
 
-            for (int i = 0; i < 3; i++)
-            {
-
-            }
+            //enemies.Add(enemyA);
         }
 
         protected override void Update(GameTime gameTime)
         {
             minutes = gameTime.TotalGameTime.Minutes;
             seconds = gameTime.TotalGameTime.Seconds;
+            var timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            _remainingDelay -= timer;
+
+            // enemyAs spawn
+            for (int i = 0; i < 5; i++)
+            {
+                if (_remainingDelay <= 0 && enemyACount < 5)
+                {
+                    enemyACount++;
+                    enemies.Add(enemyFactory.CreateEnemy("EnemyA", enemyATexture));
+                    _remainingDelay = _delay;
+                }
+            }
+
+            // enemyBs spawn
+            for (int i = 0; i < 5; i++)
+            {
+                if (gameTime.TotalGameTime.Seconds >= 30 && _remainingDelay <= 0 && enemyBCount < 5)
+                {
+                    enemyBCount++;
+                    enemies.Add(enemyFactory.CreateEnemy("EnemyB", enemyBTexture));
+                    _remainingDelay = _delay;
+                }
+            }
 
             KeyboardState state = Keyboard.GetState();
 
@@ -93,7 +119,7 @@ namespace TRNBulletHell
                 Exit();
             }
             player.Update();
-           // enemyA.Update();
+            // enemyA.Update();
 
             foreach (var enemy in enemies.ToArray())
             {
@@ -114,9 +140,14 @@ namespace TRNBulletHell
         {
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.DrawString(font, enemyA.movement.position.X.ToString() , new Vector2(100, 0), Color.White);
+            //_spriteBatch.DrawString(font, enemyA.movement.position.X.ToString() , new Vector2(100, 0), Color.White);
             player.Draw(_spriteBatch);
-            enemyA.Draw(_spriteBatch);
+
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].Draw(_spriteBatch);
+            }
+
             if (seconds < 10)
             {
                 _spriteBatch.DrawString(font, $"{minutes + " : 0" + seconds}", new Vector2(700, 0), Color.White);

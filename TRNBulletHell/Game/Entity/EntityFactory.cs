@@ -10,6 +10,5 @@ namespace TRNBulletHell.Game.Entity
         public abstract Enemy.Enemy CreateEnemy(string type, Texture2D texture);
         public abstract Bullet.Bullet CreateBullet(string type, Texture2D texture);
         public abstract Movement CreateMovement(string type);
-             
     }
 }

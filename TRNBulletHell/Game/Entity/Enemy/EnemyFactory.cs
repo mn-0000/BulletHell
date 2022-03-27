@@ -31,7 +31,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
             
         }
 
-        public override Movement CreateMovement()
+        public override Movement CreateMovement(string type)
         {
             throw new NotImplementedException();
         }

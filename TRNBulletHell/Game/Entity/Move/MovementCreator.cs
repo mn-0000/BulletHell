@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TRNBulletHell.Game.Entity.Move
 {
-    class MovementCreator : EntityFactory
+    public class MovementCreator : EntityFactory
     {
         public override Bullet.Bullet CreateBullet(string type, Texture2D texture)
         {
