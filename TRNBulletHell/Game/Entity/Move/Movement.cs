@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 
 public abstract class Movement
@@ -10,7 +9,7 @@ public abstract class Movement
     public Vector2 origin;
     public Vector2 speed = new Vector2(2f, 2f);
     public int screenWidth = 775;
-    private bool complete = false;
+    private Boolean complete = false;
     
 
     public abstract void Moving();
@@ -19,15 +18,14 @@ public abstract class Movement
     {
         this.complete = true;
     }
-    public bool isComplete()
+    public Boolean isComplete()
     {
         return complete;
     }
 
     public void outsideWidthBoundary()
     {
-        if(this.position.X < 100 || 
-            this.position.X > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width)
+        if(this.position.X < -100 || this.position.X > 780)
         {
             this.completedMovement();
         }

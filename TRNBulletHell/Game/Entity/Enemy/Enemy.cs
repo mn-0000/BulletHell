@@ -6,13 +6,13 @@ using System.Text;
 
 namespace TRNBulletHell.Game.Entity.Enemy
 {
-    public abstract class Enemy : AbstractEntity
+    abstract class Enemy : AbstractEntity
     {
 
         //List of movements enemy will perform.
         public  List<Movement> movements = new List<Movement>();
         int counter = 0;
-        public AbstractEnemy(Texture2D texture) :base(texture)
+        public Enemy(Texture2D texture) :base(texture)
         {
 
         }

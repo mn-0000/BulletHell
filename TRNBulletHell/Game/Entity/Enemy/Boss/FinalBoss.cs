@@ -13,53 +13,60 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
 
         public int Step;
         public BulletA BulletClone;
+        public float timer;
 
         public FinalBoss(Texture2D texture) : base(texture)
         {
+            timer = 0f;
             Speed = 2f;
         }
 
         public void firstAttack(GameTime gameTime, List<AbstractEntity> entities)
         {
-            switch (Step)
+           /* timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (timer > 33)
             {
-                case 0:
-                    this.position.X += Speed;
-                    shootBullet(entities);
-                    if (this.position.X >= 80) Step++;
-                    break;
-                case 1:
-                    this.position.Y += Speed;
-                    if (this.position.Y >= 280) Step++;
-                    break;
-                case 2:
-                    this.position.Y -= 0.4f * Speed;
-                    this.position.X += Speed;
-                    shootBullet(entities);
-                    if (this.position.Y <= 70) Step++;
-                    break;
-                case 3:
-                    this.position.Y += Speed;
-                    if (this.position.Y >= 280) Step++;
-                    break;
-                case 4:
-                    this.position.Y -= 0.4f * Speed;
-                    this.position.X -= Speed;
-                    shootBullet(entities);
-                    if (this.position.X <= 100) Step++;
-                    break;
-                case 5:
-                    this.position.X += 0.8f * Speed;
-                    if (this.position.X >= 400) Step++;
-                    break;
-                case 6:
-                    this.position.Y += 0.2f * Speed;
-                    shootBullet(entities);
-                    if (this.position.Y >= 150) Step++;
-                    break;
-                default:
-                    break;
-            }
+                switch (Step)
+                {
+                    case 0:
+                        this.position.X += Speed;
+                        shootBullet(entities);
+                        if (this.position.X >= 80) Step++;
+                        break;
+                    case 1:
+                        this.position.Y += Speed;
+                        if (this.position.Y >= 200) Step++;
+                        break;
+                    case 2:
+                        this.position.Y -= 0.4f * Speed;
+                        this.position.X += Speed;
+                        shootBullet(entities);
+                        if (this.position.Y <= 70) Step++;
+                        break;
+                    case 3:
+                        this.position.Y += Speed;
+                        if (this.position.Y >= 210) Step++;
+                        break;
+                    case 4:
+                        this.position.X -= Speed;
+                        shootBullet(entities);
+                        if (this.position.X <= 100) Step++;
+                        break;
+                    case 5:
+                        shootBullet(entities);
+                        this.position.X += 0.8f * Speed;
+                        if (this.position.X >= 400) Step++;
+                        break;
+                    case 6:
+                        this.position.Y -= 0.9f * Speed;
+                        if (this.position.Y == -100) Step++;
+                        break;
+                    default:
+                        break;
+                }
+
+            }*/
         }
         
 
@@ -78,13 +85,13 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
         }
 
         private void AddBullet(List<AbstractEntity> entities)
-        {
+        {/*
             var bullet = BulletClone.Clone() as BulletA;
             bullet.direction = new Vector2(0, 1);
             bullet.position = this.position;
             bullet.speed = this.Speed * 2;
             entities.Add(bullet);
-            counter++;
+            counter++;*/
         }
     }
 }
