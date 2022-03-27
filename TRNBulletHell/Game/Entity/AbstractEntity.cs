@@ -34,7 +34,7 @@ namespace TRNBulletHell.Game.Entity
             texture = image;
 
         }
-
+        
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, movement.position, null, Color.White, 0, movement.origin, 1, SpriteEffects.None, 0);

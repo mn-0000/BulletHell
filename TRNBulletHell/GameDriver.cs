@@ -10,6 +10,7 @@ using TRNBulletHell.Game.Entity.Enemy;
 using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Enemy.Boss;
 using System.Diagnostics;
+using TRNBulletHell.Game.Entity.Bullet;
 
 namespace TRNBulletHell
 {
@@ -23,6 +24,8 @@ namespace TRNBulletHell
         Texture2D finalBossTexture;
         Texture2D playerSprite;
         Texture2D backgroundSprite;
+        Texture2D playerBullet2D;
+        PlayerBullet playerBullet;
         Player player;
         EnemyA enemyA;
         EnemyB enemyB;
@@ -55,12 +58,12 @@ namespace TRNBulletHell
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            player = new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"));
+            //player = new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"));
             enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
-            enemyB = new EnemyB(Content.Load<Texture2D>("enemyB"));
-            midBoss = new MidBoss(Content.Load<Texture2D>("midboss"));
-            finalBoss = new FinalBoss(Content.Load<Texture2D>("boss"));
-            playerSprite = player.getImage();
+            //enemyB = new EnemyB(Content.Load<Texture2D>("enemyB"));
+            //midBoss = new MidBoss(Content.Load<Texture2D>("midboss"));
+            //finalBoss = new FinalBoss(Content.Load<Texture2D>("boss"));
+            //playerSprite = player.getImage();
             font = Content.Load<SpriteFont>("galleryFont");
             backgroundSprite = Content.Load<Texture2D>("background");
 
@@ -68,10 +71,27 @@ namespace TRNBulletHell
             enemyBTexture = Content.Load<Texture2D>("enemyB");
             midBossTexture = Content.Load<Texture2D>("midBoss");
             finalBossTexture = Content.Load<Texture2D>("boss");
+            playerBullet2D = Content.Load<Texture2D>("bullet");
 
-            // TODO: use this.Content to load your game content here
+            entities = new List<AbstractEntity>
+            {
+                new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
+                {
+                    playerBullet = new PlayerBullet(playerBullet2D)
+                },
 
-            enemies.Add(enemyA);
+                 
+            };
+
+            enemies = new List<Enemy>
+            {
+                new EnemyA(enemyATexture)
+                {
+                    BulletClone = new BulletA(playerBullet2D)
+                }
+            };
+
+            //enemies.Add(enemyA);
         }
 
         protected override void Update(GameTime gameTime)
@@ -85,19 +105,32 @@ namespace TRNBulletHell
             {
                 Exit();
             }
-            player.Update();
-           // enemyA.Update();
 
-            foreach (var enemy in enemies.ToArray())
+            foreach (var entity in entities.ToArray())
             {
-                enemy.Update();
-                if (enemy.isRemoved)
+                entity.Update(gameTime, entities);
+
+            }
+
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].isRemoved)
                 {
-                    //Removing enemy from list once movemet is finished?
-                    // what should our logic be once the enemies are off screen?
-                    enemies.Remove(enemy);
+                    entities.RemoveAt(i);
+                    i--;
                 }
             }
+
+            //foreach (var enemy in enemies.ToArray())
+            //{
+            //    enemy.Update(gameTime, entities);
+            //    if (enemy.isRemoved)
+            //    {
+            //        //Removing enemy from list once movemet is finished?
+            //        // what should our logic be once the enemies are off screen?
+            //        enemies.Remove(enemy);
+            //    }
+            //}
 
             base.Update(gameTime);
         }
@@ -108,8 +141,19 @@ namespace TRNBulletHell
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
             _spriteBatch.DrawString(font, enemyA.movement.position.X.ToString() , new Vector2(100, 0), Color.White);
-            player.Draw(_spriteBatch);
-            enemyA.Draw(_spriteBatch);
+            //player.Draw(_spriteBatch);
+            //enemyA.Draw(_spriteBatch);
+
+            foreach (var entity in entities)
+            {
+                entity.Draw(_spriteBatch);
+            }
+
+            foreach (var entity in enemies)
+            {
+                entity.Draw(_spriteBatch);
+            }
+
             if (seconds < 10)
             {
                 _spriteBatch.DrawString(font, $"{minutes + " : 0" + seconds}", new Vector2(700, 0), Color.White);
