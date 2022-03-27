@@ -6,17 +6,37 @@ using System.Text;
 
 namespace TRNBulletHell.Game.Entity.Enemy
 {
-    abstract class Enemy : AbstractEntity
+    public abstract class Enemy : AbstractEntity
     {
-     
-        public Enemy(Texture2D texture) :base(texture)
+
+        //List of movements enemy will perform.
+        public  List<Movement> movements = new List<Movement>();
+        int counter = 0;
+        public AbstractEnemy(Texture2D texture) :base(texture)
         {
 
         }
-
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public void addMove(Movement m)
         {
-
+            movements.Add(m);
         }
+
+        public virtual void Update()
+        {
+            this.movement.Moving();
+
+            
+            if (this.movement.isComplete() && counter < movements.Count)
+            {
+                this.movement = movements[counter];
+                counter++;
+            }
+
+            if(movements[movements.Count-1].isComplete())
+            {
+                this.isRemoved = true;
+            }
+        }
+
     }
 }

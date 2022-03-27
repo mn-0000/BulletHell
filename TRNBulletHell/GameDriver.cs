@@ -3,12 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using TRNBulletHell.Game;
 using TRNBulletHell.Game.Bullet;
 using TRNBulletHell.Game.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.Enemy;
 using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Enemy.Boss;
 using System.Diagnostics;
+using TRNBulletHell.Game.Entity.Move;
 
 namespace TRNBulletHell
 {
@@ -16,20 +18,26 @@ namespace TRNBulletHell
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
-
         Texture2D enemyATexture;
+        Texture2D enemyBTexture;
+        Texture2D midBossTexture;
+        Texture2D finalBossTexture;
         Texture2D playerSprite;
         Texture2D backgroundSprite;
-        //Texture2D bulletTexture;
-        Texture2D enemyB;
         Player player;
         EnemyA enemyA;
+        EnemyB enemyB;
         MidBoss midBoss;
         FinalBoss finalBoss;
         SpriteFont font;
-        //BulletA bulletA;
         private List<AbstractEntity> entities;
+        private List<Enemy> enemies = new List<Enemy>();
+        protected int minutes;
+        protected int seconds;
+        EnemyFactory enemyFactory = new EnemyFactory();
+        BulletFactory bulletFactory = new BulletFactory();
+        MovementCreator movementCreator = new MovementCreator();
+
 
         public GameDriver()
         {
@@ -41,13 +49,11 @@ namespace TRNBulletHell
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             base.Initialize();
+            
 
-            // Change window size (to be incorporated later)
-            //_graphics.PreferredBackBufferWidth = 960;
-            //_graphics.PreferredBackBufferHeight = 540;
-            //_graphics.ApplyChanges();
+            _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+            _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
         }
 
         protected override void LoadContent()
@@ -55,81 +61,71 @@ namespace TRNBulletHell
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             player = new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"));
             enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
+            enemyB = new EnemyB(Content.Load<Texture2D>("enemyB"));
             midBoss = new MidBoss(Content.Load<Texture2D>("midboss"));
             finalBoss = new FinalBoss(Content.Load<Texture2D>("boss"));
-            enemyB = Content.Load<Texture2D>("enemyB");
             playerSprite = player.getImage();
             font = Content.Load<SpriteFont>("galleryFont");
             backgroundSprite = Content.Load<Texture2D>("background");
 
             enemyATexture = Content.Load<Texture2D>("enemyA");
-
-            entities = new List<AbstractEntity>
-            {
-                new EnemyA(enemyATexture)
-                {
-                    position = new Vector2(100, 100),
-                    BulletClone = new BulletA(Content.Load<Texture2D>("bullet")),
-                },
-                new Player(_graphics.GraphicsDevice ,Content.Load<Texture2D>("player"))
-                {
-
-                }
-            };
+            enemyBTexture = Content.Load<Texture2D>("enemyB");
+            midBossTexture = Content.Load<Texture2D>("midBoss");
+            finalBossTexture = Content.Load<Texture2D>("boss");
 
             // TODO: use this.Content to load your game content here
+
+            for (int i = 0; i < 3; i++)
+            {
+
+            }
         }
 
         protected override void Update(GameTime gameTime)
         {
+            minutes = gameTime.TotalGameTime.Minutes;
+            seconds = gameTime.TotalGameTime.Seconds;
+
             KeyboardState state = Keyboard.GetState();
 
             if (state.IsKeyDown(Keys.Escape))
             {
                 Exit();
             }
+            player.Update();
+           // enemyA.Update();
 
-            foreach (var entity in entities.ToArray())
+            foreach (var enemy in enemies.ToArray())
             {
-                entity.Update(gameTime, entities);
+                enemy.Update();
+                if (enemy.isRemoved)
+                {
+                    //Removing enemy from list once movemet is finished?
+                    // what should our logic be once the enemies are off screen?
+                    enemies.Remove(enemy);
+                }
             }
-            EntityUpdate();
-
 
             base.Update(gameTime);
         }
 
-        private void EntityUpdate()
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                if (entities[i].isRemoved)
-                {
-                    entities.RemoveAt(i);
-                    i--;
-                }
-            }
-        }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
             _spriteBatch.Begin();
-
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(midBoss.getImage(), new Vector2(50, 120), Color.White);
-            _spriteBatch.Draw(finalBoss.getImage(), new Vector2(50, 300), Color.White);
-            _spriteBatch.Draw(enemyB, new Vector2(150, 150), Color.White);
-            //_spriteBatch.Draw(enemyA.Bullet.Texture, enemyA.Bullet.Position, Color.White);
-            //_spriteBatch.Draw(enemyASprite, new Vector2(300, 0), Color.White);
-            //_spriteBatch.Draw(playerSprite, player.getPosition(), Color.White);
-
-
-            foreach (var entity in entities)
+            _spriteBatch.DrawString(font, enemyA.movement.position.X.ToString() , new Vector2(100, 0), Color.White);
+            player.Draw(_spriteBatch);
+            enemyA.Draw(_spriteBatch);
+            if (seconds < 10)
             {
-                entity.Draw(_spriteBatch, entities);
+                _spriteBatch.DrawString(font, $"{minutes + " : 0" + seconds}", new Vector2(700, 0), Color.White);
             }
+            else
+            {
+                _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 10), Color.White);
+            }
+
 
             _spriteBatch.End();
             base.Draw(gameTime);
