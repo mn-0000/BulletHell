@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TRNBulletHell.Game.Entity.Enemy
 {
-    abstract class Enemy : AbstractEntity
+    public abstract class Enemy : AbstractEntity
     {
 
         //List of movements enemy will perform.

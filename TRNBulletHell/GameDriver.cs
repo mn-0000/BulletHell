@@ -10,7 +10,7 @@ using TRNBulletHell.Game.Entity.Enemy;
 using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Enemy.Boss;
 using System.Diagnostics;
-using TRNBulletHell.Game.Entity.Bullet;
+using TRNBulletHell.Game.Entity.Move;
 
 namespace TRNBulletHell
 {
@@ -36,11 +36,18 @@ namespace TRNBulletHell
         private List<Enemy> enemies = new List<Enemy>();
         protected int minutes;
         protected int seconds;
+        EnemyFactory enemyFactory = new EnemyFactory();
+        BulletFactory bulletFactory = new BulletFactory();
+        MovementCreator movementCreator = new MovementCreator();
+        private const float _delay = 2; // seconds
+        private float _remainingDelay = _delay;
+        private int enemyACount = 0;
+        private int enemyBCount = 0;
 
 
         public GameDriver()
         {
-            _graphics = new GraphicsDeviceManager(this);           
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
             _graphics.IsFullScreen = false;
@@ -49,7 +56,7 @@ namespace TRNBulletHell
         protected override void Initialize()
         {
             base.Initialize();
-            
+
 
             _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
@@ -98,6 +105,31 @@ namespace TRNBulletHell
         {
             minutes = gameTime.TotalGameTime.Minutes;
             seconds = gameTime.TotalGameTime.Seconds;
+            var timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            _remainingDelay -= timer;
+
+            // enemyAs spawn
+            for (int i = 0; i < 5; i++)
+            {
+                if (_remainingDelay <= 0 && enemyACount < 5)
+                {
+                    enemyACount++;
+                    enemies.Add(enemyFactory.CreateEnemy("EnemyA", enemyATexture));
+                    _remainingDelay = _delay;
+                }
+            }
+
+            // enemyBs spawn
+            for (int i = 0; i < 5; i++)
+            {
+                if (gameTime.TotalGameTime.Seconds >= 30 && _remainingDelay <= 0 && enemyBCount < 5)
+                {
+                    enemyBCount++;
+                    enemies.Add(enemyFactory.CreateEnemy("EnemyB", enemyBTexture));
+                    _remainingDelay = _delay;
+                }
+            }
 
             KeyboardState state = Keyboard.GetState();
 

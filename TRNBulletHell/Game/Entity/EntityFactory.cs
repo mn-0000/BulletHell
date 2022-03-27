@@ -1,14 +1,14 @@
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace TRNBulletHell.Game.Entity
 {
-    abstract class EntityFactory
+    public abstract class EntityFactory
     {
-        public void Spawn(AbstractEntity entity)
-        {
-            
-        }
+        public abstract Enemy.Enemy CreateEnemy(string type, Texture2D texture);
+        public abstract Bullet.Bullet CreateBullet(string type, Texture2D texture);
+        public abstract Movement CreateMovement(string type);
     }
 }

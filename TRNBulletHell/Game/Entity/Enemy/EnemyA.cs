@@ -22,9 +22,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
             MovementCreator creator = new MovementCreator();
 
 
-            this.movement = creator.createMovement("CirclePath");
-            this.addMove(creator.createMovement("AcrossScreen"));
-            this.addMove(creator.createMovement("ZigZagPath"));
+            this.movement = creator.CreateMovement("CirclePath");
+            this.addMove(creator.CreateMovement("AcrossScreen"));
+            this.addMove(creator.CreateMovement("ZigZagPath"));
         }
 
         public override void Update(GameTime gameTime, List<AbstractEntity> entities)
