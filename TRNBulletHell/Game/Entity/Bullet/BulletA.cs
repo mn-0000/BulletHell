@@ -14,15 +14,6 @@ namespace TRNBulletHell.Game.Bullet.BulletA
             
         }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
-        {
-            if (this.position.Y > 450)
-            {
-                isRemoved = true;
-            }
-
-            position += direction * speed;
-        }
     }
 
 }

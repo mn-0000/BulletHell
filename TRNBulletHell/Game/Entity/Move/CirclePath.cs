@@ -12,23 +12,23 @@ namespace TRNBulletHell.Game.Entity.Move
         float originX = 300;
         float originY = 75;
         public CirclePath()
-
-        {
+    
+       {
             position = new Vector2(700, 75);
 
         }
-
+        
 
         public override void Moving()
         {
-
+            
             // Enter Screen
-            if (this.position.X > 401)
+            if(this.position.X > 401)
             {
                 this.position.X -= this.speed.X;
             }
             //Exit Screen
-            else if (angle >= 10)
+            else if(angle >= 10)
             {
                 this.position.X -= this.speed.X;
             }
@@ -37,8 +37,8 @@ namespace TRNBulletHell.Game.Entity.Move
             {
                 position.X = originX + (float)(radius * Math.Cos(angle));
                 position.Y = originY + (float)(radius * Math.Sin(angle));
-                angle = (float)(angle + 0.03);
-
+                angle = (float)(angle + 0.09);
+                
             }
             this.outsideWidthBoundary();
         }
