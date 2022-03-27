@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using TRNBulletHell.Game.Entity;
 
-namespace TRNBulletHell.Game.Bullet
+namespace TRNBulletHell.Game.Entity.Bullet
 {
     public abstract class Bullet : AbstractEntity
     {

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TRNBulletHell.Game.Bullet.BulletA;
+using TRNBulletHell.Game.Entity.Bullet.BulletA;
 
 namespace TRNBulletHell.Game.Entity.Enemy.Boss
 {

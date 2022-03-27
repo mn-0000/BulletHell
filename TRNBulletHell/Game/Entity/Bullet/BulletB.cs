@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TRNBulletHell.Game.Bullet.BulletB
+namespace TRNBulletHell.Game.Entity.Bullet.BulletB
 {
     public class BulletB : Bullet
     {
