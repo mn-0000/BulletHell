@@ -110,9 +110,9 @@ namespace TRNBulletHell
             _remainingDelay -= timer;
 
             // enemyAs spawn
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
-                if (_remainingDelay <= 0 && enemyACount < 5)
+                if (_remainingDelay <= 0 && enemyACount < 1)
                 {
                     enemyACount++;
                     EnemyA a = (EnemyA)enemyFactory.CreateEnemy("EnemyA", enemyATexture);
@@ -124,7 +124,7 @@ namespace TRNBulletHell
             }
 
             // enemyBs spawn
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
                 if (gameTime.TotalGameTime.Seconds >= 30 && _remainingDelay <= 0 && enemyBCount < 5)
                 {
@@ -148,14 +148,14 @@ namespace TRNBulletHell
 
             }
 
-            for (int i = 0; i < entities.Count; i++)
+         /*   for (int i = 0; i < entities.Count; i++)
             {
                 if (entities[i].isRemoved)
                 {
                     entities.RemoveAt(i);
                     i--;
                 }
-            }
+            } */
 
             foreach (var enemy in enemies.ToArray())
             {

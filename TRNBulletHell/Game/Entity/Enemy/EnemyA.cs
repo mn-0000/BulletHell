@@ -22,9 +22,12 @@ namespace TRNBulletHell.Game.Entity.Enemy
             MovementCreator creator = new MovementCreator();
 
 
-            this.movement = creator.CreateMovement("CirclePath");
+            this.movement = creator.CreateMovement("AcrossScreen");
             this.addMove(creator.CreateMovement("AcrossScreen"));
-            this.addMove(creator.CreateMovement("ZigZagPath"));
+          //  this.addMove(creator.CreateMovement("ZigZagPath"));
+
+            // higher the number the easier the enemy.
+            this.frequencyOfBullets = 30;
         }
 
         /*  public override void Update(GameTime gameTime, List<AbstractEntity> entities)
