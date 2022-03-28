@@ -29,7 +29,6 @@ namespace TRNBulletHell.Game.Entity.Enemy
             counter++;
             this.movement.Moving();
 
-            //From tutorial 006.
 
             this.movement.direction = new Vector2((float)Math.Cos(movement._rotation), (float)Math.Sin(movement._rotation));
 
@@ -51,9 +50,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
             
                 PlayerBullet bullet = new PlayerBullet(enemyBullet.getImage());
                 bullet.movement.direction = new Vector2();
-                bullet.movement.direction.X = this.movement.direction.X;
-                bullet.movement.direction.Y = this.movement.direction.Y;
-                bullet.movement.position = new Vector2();
+                bullet.movement.direction = new Vector2(0, -1);
+            //  bullet.movement.direction.Y = this.movement.direction.Y * 3;
+            bullet.movement.position = new Vector2();
                 bullet.movement.position.X = this.movement.position.X;
                 bullet.movement.position.Y = this.movement.position.Y;
                 entities.Add(bullet);
@@ -63,7 +62,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public void shootBullet(List<AbstractEntity> entities)
         {
-            if ((counter % 25) == 0)
+            // frequency can determine the different levels.
+            //frequency here = 30
+            if ((counter % 30) == 0)
             {
                 shoot(entities);
             }
