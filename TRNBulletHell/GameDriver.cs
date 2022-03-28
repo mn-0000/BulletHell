@@ -94,7 +94,7 @@ namespace TRNBulletHell
             {
                 new EnemyA(enemyATexture)
                 {
-                    BulletClone = new BulletA(playerBullet2D)
+                    enemyBullet = new PlayerBullet(playerBullet2D)
                 }
             };
 

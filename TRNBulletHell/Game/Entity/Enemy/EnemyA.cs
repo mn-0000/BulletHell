@@ -27,15 +27,15 @@ namespace TRNBulletHell.Game.Entity.Enemy
             this.addMove(creator.CreateMovement("ZigZagPath"));
         }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
-        {
-            this.movement.Moving();
+        /*  public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+          {
+              this.movement.Moving();
 
-          /*  var bullet = BulletClone.Clone() as BulletA;
-            bullet.movement.direction = new Vector2(0, 1);
-            bullet.movement.position = this.movement.position;
-            entities.Add(bullet);*/
-        }
+            /*  var bullet = BulletClone.Clone() as BulletA;
+              bullet.movement.direction = new Vector2(0, 1);
+              bullet.movement.position = this.movement.position;
+              entities.Add(bullet);
+          }*/
 
 
     }

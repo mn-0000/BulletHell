@@ -8,6 +8,7 @@ public abstract class Movement
     public Vector2 position;
     public Vector2 origin;
     public Vector2 direction;
+    public float _rotation;
     public Vector2 speed = new Vector2(2f, 2f);
     public int screenWidth = 775;
     private Boolean complete = false;
