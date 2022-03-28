@@ -25,7 +25,7 @@ namespace TRNBulletHell
         Texture2D enemyBullet;
         Texture2D backgroundSprite;
         Texture2D playerBullet2D;
-        //PlayerBullet playerBullet;
+
         SpriteFont font;
         protected Dictionary<String, List<AbstractEntity>> _entities = new Dictionary<String, List<AbstractEntity>>();
         protected List<AbstractEntity> enemies = new List<AbstractEntity>();
@@ -35,14 +35,10 @@ namespace TRNBulletHell
         CollisionDetection collisionDetection = new CollisionDetection();
        protected int minutes;
         protected int seconds;
-     //   EnemyFactory enemyFactory = new EnemyFactory();
-     //   BulletFactory bulletFactory = new BulletFactory();
-     //   MovementCreator movementCreator = new MovementCreator();
+
         private const float _delay = 2; // seconds
         private float _remainingDelay = _delay;
-       // private int enemyACount = 0;
-      //  private int enemyBCount = 0;
-      //  private int midBossCount = 0;
+
         private int finalBossCount = 0;
         private bool win = false;
         Wave first;
@@ -71,12 +67,7 @@ namespace TRNBulletHell
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            //players.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player")));
-            //enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
-            //enemyB = new EnemyB(Content.Load<Texture2D>("enemyB"));
-            //midBoss = new MidBoss(Content.Load<Texture2D>("midboss"));
-            //finalBoss = new FinalBoss(Content.Load<Texture2D>("boss"));
-            //playerSprite = player.getImage();
+ 
             font = Content.Load<SpriteFont>("galleryFont");
             backgroundSprite = Content.Load<Texture2D>("background");
 
@@ -86,20 +77,20 @@ namespace TRNBulletHell
             finalBossTexture = Content.Load<Texture2D>("boss");
             playerBullet2D = Content.Load<Texture2D>("bullet");
             enemyBullet = Content.Load<Texture2D>("EnemyBullet");
+
+
             first = new Wave(0, 3, "EnemyA", enemyATexture);
             second = new Wave(30, 1, "MidBoss", midBossTexture);
             third = new Wave(60, 5, "EnemyB", enemyBTexture);
             fourth = new Wave(90, 1, "FinalBoss", finalBossTexture);
+
+
+
             players.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
             {
                 playerBullet = new PlayerBullet(playerBullet2D)
             });
-/*
-            enemies.Add(new EnemyA(enemyATexture)
-            {
-                BulletClone = new BulletA(playerBullet2D)
-            });
-*/
+
             _entities.Add("Players", players);
             _entities.Add("Enemies", enemies);
             _entities.Add("PlayerBullets", new List<AbstractEntity>());
@@ -118,47 +109,19 @@ namespace TRNBulletHell
 
             _remainingDelay -= timer;
 
-            // enemyAs spawn
-            /*   if (_remainingDelay <= 0 && enemyACount < 3)
-               {
-                   enemyACount++;
-                   EnemyA a = (EnemyA)enemyFactory.CreateEnemy("EnemyA", enemyATexture);
-                   a.enemyBullet = new PlayerBullet(playerBullet2D);
-                   enemies.Add(a);                 
-                   _remainingDelay = _delay;
-               }*/
+        
 
 
             double waveTimer = gameTime.TotalGameTime.TotalSeconds;
-           // Wave first = new Wave(0, 3, "EnemyA", enemyATexture);
+           
+
+            // Returns true if spawn was created in a wave. 
             if (first.createWave(waveTimer, _remainingDelay, enemies, enemyBullet) || second.createWave(waveTimer, _remainingDelay, enemies, enemyBullet) || third.createWave(waveTimer, _remainingDelay, enemies, enemyBullet) || fourth.createWave(waveTimer, _remainingDelay, enemies, enemyBullet))
             {
                 _remainingDelay = _delay;
             }
 
-            // Wave first = new Wave(30, 1, "MidBoss", midBossTexture);
-            // MidBoss spawn
-            /*    if (gameTime.TotalGameTime.TotalSeconds >= 30 && _remainingDelay <= 0 && midBossCount < 1)
-                {
-                    midBossCount++;
-                    Enemy m = enemyFactory.CreateEnemy("MidBoss", midBossTexture);
-                    m.enemyBullet = new PlayerBullet(playerBullet2D);
-                    enemies.Add(m);
-                    _remainingDelay = _delay;
-                }*/
 
-            // Wave third = new Wave(90, 6, "EnemyB", enemyBTexture);
-            // enemyBs spawn
-            /* if (gameTime.TotalGameTime.TotalSeconds >= 90 && _remainingDelay <= 0 && enemyBCount < 5)
-             {
-                 enemyBCount++;
-                 Enemy b = enemyFactory.CreateEnemy("EnemyB", enemyBTexture);
-                 b.enemyBullet = new PlayerBullet(playerBullet2D);
-                 enemies.Add(b);
-                 _remainingDelay = _delay;
-             }*/
-            // Wave four = new Wave(120, 1, "FinalBoss", finalBossTexture);
-            // FinalBoss spawn
             if (gameTime.TotalGameTime.TotalSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
             {
                 finalBossCount++;

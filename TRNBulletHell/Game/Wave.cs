@@ -18,6 +18,7 @@ namespace TRNBulletHell.Game
         private int intervalTime;
         string type;
 
+
         private int count;
         Texture2D texture;
 
@@ -31,17 +32,16 @@ namespace TRNBulletHell.Game
         }
 
         public bool createWave(double seconds, float _remainingDelay, List<AbstractEntity> enemies, Texture2D enemyBullet)
-        {
-            
-            
+        {           
             if (seconds >= intervalTime && _remainingDelay <= 0 && this.count < total)
             {
-               this.count++;
-                Enemy a = enemyFactory.CreateEnemy(type, texture);
-                //a.enemyBullet = new PlayerBullet(enemyBullet);
-                a.enemyBullet = new BulletA(enemyBullet);
-                enemies.Add(a);
-                return true;
+                this.count++;
+                EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
+                builder.createEnemy(enemies);
+                    /*  Enemy a = enemyFactory.CreateEnemy(type, texture);
+                      a.enemyBullet = new BulletA(enemyBullet);
+                      enemies.Add(a);*/
+                    return true;
 
             }
            
