@@ -42,6 +42,9 @@ namespace TRNBulletHell
         private float _remainingDelay = _delay;
         private int enemyACount = 0;
         private int enemyBCount = 0;
+        private int midBossCount = 0;
+        private int finalBossCount = 0;
+        private bool win = false;
 
         public GameDriver()
         {
@@ -104,31 +107,54 @@ namespace TRNBulletHell
             _remainingDelay -= timer;
 
             // enemyAs spawn
-            for (int i = 0; i < 1; i++)
+            if (_remainingDelay <= 0 && enemyACount < 3)
             {
-                if (_remainingDelay <= 0 && enemyACount < 1)
-                {
-                    enemyACount++;
-                    EnemyA a = (EnemyA)enemyFactory.CreateEnemy("EnemyA", enemyATexture);
-                    a.enemyBullet = new PlayerBullet(playerBullet2D);
-                    enemies.Add(a);
-                    
-                    _remainingDelay = _delay;
-                }
+                enemyACount++;
+                EnemyA a = (EnemyA)enemyFactory.CreateEnemy("EnemyA", enemyATexture);
+                a.enemyBullet = new PlayerBullet(playerBullet2D);
+                enemies.Add(a);                 
+                _remainingDelay = _delay;
+            }
+
+            // MidBoss spawn
+            if (gameTime.TotalGameTime.TotalSeconds >= 30 && _remainingDelay <= 0 && midBossCount < 1)
+            {
+                midBossCount++;
+                Enemy m = enemyFactory.CreateEnemy("MidBoss", midBossTexture);
+                m.enemyBullet = new PlayerBullet(playerBullet2D);
+                enemies.Add(m);
+                _remainingDelay = _delay;
             }
 
             // enemyBs spawn
-            for (int i = 0; i < 1; i++)
+            if (gameTime.TotalGameTime.TotalSeconds >= 90 && _remainingDelay <= 0 && enemyBCount < 5)
             {
-                if (gameTime.TotalGameTime.Seconds >= 30 && _remainingDelay <= 0 && enemyBCount < 5)
-                {
-                    enemyBCount++;
-                    EnemyB b = (EnemyB)enemyFactory.CreateEnemy("EnemyB", enemyBTexture);
-                    b.enemyBullet = new PlayerBullet(playerBullet2D);
-                    enemies.Add(b);
+                enemyBCount++;
+                Enemy b = enemyFactory.CreateEnemy("EnemyB", enemyBTexture);
+                b.enemyBullet = new PlayerBullet(playerBullet2D);
+                enemies.Add(b);
+                _remainingDelay = _delay;
+            }
 
-                    _remainingDelay = _delay;
-                }
+            // FinalBoss spawn
+            if (gameTime.TotalGameTime.TotalSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
+            {
+                finalBossCount++;
+                Enemy f = enemyFactory.CreateEnemy("FinalBoss", finalBossTexture);
+                f.enemyBullet = new PlayerBullet(playerBullet2D);
+                enemies.Add(f);
+                _remainingDelay = _delay;
+            }
+            
+            // check if boss is dead or game is over
+            if(finalBossCount >= 1 && (gameTime.TotalGameTime.TotalSeconds >= 150 || finalBossDead()))
+            {
+                win = true;
+            }
+
+            bool finalBossDead()
+            {
+                return (_entities["Enemies"].ToArray().Length == 0);
             }
 
             KeyboardState state = Keyboard.GetState();
@@ -137,8 +163,6 @@ namespace TRNBulletHell
             {
                 Exit();
             }
-
-            
 
             // update all entities
             foreach (var players in _entities["Players"])
@@ -163,7 +187,6 @@ namespace TRNBulletHell
 
             // detect collisions
             collisionDetection.detectCollision(_entities, gameTime);
-            
 
             base.Update(gameTime);
         }
@@ -212,6 +235,14 @@ namespace TRNBulletHell
             else
             {
                 _spriteBatch.DrawString(font, "Game Over", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
+            }
+
+            if(win)
+            {
+                _spriteBatch.DrawString(font, "Winner", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
+                _entities["Enemies"].Clear();
+                _entities["PlayerBullets"].Clear();
+                _entities["EnemyBullets"].Clear();
             }
 
             _spriteBatch.End();
