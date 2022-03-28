@@ -48,8 +48,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public void shoot(List<AbstractEntity> entities)
         {
-            if (counter < 6)
-            {
+            
                 PlayerBullet bullet = new PlayerBullet(enemyBullet.getImage());
                 bullet.movement.direction = new Vector2();
                 bullet.movement.direction.X = this.movement.direction.X;
@@ -58,7 +57,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
                 bullet.movement.position.X = this.movement.position.X;
                 bullet.movement.position.Y = this.movement.position.Y;
                 entities.Add(bullet);
-            }
+            
         }
 
 
