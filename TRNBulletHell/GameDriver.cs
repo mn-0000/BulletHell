@@ -115,7 +115,10 @@ namespace TRNBulletHell
                 if (_remainingDelay <= 0 && enemyACount < 5)
                 {
                     enemyACount++;
-                    enemies.Add(enemyFactory.CreateEnemy("EnemyA", enemyATexture));
+                    EnemyA a = (EnemyA)enemyFactory.CreateEnemy("EnemyA", enemyATexture);
+                    a.enemyBullet = new PlayerBullet(playerBullet2D);
+                    enemies.Add(a);
+                    
                     _remainingDelay = _delay;
                 }
             }
@@ -127,6 +130,7 @@ namespace TRNBulletHell
                 {
                     enemyBCount++;
                     enemies.Add(enemyFactory.CreateEnemy("EnemyB", enemyBTexture));
+
                     _remainingDelay = _delay;
                 }
             }
