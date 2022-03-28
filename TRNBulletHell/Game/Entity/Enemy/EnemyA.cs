@@ -31,10 +31,10 @@ namespace TRNBulletHell.Game.Entity.Enemy
         {
             this.movement.Moving();
 
-            var bullet = BulletClone.Clone() as BulletA;
+          /*  var bullet = BulletClone.Clone() as BulletA;
             bullet.movement.direction = new Vector2(0, 1);
             bullet.movement.position = this.movement.position;
-            entities.Add(bullet);
+            entities.Add(bullet);*/
         }
 
 

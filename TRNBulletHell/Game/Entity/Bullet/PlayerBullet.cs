@@ -30,5 +30,6 @@ namespace TRNBulletHell.Game.Entity.Bullet
 
             movement.Moving();
         }
+
     }
 }

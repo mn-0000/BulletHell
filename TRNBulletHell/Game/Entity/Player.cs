@@ -46,9 +46,11 @@ namespace TRNBulletHell.Game.Entity
 
             if (_currentKey.IsKeyDown(Keys.Space) && _prevousKey.IsKeyUp(Keys.Space))
             {
-                var bullet = playerBullet.Clone() as PlayerBullet;
+                PlayerBullet bullet = new PlayerBullet(playerBullet.getImage());
                 bullet.movement.direction = new Vector2(0, 1);
-                bullet.movement.position = this.movement.position;
+                bullet.movement.position = new Vector2();
+                bullet.movement.position.X = this.movement.position.X;
+                bullet.movement.position.Y = this.movement.position.Y;
                 entities.Add(bullet);
             }
         }

@@ -13,7 +13,7 @@ namespace TRNBulletHell.Game.Entity.Move
 
         public override void Moving()
         {
-            position -= direction * speed;
+            this.position -= direction * speed;
         }
     }
 }

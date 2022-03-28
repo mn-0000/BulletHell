@@ -44,7 +44,6 @@ namespace TRNBulletHell
         private int enemyACount = 0;
         private int enemyBCount = 0;
 
-
         public GameDriver()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -89,6 +88,7 @@ namespace TRNBulletHell
 
                  
             };
+         
 
             enemies = new List<Enemy>
             {
@@ -153,16 +153,16 @@ namespace TRNBulletHell
                 }
             }
 
-            //foreach (var enemy in enemies.ToArray())
-            //{
-            //    enemy.Update(gameTime, entities);
-            //    if (enemy.isRemoved)
-            //    {
-            //        //Removing enemy from list once movemet is finished?
-            //        // what should our logic be once the enemies are off screen?
-            //        enemies.Remove(enemy);
-            //    }
-            //}
+            foreach (var enemy in enemies.ToArray())
+            {
+                enemy.Update(gameTime, entities);
+                if (enemy.isRemoved)
+                {
+                    //Removing enemy from list once movemet is finished?
+                    // what should our logic be once the enemies are off screen?
+                    enemies.Remove(enemy);
+                }
+            }
 
             base.Update(gameTime);
         }
