@@ -32,8 +32,12 @@ namespace TRNBulletHell
         MidBoss midBoss;
         FinalBoss finalBoss;
         SpriteFont font;
-        private List<AbstractEntity> entities;
-        private List<Enemy> enemies = new List<Enemy>();
+        protected Dictionary<String, IEnumerable<AbstractEntity>> _entities = new Dictionary<String, IEnumerable<AbstractEntity>>();
+        protected List<Enemy> enemies = new List<Enemy>();
+        protected List<Player> players = new List<Player>();
+        protected List<Bullet> enemyBullets = new List<Bullet>();
+        protected List<Bullet> playerBullets = new List<Bullet>();
+        CollisionDetection collisionDetection = new CollisionDetection();
         protected int minutes;
         protected int seconds;
         EnemyFactory enemyFactory = new EnemyFactory();
@@ -64,7 +68,7 @@ namespace TRNBulletHell
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            //player = new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"));
+            players.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player")));
             enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
             //enemyB = new EnemyB(Content.Load<Texture2D>("enemyB"));
             //midBoss = new MidBoss(Content.Load<Texture2D>("midboss"));
@@ -79,26 +83,21 @@ namespace TRNBulletHell
             finalBossTexture = Content.Load<Texture2D>("boss");
             playerBullet2D = Content.Load<Texture2D>("bullet");
 
-            entities = new List<AbstractEntity>
+            players.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
             {
-                new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
-                {
-                    playerBullet = new PlayerBullet(playerBullet2D)
-                },
+                playerBullet = new PlayerBullet(playerBullet2D)
+            });
 
-                 
-            };
-         
-
-            enemies = new List<Enemy>
+            enemies.Add(new EnemyA(enemyATexture)
             {
-                new EnemyA(enemyATexture)
-                {
-                    BulletClone = new BulletA(playerBullet2D)
-                }
-            };
+                BulletClone = new BulletA(playerBullet2D)
+            });
 
-            //enemies.Add(enemyA);
+            _entities.Add("Players", players);
+            _entities.Add("Enemies", enemies);
+            _entities.Add("PlayerBullets", new List<Bullet>());
+            _entities.Add("EnemyBullets", new List<Bullet>());
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -138,31 +137,33 @@ namespace TRNBulletHell
                 Exit();
             }
 
-            foreach (var entity in entities.ToArray())
-            {
-                entity.Update(gameTime, entities);
+            
 
+            // update all entities
+            foreach (var players in _entities["Players"])
+            {
+                players.Update(gameTime, _entities["PlayerBullets"]);
             }
 
-            for (int i = 0; i < entities.Count; i++)
+            foreach (var enemy in _entities["Enemies"])
             {
-                if (entities[i].isRemoved)
-                {
-                    entities.RemoveAt(i);
-                    i--;
-                }
+                enemy.Update(gameTime, _entities["EnemyBullets"]);
             }
 
-            foreach (var enemy in enemies.ToArray())
+            foreach(var bullet in _entities["PlayerBullets"])
             {
-                enemy.Update(gameTime, entities);
-                if (enemy.isRemoved)
-                {
-                    //Removing enemy from list once movemet is finished?
-                    // what should our logic be once the enemies are off screen?
-                    enemies.Remove(enemy);
-                }
+                bullet.Update(gameTime, _entities["PlayerBullets"]);
             }
+
+            foreach (var bullet in _entities["EnemyBullets"])
+            {
+                bullet.Update(gameTime, _entities["EnemyBullets"]);
+            }
+
+            // detect collisions
+            collisionDetection.detectCollision(_entities);
+            
+
 
             base.Update(gameTime);
         }
@@ -176,14 +177,14 @@ namespace TRNBulletHell
             //player.Draw(_spriteBatch);
             //enemyA.Draw(_spriteBatch);
 
-            foreach (var entity in entities)
+            foreach (var player in _entities["Players"])
             {
-                entity.Draw(_spriteBatch);
+                player.Draw(_spriteBatch);
             }
 
-            foreach (var entity in enemies)
+            foreach (var enemy in _entities["Enemies"])
             {
-                entity.Draw(_spriteBatch);
+                enemy.Draw(_spriteBatch);
             }
 
             if (seconds < 10)

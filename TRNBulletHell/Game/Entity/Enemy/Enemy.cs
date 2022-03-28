@@ -11,7 +11,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         //List of movements enemy will perform.
         public  List<Movement> movements = new List<Movement>();
-        int counter = 0;
+        protected int health;
 
         public Enemy(Texture2D texture) :base(texture)
         {
@@ -21,8 +21,12 @@ namespace TRNBulletHell.Game.Entity.Enemy
         {
             movements.Add(m);
         }
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
+        }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public override void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
         {
             this.movement.Moving();
 

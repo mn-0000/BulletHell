@@ -40,11 +40,10 @@ namespace TRNBulletHell.Game.Entity
             spriteBatch.Draw(texture, movement.position, null, Color.White, 0, movement.origin, 1, SpriteEffects.None, 0);
         }
 
-        public virtual void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public virtual void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
         {
 
         }
-
 
         public Texture2D getImage()
         {
@@ -59,6 +58,11 @@ namespace TRNBulletHell.Game.Entity
         public Boolean Removed()
         {
             return this.isRemoved;
+        }
+
+        internal void Update(GameTime gameTime, List<Bullet.Bullet> playerBullets)
+        {
+            throw new NotImplementedException();
         }
     }
 }

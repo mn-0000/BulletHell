@@ -19,9 +19,10 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
         {
             timer = 0f;
             Speed = 2f;
+            health = 500;
         }
 
-        public void firstAttack(GameTime gameTime, List<AbstractEntity> entities)
+        public void firstAttack(GameTime gameTime, IEnumerable<AbstractEntity> entities)
         {
            /* timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -70,10 +71,14 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
         }
         
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public override void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
         {
             counter++;
             firstAttack(gameTime, entities);
+            if (health <= 0)
+            {
+                isRemoved = true;
+            }
         }
 
         public void shootBullet(List<AbstractEntity> entities)

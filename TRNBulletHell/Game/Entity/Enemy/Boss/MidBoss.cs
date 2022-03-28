@@ -18,6 +18,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
         {
             timer = 0f;
             Speed = 2f;
+            health = 300;
         }
 
       

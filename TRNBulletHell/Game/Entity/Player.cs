@@ -7,10 +7,11 @@ using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using TRNBulletHell.Game.Entity.Move;
 using TRNBulletHell.Game.Entity.Bullet;
+using System.Linq;
 
 namespace TRNBulletHell.Game.Entity
 {
-    class Player : AbstractEntity
+    public class Player : AbstractEntity
     {
         public PlayerBullet playerBullet;
         protected Texture2D rectangleTexture;
@@ -18,6 +19,7 @@ namespace TRNBulletHell.Game.Entity
         public bool ShowHitbox = false;
         private KeyboardState _currentKey;
         private KeyboardState _prevousKey;
+        int health = 100;
 
         public Player(GraphicsDevice graphics,Texture2D image) : base(image)
         {
@@ -34,11 +36,11 @@ namespace TRNBulletHell.Game.Entity
         {
             get
             {
-                return new Rectangle((int)movement.position.X - 1, (int)movement.position.Y - 14, 5, 5);
+                return new Rectangle((int)movement.position.X - 1, (int)movement.position.Y - 14, 50, 50);
             }
         }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public override void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
         {
             this.movement.Moving();
             _prevousKey = _currentKey;
@@ -51,8 +53,18 @@ namespace TRNBulletHell.Game.Entity
                 bullet.movement.position = new Vector2();
                 bullet.movement.position.X = this.movement.position.X;
                 bullet.movement.position.Y = this.movement.position.Y;
-                entities.Add(bullet);
+                entities = entities.Concat(new[] { bullet });
             }
+
+            if(health <= 0)
+            {
+                isRemoved = true;
+            }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
         }
 
     }

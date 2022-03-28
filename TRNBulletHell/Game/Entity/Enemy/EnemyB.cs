@@ -14,6 +14,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public EnemyB(Texture2D texture) : base(texture)
         {
+            health = 50;
             MovementCreator creator = new MovementCreator();
 
 

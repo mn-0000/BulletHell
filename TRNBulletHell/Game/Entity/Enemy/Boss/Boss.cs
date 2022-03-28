@@ -11,5 +11,6 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
         {
 
         }
+
     }
 }

@@ -11,16 +11,23 @@ namespace TRNBulletHell.Game.Entity.Bullet.BulletA
     public class BulletA : Bullet
     {
         private double timer;
-        private double life;
 
         public BulletA(Texture2D texture) : base(texture)
         {
             movement = new CirclePath();
             movement.speed = new Vector2(4f, 4f);
-            life = 10;
+            damage = 10;
         }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public override Rectangle Rectangle
+        {
+            get
+            {
+                return new Rectangle((int)movement.position.X - 1, (int)movement.position.Y - 1, 5, 5);
+            }
+        }
+
+        public override void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
         {
             timer += gameTime.ElapsedGameTime.TotalSeconds;
 

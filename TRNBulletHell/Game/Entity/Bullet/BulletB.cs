@@ -9,7 +9,7 @@ namespace TRNBulletHell.Game.Entity.Bullet.BulletB
     {
         public BulletB(Texture2D texture) : base(texture)
         {
-
+            damage = 20;
         }
     }
 }
