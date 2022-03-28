@@ -21,8 +21,8 @@ namespace TRNBulletHell.Game.Entity.Enemy
             this.movement = creator.CreateMovement("ZigZagPath");
             this.addMove(creator.CreateMovement("CirclePath"));
             this.addMove(creator.CreateMovement("ZigZagPath"));
-
-            this.frequencyOfBullets = 20;
+            this.movement.speed = new Vector2(1f, 1f);
+            this.frequencyOfBullets = 30;
         }
 
       

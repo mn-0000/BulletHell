@@ -10,7 +10,7 @@ namespace TRNBulletHell.Game.Entity.Bullet
     public class PlayerBullet : Bullet
     {
         private double timer;
-        private double life;
+       // private double life;
 
         public PlayerBullet(Texture2D texture) : base(texture)
         {

@@ -11,7 +11,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
 {
     class EnemyA : Enemy
     {
-        public BulletA BulletClone;
+       // public BulletA BulletClone;
 
         public EnemyA(Texture2D texture) : base(texture)
         {

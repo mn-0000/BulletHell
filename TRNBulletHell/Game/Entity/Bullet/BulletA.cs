@@ -14,7 +14,8 @@ namespace TRNBulletHell.Game.Entity.Bullet.BulletA
 
         public BulletA(Texture2D texture) : base(texture)
         {
-            movement = new CirclePath();
+            movement = new BulletMovement();
+         
             movement.speed = new Vector2(4f, 4f);
             damage = 10;
         }

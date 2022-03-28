@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
+using TRNBulletHell.Game.Entity.Bullet.BulletA;
 
 namespace TRNBulletHell.Game.Entity.Enemy
 {
@@ -12,7 +13,8 @@ namespace TRNBulletHell.Game.Entity.Enemy
     {
 
         //List of movements enemy will perform.
-        public PlayerBullet enemyBullet;
+        //public PlayerBullet enemyBullet;
+        public BulletA enemyBullet;
         public  List<Movement> movements = new List<Movement>();
         int counter = 0;
         int ProduceBulletcounter = 0;
