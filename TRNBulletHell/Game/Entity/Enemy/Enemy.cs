@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
 
@@ -55,7 +56,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
 
  
-        public void shoot(List<AbstractEntity> entities)
+        public void shoot(IEnumerable<AbstractEntity> entities)
         {
 
 
@@ -102,12 +103,12 @@ namespace TRNBulletHell.Game.Entity.Enemy
                  bullet.movement.position = new Vector2();
                 bullet.movement.position.X = this.movement.position.X;
                 bullet.movement.position.Y = this.movement.position.Y;
-                entities.Add(bullet);
+                entities = entities.Concat(new[] { bullet });
 
         }
 
 
-        public void shootBullet(List<AbstractEntity> entities)
+        public void shootBullet(IEnumerable<AbstractEntity> entities)
         {
             // frequency can determine the different levels.
             //frequency here = 30

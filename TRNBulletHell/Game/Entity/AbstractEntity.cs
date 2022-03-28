@@ -19,7 +19,7 @@ namespace TRNBulletHell.Game.Entity
         {
             get
             {
-                return new Rectangle((int)movement.position.X, (int)movement.position.Y, texture.Width, texture.Height);
+                return new Rectangle((int)movement.position.X, (int)movement.position.Y, texture.Width - 20, texture.Height - 20);
             }
         }
 
