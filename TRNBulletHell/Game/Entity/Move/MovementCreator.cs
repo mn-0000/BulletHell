@@ -1,18 +1,29 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace TRNBulletHell.Game.Entity.Move
 {
-    class MovementCreator
+    public class MovementCreator : EntityFactory
     {
-        public Movement createMovement(String type)
+        public override Bullet.Bullet CreateBullet(string type, Texture2D texture)
         {
-            if(type == "AcrossScreen")
+            throw new NotImplementedException();
+        }
+
+        public override Enemy.Enemy CreateEnemy(string type, Texture2D texture)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Movement CreateMovement(string type)
+        {
+            if (type == "AcrossScreen")
             {
                 return new AcrossScreen();
             }
-            if(type == "CirclePath")
+            if (type == "CirclePath")
             {
                 return new CirclePath();
             }
@@ -20,7 +31,7 @@ namespace TRNBulletHell.Game.Entity.Move
             {
                 return new ZigZagPath();
             }
-            if(type == "Player")
+            if (type == "Player")
             {
                 return new PlayerMovement();
             }
