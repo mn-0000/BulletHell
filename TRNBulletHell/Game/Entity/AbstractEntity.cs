@@ -14,7 +14,7 @@ namespace TRNBulletHell.Game.Entity
         public bool isRemoved = false;
         public int counter = 0;
         public Movement movement;
-
+        
         public virtual Rectangle Rectangle
         {
             get
@@ -37,7 +37,7 @@ namespace TRNBulletHell.Game.Entity
         
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, movement.position, null, Color.White, 0, movement.origin, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, movement.position, null, Color.White, movement._rotation, movement.origin, 1, SpriteEffects.None, 0);
         }
 
         public virtual void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)

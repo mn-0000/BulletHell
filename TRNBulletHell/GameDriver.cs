@@ -109,23 +109,27 @@ namespace TRNBulletHell
             _remainingDelay -= timer;
 
             // enemyAs spawn
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
-                if (_remainingDelay <= 0 && enemyACount < 5)
+                if (_remainingDelay <= 0 && enemyACount < 1)
                 {
                     enemyACount++;
-                    enemies.Add(enemyFactory.CreateEnemy("EnemyA", enemyATexture));
+                    EnemyA a = (EnemyA)enemyFactory.CreateEnemy("EnemyA", enemyATexture);
+                    a.enemyBullet = new PlayerBullet(playerBullet2D);
+                    enemies.Add(a);
+                    
                     _remainingDelay = _delay;
                 }
             }
 
             // enemyBs spawn
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
                 if (gameTime.TotalGameTime.Seconds >= 30 && _remainingDelay <= 0 && enemyBCount < 5)
                 {
                     enemyBCount++;
                     enemies.Add(enemyFactory.CreateEnemy("EnemyB", enemyBTexture));
+
                     _remainingDelay = _delay;
                 }
             }
