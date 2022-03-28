@@ -7,7 +7,7 @@ using TRNBulletHell.Game.Entity.Move;
 
 namespace TRNBulletHell.Game.Entity.Bullet
 {
-    public class PlayerBullet : AbstractEntity
+    public class PlayerBullet : Bullet
     {
         private double timer;
         private double life;
@@ -17,9 +17,10 @@ namespace TRNBulletHell.Game.Entity.Bullet
             movement = new BulletMovement();
             movement.speed = new Vector2 (4f, 4f);
             life = 10;
+            damage = 10;
         }
 
-        public override void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
+        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
             timer += gameTime.ElapsedGameTime.TotalSeconds;
 

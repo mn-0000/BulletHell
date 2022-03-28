@@ -40,7 +40,7 @@ namespace TRNBulletHell.Game.Entity
             }
         }
 
-        public override void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
+        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
             this.movement.Moving();
             _prevousKey = _currentKey;
@@ -53,7 +53,8 @@ namespace TRNBulletHell.Game.Entity
                 bullet.movement.position = new Vector2();
                 bullet.movement.position.X = this.movement.position.X;
                 bullet.movement.position.Y = this.movement.position.Y;
-                entities = entities.Concat(new[] { bullet });
+                entities.Add(bullet);
+                //entities = entities.Concat(new[] { bullet });
             }
 
             if(health <= 0)
@@ -65,6 +66,11 @@ namespace TRNBulletHell.Game.Entity
         public void TakeDamage(int damage)
         {
             health -= damage;
+        }
+
+        public int GetHealth()
+        {
+            return health;
         }
 
     }

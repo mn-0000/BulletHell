@@ -31,27 +31,6 @@ namespace TRNBulletHell.Game.Entity.Enemy
             this.frequencyOfBullets = 30;
         }
 
-        public override void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
-        {
-            this.movement.Moving();
-
-            /*  var bullet = BulletClone.Clone() as BulletA;
-              bullet.movement.direction = new Vector2(0, 1);
-              bullet.movement.position = this.movement.position;
-              entities.Add(bullet);
-          }*/
-
-
-            /*  var bullet = BulletClone.Clone() as BulletA;
-              bullet.movement.direction = new Vector2(0, 1);
-              bullet.movement.position = this.movement.position;
-              entities.Add(bullet);*/
-
-            if (health <= 0)
-            {
-                isRemoved = true;
-            }
-        }
     }
 }
 

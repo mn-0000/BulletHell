@@ -71,7 +71,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
         }
         
 
-        public override void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
+        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
             counter++;
             firstAttack(gameTime, entities);

@@ -37,10 +37,10 @@ namespace TRNBulletHell.Game.Entity
         
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, movement.position, null, Color.White, movement._rotation, movement.origin, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, movement.position, null, Color.White, movement._rotation, new Vector2(texture.Width/2,texture.Height/2), 1, SpriteEffects.None, 0);
         }
 
-        public virtual void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
+        public virtual void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
 
         }

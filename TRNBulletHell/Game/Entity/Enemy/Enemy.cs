@@ -33,7 +33,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
             health -= damage;
         }
 
-        public override void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
+        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
             ProduceBulletcounter++;
             this.movement.Moving();
@@ -52,11 +52,16 @@ namespace TRNBulletHell.Game.Entity.Enemy
                 this.isRemoved = true;
             }
             this.shootBullet(entities);
+
+            if (health <= 0)
+            {
+                isRemoved = true;
+            }
         }
 
 
  
-        public void shoot(IEnumerable<AbstractEntity> entities)
+        public void shoot(List<AbstractEntity> entities)
         {
 
 
@@ -100,15 +105,16 @@ namespace TRNBulletHell.Game.Entity.Enemy
                 bullet.movement.direction = new Vector2();
                 bullet.movement.direction = new Vector2(0, -1);
             //  bullet.movement.direction.Y = this.movement.direction.Y * 3;
-                 bullet.movement.position = new Vector2();
+                bullet.movement.position = new Vector2();
                 bullet.movement.position.X = this.movement.position.X;
                 bullet.movement.position.Y = this.movement.position.Y;
-                entities = entities.Concat(new[] { bullet });
+                entities.Add(bullet);
+                //entities = entities.Concat(new[] { bullet });
 
         }
 
 
-        public void shootBullet(IEnumerable<AbstractEntity> entities)
+        public void shootBullet(List<AbstractEntity> entities)
         {
             // frequency can determine the different levels.
             //frequency here = 30

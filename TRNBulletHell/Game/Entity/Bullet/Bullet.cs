@@ -17,7 +17,7 @@ namespace TRNBulletHell.Game.Entity.Bullet
 
         }
 
-        public override void Update(GameTime gameTime, IEnumerable<AbstractEntity> entities)
+        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
         {
 
         }

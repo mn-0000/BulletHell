@@ -22,21 +22,16 @@ namespace TRNBulletHell
         Texture2D enemyBTexture;
         Texture2D midBossTexture;
         Texture2D finalBossTexture;
-        Texture2D playerSprite;
+        //Texture2D playerSprite;
         Texture2D backgroundSprite;
         Texture2D playerBullet2D;
-        PlayerBullet playerBullet;
-        Player player;
-        EnemyA enemyA;
-        EnemyB enemyB;
-        MidBoss midBoss;
-        FinalBoss finalBoss;
+        //PlayerBullet playerBullet;
         SpriteFont font;
-        protected Dictionary<String, IEnumerable<AbstractEntity>> _entities = new Dictionary<String, IEnumerable<AbstractEntity>>();
-        protected List<Enemy> enemies = new List<Enemy>();
-        protected List<Player> players = new List<Player>();
-        protected List<Bullet> enemyBullets = new List<Bullet>();
-        protected List<Bullet> playerBullets = new List<Bullet>();
+        protected Dictionary<String, List<AbstractEntity>> _entities = new Dictionary<String, List<AbstractEntity>>();
+        protected List<AbstractEntity> enemies = new List<AbstractEntity>();
+        protected List<AbstractEntity> players = new List<AbstractEntity>();
+        protected List<AbstractEntity> enemyBullets = new List<AbstractEntity>();
+        protected List<AbstractEntity> playerBullets = new List<AbstractEntity>();
         CollisionDetection collisionDetection = new CollisionDetection();
         protected int minutes;
         protected int seconds;
@@ -68,8 +63,8 @@ namespace TRNBulletHell
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            players.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player")));
-            enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
+            //players.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player")));
+            //enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
             //enemyB = new EnemyB(Content.Load<Texture2D>("enemyB"));
             //midBoss = new MidBoss(Content.Load<Texture2D>("midboss"));
             //finalBoss = new FinalBoss(Content.Load<Texture2D>("boss"));
@@ -87,16 +82,16 @@ namespace TRNBulletHell
             {
                 playerBullet = new PlayerBullet(playerBullet2D)
             });
-
+/*
             enemies.Add(new EnemyA(enemyATexture)
             {
                 BulletClone = new BulletA(playerBullet2D)
             });
-
+*/
             _entities.Add("Players", players);
             _entities.Add("Enemies", enemies);
-            _entities.Add("PlayerBullets", new List<Bullet>());
-            _entities.Add("EnemyBullets", new List<Bullet>());
+            _entities.Add("PlayerBullets", new List<AbstractEntity>());
+            _entities.Add("EnemyBullets", new List<AbstractEntity>());
 
         }
 
@@ -128,7 +123,9 @@ namespace TRNBulletHell
                 if (gameTime.TotalGameTime.Seconds >= 30 && _remainingDelay <= 0 && enemyBCount < 5)
                 {
                     enemyBCount++;
-                    enemies.Add(enemyFactory.CreateEnemy("EnemyB", enemyBTexture));
+                    EnemyB b = (EnemyB)enemyFactory.CreateEnemy("EnemyB", enemyBTexture);
+                    b.enemyBullet = new PlayerBullet(playerBullet2D);
+                    enemies.Add(b);
 
                     _remainingDelay = _delay;
                 }
@@ -165,9 +162,8 @@ namespace TRNBulletHell
             }
 
             // detect collisions
-            collisionDetection.detectCollision(_entities);
+            collisionDetection.detectCollision(_entities, gameTime);
             
-
 
             base.Update(gameTime);
         }
@@ -177,9 +173,6 @@ namespace TRNBulletHell
         {
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.DrawString(font, enemyA.movement.position.X.ToString() , new Vector2(100, 0), Color.White);
-            //player.Draw(_spriteBatch);
-            //enemyA.Draw(_spriteBatch);
 
             foreach (var player in _entities["Players"])
             {
@@ -187,6 +180,16 @@ namespace TRNBulletHell
             }
 
             foreach (var enemy in _entities["Enemies"])
+            {
+                enemy.Draw(_spriteBatch);
+            }
+
+            foreach (var enemy in _entities["PlayerBullets"])
+            {
+                enemy.Draw(_spriteBatch);
+            }
+
+            foreach (var enemy in _entities["EnemyBullets"])
             {
                 enemy.Draw(_spriteBatch);
             }
@@ -200,6 +203,16 @@ namespace TRNBulletHell
                 _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 10), Color.White);
             }
 
+            // display health if player(s) is alive
+            if(_entities["Players"].Count != 0)
+            {
+                Player p = (Player)_entities["Players"][0];
+                _spriteBatch.DrawString(font, $"Health: { p.GetHealth().ToString()}", new Vector2(20, 10), Color.White);
+            }
+            else
+            {
+                _spriteBatch.DrawString(font, "Game Over", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
+            }
 
             _spriteBatch.End();
             base.Draw(gameTime);
