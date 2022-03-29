@@ -148,25 +148,7 @@ namespace TRNBulletHell
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
 
-            foreach (var player in EntityLists.playerList)
-            {
-                player.Draw(_spriteBatch);
-            }
-
-            foreach (var enemy in EntityLists.enemyList)
-            {
-                enemy.Draw(_spriteBatch);
-            }
-
-            foreach (var enemy in EntityLists.playerBulletList)
-            {
-                playerBullets.Draw(_spriteBatch);
-            }
-
-            foreach (var enemy in EntityLists.enemyBulletList)
-            {
-                enemyBullets.Draw(_spriteBatch);
-            }
+            EntityLists.Draw(_spriteBatch);
 
             if (seconds < 10)
             {
@@ -186,14 +168,15 @@ namespace TRNBulletHell
             {
                 _spriteBatch.DrawString(font, "Game Over", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
                 _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
-                _entities["Enemies"].Clear();
-                _entities["PlayerBullets"].Clear();
-                _entities["EnemyBullets"].Clear();
+                EntityLists.enemyList.Clear();
+                EntityLists.playerBulletList.Clear();
+                EntityLists.enemyBulletList.Clear();
             }
 
             if(win)
             {
                 _spriteBatch.DrawString(font, "Winner", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
+                _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
                 EntityLists.enemyList.Clear();
                 EntityLists.playerBulletList.Clear();
                 EntityLists.enemyBulletList.Clear();

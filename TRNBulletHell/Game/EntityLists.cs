@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,26 +53,27 @@ namespace TRNBulletHell.Game
             }
         }
 
-        /*
-        public List<Player> GetPlayerList()
+        public static void Draw(SpriteBatch spriteBatch)
         {
-            return players;
-        }
+            foreach (var player in EntityLists.playerList)
+            {
+                player.Draw(spriteBatch);
+            }
 
-        public List<Bullet> GetPlayerBulletList()
-        {
-            return playerBullets;
-        }
+            foreach (var enemy in EntityLists.enemyList)
+            {
+                enemy.Draw(spriteBatch);
+            }
 
-        public List<Enemy> GetEnemyList()
-        {
-            return enemies;
-        }
+            foreach (var bullet in EntityLists.playerBulletList)
+            {
+                bullet.Draw(spriteBatch);
+            }
 
-        public List<Bullet> GetEnemyBulletList()
-        {
-            return enemyBullets;
+            foreach (var bullet in EntityLists.enemyBulletList)
+            {
+                bullet.Draw(spriteBatch);
+            }
         }
-        */
     }
 }

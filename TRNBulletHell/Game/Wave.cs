@@ -39,7 +39,7 @@ namespace TRNBulletHell.Game
             {
                 this.count++;
                 EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
-                builder.createEnemy(enemies);
+                builder.createEnemy(EntityLists.enemyList);
                     /*  Enemy a = enemyFactory.CreateEnemy(type, texture);
                       a.enemyBullet = new BulletA(enemyBullet);
                       enemies.Add(a);*/

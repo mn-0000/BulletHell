@@ -34,7 +34,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
            randomMovement = random.Next(0, 4);
         }
 
-        public void createEnemy(List<AbstractEntity> enemies)
+        public void createEnemy(List<Enemy> enemies)
         {
             this.a = enemyFactory.CreateEnemy(type, texture);
             a.enemyBullet = new BulletA(enemyBullet);
