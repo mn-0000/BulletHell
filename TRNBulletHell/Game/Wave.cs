@@ -31,8 +31,10 @@ namespace TRNBulletHell.Game
             this.count = 0;
         }
 
-        public bool createWave(double seconds, float _remainingDelay, List<AbstractEntity> enemies, Texture2D enemyBullet)
-        {           
+        public bool createWave(double seconds, float _remainingDelay, Texture2D enemyBullet)
+        {
+            
+            
             if (seconds >= intervalTime && _remainingDelay <= 0 && this.count < total)
             {
                 this.count++;

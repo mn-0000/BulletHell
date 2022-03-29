@@ -28,7 +28,7 @@ namespace TRNBulletHell.Game.Entity.Bullet.BulletA
             }
         }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public override void Update(GameTime gameTime)
         {
             timer += gameTime.ElapsedGameTime.TotalSeconds;
 

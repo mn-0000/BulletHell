@@ -20,7 +20,7 @@ namespace TRNBulletHell.Game.Entity.Bullet
             damage = 10;
         }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public override void Update(GameTime gameTime)
         {
             timer += gameTime.ElapsedGameTime.TotalSeconds;
 
