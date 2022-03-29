@@ -17,6 +17,8 @@ namespace TRNBulletHell.Game.Entity.Enemy
         Enemy a;
         Random random = new Random();
         int randomMovement = 0;
+
+
         public EnemyBuilder(Texture2D texture, Texture2D bullet, string type)
         {
             this.texture = texture;

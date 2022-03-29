@@ -78,7 +78,7 @@ namespace TRNBulletHell
             playerBullet2D = Content.Load<Texture2D>("bullet");
             enemyBullet = Content.Load<Texture2D>("EnemyBullet");
 
-
+            // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
             first = new Wave(0, 3, "EnemyA", enemyATexture);
             second = new Wave(30, 1, "MidBoss", midBossTexture);
             third = new Wave(60, 5, "EnemyB", enemyBTexture);
@@ -115,7 +115,7 @@ namespace TRNBulletHell
             double waveTimer = gameTime.TotalGameTime.TotalSeconds;
            
 
-            // Returns true if spawn was created in a wave. 
+            // Returns true if spawn was created in a wave. This updates when th
             if (first.createWave(waveTimer, _remainingDelay, enemies, enemyBullet) || second.createWave(waveTimer, _remainingDelay, enemies, enemyBullet) || third.createWave(waveTimer, _remainingDelay, enemies, enemyBullet) || fourth.createWave(waveTimer, _remainingDelay, enemies, enemyBullet))
             {
                 _remainingDelay = _delay;
@@ -189,14 +189,14 @@ namespace TRNBulletHell
                 enemy.Draw(_spriteBatch);
             }
 
-            foreach (var enemy in _entities["PlayerBullets"])
+            foreach (var playerBullets in _entities["PlayerBullets"])
             {
-                enemy.Draw(_spriteBatch);
+                playerBullets.Draw(_spriteBatch);
             }
 
-            foreach (var enemy in _entities["EnemyBullets"])
+            foreach (var enemyBullets in _entities["EnemyBullets"])
             {
-                enemy.Draw(_spriteBatch);
+                enemyBullets.Draw(_spriteBatch);
             }
 
             if (seconds < 10)
@@ -217,11 +217,16 @@ namespace TRNBulletHell
             else
             {
                 _spriteBatch.DrawString(font, "Game Over", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
+                _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
+                _entities["Enemies"].Clear();
+                _entities["PlayerBullets"].Clear();
+                _entities["EnemyBullets"].Clear();
             }
 
             if(win)
             {
                 _spriteBatch.DrawString(font, "Winner", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
+                _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
                 _entities["Enemies"].Clear();
                 _entities["PlayerBullets"].Clear();
                 _entities["EnemyBullets"].Clear();
