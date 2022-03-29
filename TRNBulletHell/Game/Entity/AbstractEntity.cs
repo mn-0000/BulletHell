@@ -40,7 +40,7 @@ namespace TRNBulletHell.Game.Entity
             spriteBatch.Draw(texture, movement.position, null, Color.White, movement._rotation, new Vector2(texture.Width/2,texture.Height/2), 1, SpriteEffects.None, 0);
         }
 
-        public virtual void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public virtual void Update(GameTime gameTime)
         {
 
         }
@@ -58,11 +58,6 @@ namespace TRNBulletHell.Game.Entity
         public Boolean Removed()
         {
             return this.isRemoved;
-        }
-
-        internal void Update(GameTime gameTime, List<Bullet.Bullet> playerBullets)
-        {
-            throw new NotImplementedException();
         }
     }
 }

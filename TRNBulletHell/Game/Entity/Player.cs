@@ -40,7 +40,7 @@ namespace TRNBulletHell.Game.Entity
             }
         }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public override void Update(GameTime gameTime)
         {
             this.movement.Moving();
             _prevousKey = _currentKey;
@@ -53,8 +53,7 @@ namespace TRNBulletHell.Game.Entity
                 bullet.movement.position = new Vector2();
                 bullet.movement.position.X = this.movement.position.X;
                 bullet.movement.position.Y = this.movement.position.Y;
-                entities.Add(bullet);
-                //entities = entities.Concat(new[] { bullet });
+                EntityLists.playerBulletList.Add(bullet);
             }
 
             if(health <= 0)

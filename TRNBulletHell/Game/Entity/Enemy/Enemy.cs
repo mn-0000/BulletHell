@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
@@ -16,7 +17,6 @@ namespace TRNBulletHell.Game.Entity.Enemy
         //public PlayerBullet enemyBullet;
         public BulletA enemyBullet;
         public  List<Movement> movements = new List<Movement>();
-        int counter = 0;
         int ProduceBulletcounter = 0;
         protected int frequencyOfBullets;
         
@@ -35,7 +35,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
             health -= damage;
         }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public override void Update(GameTime gameTime)
         {
             ProduceBulletcounter++;
             this.movement.Moving();
@@ -53,7 +53,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
             {
                 this.isRemoved = true;
             }
-            this.shootBullet(entities);
+            this.shootBullet();
 
             if (health <= 0)
             {
@@ -63,7 +63,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
 
  
-        public void shoot(List<AbstractEntity> entities)
+        public void shoot()
         {
 
 
@@ -110,19 +110,17 @@ namespace TRNBulletHell.Game.Entity.Enemy
                 bullet.movement.position = new Vector2();
                 bullet.movement.position.X = this.movement.position.X;
                 bullet.movement.position.Y = this.movement.position.Y;
-                entities.Add(bullet);
-                //entities = entities.Concat(new[] { bullet });
-
+                EntityLists.enemyBulletList.Add(bullet);
         }
 
 
-        public void shootBullet(List<AbstractEntity> entities)
+        public void shootBullet()
         {
             // frequency can determine the different levels.
             //frequency here = 30
             if ((ProduceBulletcounter % frequencyOfBullets) == 0)
             {
-                shoot(entities);
+                shoot();
             }
         }
 

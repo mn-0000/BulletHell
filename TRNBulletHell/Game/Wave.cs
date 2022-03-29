@@ -30,7 +30,7 @@ namespace TRNBulletHell.Game
             this.count = 0;
         }
 
-        public bool createWave(double seconds, float _remainingDelay, List<AbstractEntity> enemies, Texture2D enemyBullet)
+        public bool createWave(double seconds, float _remainingDelay, Texture2D enemyBullet)
         {
             
             
@@ -38,11 +38,9 @@ namespace TRNBulletHell.Game
             {
                this.count++;
                 Enemy a = enemyFactory.CreateEnemy(type, texture);
-                //a.enemyBullet = new PlayerBullet(enemyBullet);
                 a.enemyBullet = new BulletA(enemyBullet);
-                enemies.Add(a);
+                EntityLists.enemyList.Add(a);
                 return true;
-
             }
            
             return false;

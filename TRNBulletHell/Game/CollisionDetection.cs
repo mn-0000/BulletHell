@@ -15,7 +15,7 @@ namespace TRNBulletHell.Game
     {
         bool invincible = false;
         TimeSpan timer = new TimeSpan(0, 0, 3);
-        public void detectCollision(Dictionary<String, List<AbstractEntity>> entityList, GameTime gameTime)
+        public void detectCollision(GameTime gameTime)
         {
             timer -= gameTime.ElapsedGameTime;
             if (timer <= TimeSpan.Zero)
@@ -24,10 +24,10 @@ namespace TRNBulletHell.Game
             }
 
             // Do 20dmg to player if collides with enemy
-            foreach (var p in entityList["Players"].ToArray())
+            foreach (var p in EntityLists.playerList.ToArray())
             {
                 Player player = (Player)p;
-                foreach(var enemy in entityList["Enemies"])
+                foreach(var enemy in EntityLists.enemyList)
                 {
                     if (player.Rectangle.Intersects(enemy.Rectangle))
                     {
@@ -38,10 +38,10 @@ namespace TRNBulletHell.Game
             }
 
             // Player takes damage if hit by enemy bullet
-            foreach (var p in entityList["Players"].ToArray())
+            foreach (var p in EntityLists.playerList.ToArray())
             {
                 Player player = (Player)p;
-                foreach (var b in entityList["EnemyBullets"].ToArray())
+                foreach (var b in EntityLists.enemyBulletList.ToArray())
                 {
                     if(!invincible)
                     {
@@ -49,8 +49,8 @@ namespace TRNBulletHell.Game
                         if (player.Rectangle.Intersects(bullet.Rectangle))
                         {
                             player.TakeDamage(bullet.GetDamage());
-                            entityList["EnemyBullets"].Remove(b);
-                            respawnPlayer(player, entityList);
+                            EntityLists.enemyBulletList.Remove(b);
+                            respawnPlayer(player);
                             Debug.WriteLine("player hit");
                         }
                     }
@@ -59,40 +59,38 @@ namespace TRNBulletHell.Game
                 // remove player
                 if(p.isRemoved)
                 {
-                    entityList["Players"].Remove(p);
+                    EntityLists.playerList.Remove(p);
                 }
             }
 
             // Enemy takes damage if hit by player bullet
-            foreach (var e in entityList["Enemies"].ToArray())
+            foreach (var enemy in EntityLists.enemyList.ToArray())
             {
-                Enemy enemy = (Enemy)e;
-                foreach (var b in entityList["PlayerBullets"].ToArray())
+                foreach (var bullet in EntityLists.playerBulletList.ToArray())
                 {
-                    Bullet bullet = (Bullet)b;
                     if (enemy.Rectangle.Intersects(bullet.Rectangle))
                     {
                         enemy.TakeDamage(bullet.GetDamage());
-                        entityList["PlayerBullets"].Remove(b);
+                        EntityLists.playerBulletList.Remove(bullet);
                         Debug.WriteLine("enemy hit");
                     }
 
                     // remove enemy and bullet
-                    if (e.isRemoved)
+                    if (enemy.isRemoved)
                     {
-                        entityList["Enemies"].Remove(e);
+                        EntityLists.enemyList.Remove(enemy);
                     }
                 }
             }
 
         }
 
-        void respawnPlayer(Player player, Dictionary<String, List<AbstractEntity>> entityList)
+        void respawnPlayer(Player player)
         {
             player.movement.position.X = 400;
             player.movement.position.Y = 450;
-            entityList["EnemyBullets"].Clear();
-            entityList["PlayerBullets"].Clear();
+            EntityLists.enemyBulletList.Clear();
+            EntityLists.playerBulletList.Clear();
             invincible = true;
             this.timer = new TimeSpan(0, 0, 3);
         }
