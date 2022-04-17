@@ -7,6 +7,7 @@ using System.Text;
 using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.Enemy;
+using TRNBulletHell.Game.Entity.LifeSystem;
 
 namespace TRNBulletHell.Game
 {
@@ -17,6 +18,7 @@ namespace TRNBulletHell.Game
         public static List<Player> playerList = new List<Player>();
         public static List<Bullet> enemyBulletList = new List<Bullet>();
         public static List<Bullet> playerBulletList = new List<Bullet>();
+        public static List<LifeSprite> lifeSpriteList = new List<LifeSprite>();
         private EntityLists() { }
         public static EntityLists Instance
         {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.Bullet.BulletA;
+using TRNBulletHell.Game.Entity.LifeSystem;
 
 namespace TRNBulletHell.Game.Entity.Enemy
 {
@@ -19,17 +20,20 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public  List<Movement> movements = new List<Movement>();
         int ProduceBulletcounter = 0;
         protected int frequencyOfBullets;
-        
+        protected Boolean lifeDrop;
         protected int health;
+        public LifeSprite lifeSprite;
 
         public Enemy(Texture2D texture) :base(texture)
         {
 
         }
+
         public void addMove(Movement m)
         {
             movements.Add(m);
         }
+
         public void TakeDamage(int damage)
         {
             health -= damage;
@@ -39,7 +43,6 @@ namespace TRNBulletHell.Game.Entity.Enemy
         {
             ProduceBulletcounter++;
             this.movement.Moving();
-
 
             this.movement.direction = new Vector2((float)Math.Cos(movement._rotation), (float)Math.Sin(movement._rotation));
 
@@ -55,14 +58,18 @@ namespace TRNBulletHell.Game.Entity.Enemy
             }
             this.shootBullet();
 
-            if (health <= 0)
+            checkHealth();
+        }
+
+        public void checkHealth()
+        {
+            if (health <= 0)  // If enemy is killed, try to drop extra life.
             {
                 isRemoved = true;
+                randomizeLifeDrop();
             }
         }
 
-
- 
         public void shoot()
         {
 
@@ -124,6 +131,20 @@ namespace TRNBulletHell.Game.Entity.Enemy
             }
         }
 
+        public void randomizeLifeDrop()
+        {
+            if (this.lifeDrop)
+            {
+                LifeSprite life = new LifeSprite(lifeSprite.getImage());
+                life.movement.direction = new Vector2();
+                life.movement.direction = new Vector2(0, -1);
+                //  bullet.movement.direction.Y = this.movement.direction.Y * 3;
+                life.movement.position = new Vector2();
+                life.movement.position.X = this.movement.position.X;
+                life.movement.position.Y = this.movement.position.Y;
+                EntityLists.lifeSpriteList.Add(life);
+            }
+        }
 
     }
 }

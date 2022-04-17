@@ -26,6 +26,7 @@ namespace TRNBulletHell
         Texture2D enemyBullet;
         Texture2D backgroundSprite;
         Texture2D playerBullet2D;
+        Texture2D lifeTexture;
         SpriteFont font;
 
         // variables
@@ -58,6 +59,7 @@ namespace TRNBulletHell
             base.Initialize();
             _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+            //_graphics.ApplyChanges();
         }
 
         protected override void LoadContent()
@@ -72,6 +74,7 @@ namespace TRNBulletHell
             finalBossTexture = Content.Load<Texture2D>("boss");
             playerBullet2D = Content.Load<Texture2D>("bullet");
             enemyBullet = Content.Load<Texture2D>("EnemyBullet");
+            lifeTexture = Content.Load<Texture2D>("HeartSprite2");
 
             // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
             first = new Wave(0, 3, "EnemyA", enemyATexture);
@@ -95,10 +98,8 @@ namespace TRNBulletHell
 
             _remainingDelay -= timer;
 
-        
-
-
             double waveTimer = gameTime.TotalGameTime.TotalSeconds;
+
            // Wave first = new Wave(0, 3, "EnemyA", enemyATexture);
             if (first.createWave(waveTimer, _remainingDelay, enemyBullet) || 
                 second.createWave(waveTimer, _remainingDelay, enemyBullet) || 
@@ -108,11 +109,9 @@ namespace TRNBulletHell
                 _remainingDelay = _delay;
             }
 
-
             if (gameTime.TotalGameTime.TotalSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
             {
-                finalBossCount++;
-                
+                finalBossCount++;                
             }
             
             // check if boss is dead or game is over
@@ -163,6 +162,7 @@ namespace TRNBulletHell
             if(EntityLists.playerList.Count != 0)
             {
                 _spriteBatch.DrawString(font, $"Health: { EntityLists.playerList[0].GetHealth().ToString()}", new Vector2(20, 10), Color.White);
+                _spriteBatch.DrawString(font, $"Extra Lives: {EntityLists.playerList[0].getLives().ToString()}", new Vector2(20, 50), Color.White);
             }
             else
             {
@@ -171,6 +171,7 @@ namespace TRNBulletHell
                 EntityLists.enemyList.Clear();
                 EntityLists.playerBulletList.Clear();
                 EntityLists.enemyBulletList.Clear();
+                EntityLists.lifeSpriteList.Clear();
             }
 
             if(win)
@@ -180,6 +181,7 @@ namespace TRNBulletHell
                 EntityLists.enemyList.Clear();
                 EntityLists.playerBulletList.Clear();
                 EntityLists.enemyBulletList.Clear();
+                EntityLists.lifeSpriteList.Clear();
             }
 
             _spriteBatch.End();

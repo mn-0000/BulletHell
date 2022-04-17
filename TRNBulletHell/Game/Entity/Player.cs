@@ -19,17 +19,18 @@ namespace TRNBulletHell.Game.Entity
         public bool ShowHitbox = false;
         private KeyboardState _currentKey;
         private KeyboardState _prevousKey;
-        int health = 100;
+        private int health;
+        private int lives;
 
         public Player(GraphicsDevice graphics,Texture2D image) : base(image)
         {
             // Initialize starting position at the bottom of the screen.
-
-
             // texture for drawing hitbox
             rectangleTexture = new Texture2D(graphics, 1, 1, false, SurfaceFormat.Color);
             rectangleTexture.SetData<Color>(new Color[] { Color.White });
             this.movement = new PlayerMovement();
+            this.health = 100;
+            this.lives = 1;
         }
 
         public override Rectangle Rectangle
@@ -56,9 +57,19 @@ namespace TRNBulletHell.Game.Entity
                 EntityLists.playerBulletList.Add(bullet);
             }
 
-            if(health <= 0)
+            checkIsRemoved();
+        }
+
+        public void checkIsRemoved()
+        {
+            if (health <= 0 && lives == 0)  // health hit 0 and no lives left.
             {
                 isRemoved = true;
+            }
+            else if (health <= 0 && lives >= 1)  // health hit 0 and still has lives.
+            {
+                health = 100;
+                removeLife();
             }
         }
 
@@ -70,6 +81,26 @@ namespace TRNBulletHell.Game.Entity
         public int GetHealth()
         {
             return health;
+        }
+
+        public int getLives()
+        {
+            return this.lives;
+        }
+
+        public void setLives(int life)
+        {
+            this.lives = life;
+        }
+
+        public void addLife()
+        {
+            this.lives += 1;
+        }
+
+        public void removeLife()
+        {
+            this.lives -= 1;
         }
 
     }

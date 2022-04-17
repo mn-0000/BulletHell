@@ -24,9 +24,6 @@ namespace TRNBulletHell.Game.Entity.Enemy
             this.texture = texture;
             this.type = type;
             this.enemyBullet = bullet;          
-
-
-
         }
 
         public void getRandomNumber()
@@ -60,8 +57,6 @@ namespace TRNBulletHell.Game.Entity.Enemy
                 default:
                     throw new ArgumentException("Unexpected random number");
             }
-
-            
         }
 
         public void addMovementsOne()
