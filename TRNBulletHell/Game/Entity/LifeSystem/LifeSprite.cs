@@ -16,8 +16,17 @@ namespace TRNBulletHell.Game.Entity.LifeSystem
         public LifeSprite(Texture2D texture) : base(texture)
         {
             movement = new LifeDropMovement();
-            movement.speed = new Vector2(4f, 4f);
+            movement.speed = new Vector2(1.5f, 1.5f);
         }
+
+        public override Rectangle Rectangle
+        {
+            get
+            {
+                return new Rectangle((int)movement.position.X - 1, (int)movement.position.Y - 1, 5, 5);
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             movement.Moving();

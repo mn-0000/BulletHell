@@ -8,6 +8,7 @@ using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.Enemy;
 using Microsoft.Xna.Framework;
+using TRNBulletHell.Game.Entity.LifeSystem;
 
 namespace TRNBulletHell.Game
 {
@@ -56,8 +57,20 @@ namespace TRNBulletHell.Game
                     }
                 }
 
+                // Player gets extra life if runs into the life sprite.
+                foreach (var ls in EntityLists.lifeSpriteList.ToArray())
+                {
+                    LifeSprite life = ls;
+                    if (player.Rectangle.Intersects(life.Rectangle))
+                    {
+                        player.addLife();
+                        EntityLists.lifeSpriteList.Remove(ls);
+                        Debug.WriteLine("plus one life");
+                    }
+                }
+
                 // remove player
-                if(p.isRemoved)
+                if (p.isRemoved)
                 {
                     EntityLists.playerList.Remove(p);
                 }
