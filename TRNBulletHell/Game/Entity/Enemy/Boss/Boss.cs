@@ -9,7 +9,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
     {
         public Boss(Texture2D texture) : base(texture)
         {
-
+            this.lifeDrop = false;
         }
 
     }
