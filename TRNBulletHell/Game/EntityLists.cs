@@ -19,6 +19,7 @@ namespace TRNBulletHell.Game
         public static List<Bullet> enemyBulletList = new List<Bullet>();
         public static List<Bullet> playerBulletList = new List<Bullet>();
         public static List<LifeSprite> lifeSpriteList = new List<LifeSprite>();
+
         private EntityLists() { }
         public static EntityLists Instance
         {
@@ -53,6 +54,10 @@ namespace TRNBulletHell.Game
             {
                 bullet.Update(gameTime);
             }
+            foreach (var life in EntityLists.lifeSpriteList)
+            {
+                life.Update(gameTime);
+            }
         }
 
         public static void Draw(SpriteBatch spriteBatch)
@@ -75,6 +80,10 @@ namespace TRNBulletHell.Game
             foreach (var bullet in EntityLists.enemyBulletList)
             {
                 bullet.Draw(spriteBatch);
+            }
+            foreach (var life in EntityLists.lifeSpriteList)
+            {
+                life.Draw(spriteBatch);
             }
         }
     }

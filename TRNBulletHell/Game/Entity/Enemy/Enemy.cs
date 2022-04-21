@@ -22,11 +22,11 @@ namespace TRNBulletHell.Game.Entity.Enemy
         protected int frequencyOfBullets;
         protected Boolean lifeDrop;
         protected int health;
-        public LifeSprite lifeSprite;
+        public LifeSprite lifeTexture;
 
         public Enemy(Texture2D texture) :base(texture)
         {
-
+            lifeTexture = new LifeSprite( GameDriver.textureList[0]);
         }
 
         public void addMove(Movement m)
@@ -96,19 +96,19 @@ namespace TRNBulletHell.Game.Entity.Enemy
                 }*/
 
 
-           /* float x = 0, y = -1;
-            for (int i = 0; i < 5; i++)
-            {
-                PlayerBullet bullet = new PlayerBullet(enemyBullet.getImage());
-                bullet.movement.direction = new Vector2();
-                bullet.movement.direction = new Vector2(x, y);
-                //  bullet.movement.direction.Y = this.movement.direction.Y * 3;
-                bullet.movement.position = new Vector2();
-                bullet.movement.position.X = this.movement.position.X;
-                bullet.movement.position.Y = this.movement.position.Y;
-                x--;
-                y--;
-                entities.Add(bullet);*/
+            /* float x = 0, y = -1;
+             for (int i = 0; i < 5; i++)
+             {
+                 PlayerBullet bullet = new PlayerBullet(enemyBullet.getImage());
+                 bullet.movement.direction = new Vector2();
+                 bullet.movement.direction = new Vector2(x, y);
+                 //  bullet.movement.direction.Y = this.movement.direction.Y * 3;
+                 bullet.movement.position = new Vector2();
+                 bullet.movement.position.X = this.movement.position.X;
+                 bullet.movement.position.Y = this.movement.position.Y;
+                 x--;
+                 y--;
+                 entities.Add(bullet);*/
 
                 PlayerBullet bullet = new PlayerBullet(enemyBullet.getImage());
                 bullet.movement.direction = new Vector2();
@@ -133,9 +133,10 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public void randomizeLifeDrop()
         {
-            if (this.lifeDrop)
+                if (this.lifeDrop)
             {
-                LifeSprite life = new LifeSprite(lifeSprite.getImage());
+                //Texture2D test = EntityLists.lifeSpriteListK
+                LifeSprite life = lifeTexture.Clone() as LifeSprite;
                 life.movement.direction = new Vector2();
                 life.movement.direction = new Vector2(0, -1);
                 //  bullet.movement.direction.Y = this.movement.direction.Y * 3;

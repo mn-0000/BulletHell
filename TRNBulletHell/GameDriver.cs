@@ -29,6 +29,9 @@ namespace TRNBulletHell
         Texture2D lifeTexture;
         SpriteFont font;
 
+        // Testing this 
+        public static List<Texture2D> textureList = new List<Texture2D>();
+
         // variables
         protected int minutes;
         protected int seconds;
@@ -75,6 +78,7 @@ namespace TRNBulletHell
             playerBullet2D = Content.Load<Texture2D>("bullet");
             enemyBullet = Content.Load<Texture2D>("EnemyBullet");
             lifeTexture = Content.Load<Texture2D>("HeartSprite2");
+            textureList.Add(lifeTexture);
 
             // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
             first = new Wave(0, 3, "EnemyA", enemyATexture);
