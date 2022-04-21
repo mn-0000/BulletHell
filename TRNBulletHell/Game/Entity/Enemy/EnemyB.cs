@@ -8,10 +8,8 @@ using TRNBulletHell.Game.Entity.Move;
 
 namespace TRNBulletHell.Game.Entity.Enemy
 {
-    class EnemyB : Enemy 
+    public class EnemyB : Enemy 
     {
-
-
         public EnemyB(Texture2D texture) : base(texture)
         {
             health = 20;

@@ -27,6 +27,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public Enemy(Texture2D texture) :base(texture)
         {
             lifeTexture = new LifeSprite( GameDriver.textureList[0]);
+            setRandLifeDrop();
         }
 
         public void addMove(Movement m)
@@ -66,7 +67,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
             if (health <= 0)  // If enemy is killed, try to drop extra life.
             {
                 isRemoved = true;
-                randomizeLifeDrop();
+                dropLife();
             }
         }
 
@@ -131,15 +132,37 @@ namespace TRNBulletHell.Game.Entity.Enemy
             }
         }
 
-        public void randomizeLifeDrop()
+        /// <summary>
+        /// Randomly sets lifeDrop var to be true or false.
+        /// </summary>
+        public void setRandLifeDrop()
         {
-                if (this.lifeDrop)
+            Random r1 = new Random();
+
+            int num1 = r1.Next(10);
+            int num2 = r1.Next(10);
+
+            if (num1 == num2)
             {
-                //Texture2D test = EntityLists.lifeSpriteListK
+                this.lifeDrop = true;
+            }
+            else
+            {
+                this.lifeDrop = false;
+            }
+
+        }
+
+        /// <summary>
+        /// Drops a life if the lifeDrop var is true.
+        /// </summary>
+        public void dropLife()
+        {
+            if (this.lifeDrop)
+            {
                 LifeSprite life = lifeTexture.Clone() as LifeSprite;
                 life.movement.direction = new Vector2();
                 life.movement.direction = new Vector2(0, -1);
-                //  bullet.movement.direction.Y = this.movement.direction.Y * 3;
                 life.movement.position = new Vector2();
                 life.movement.position.X = this.movement.position.X;
                 life.movement.position.Y = this.movement.position.Y;
