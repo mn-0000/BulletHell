@@ -13,11 +13,6 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public EnemyB(Texture2D texture) : base(texture)
         {
             health = 20;
-            MovementCreator creator = new MovementCreator();
-            this.movement = creator.CreateMovement("ZigZagPath");
-            this.addMove(creator.CreateMovement("CirclePath"));
-            this.addMove(creator.CreateMovement("ZigZagPath"));
-            this.movement.speed = new Vector2(1f, 1f);
             this.frequencyOfBullets = 30;
         }
       

@@ -18,11 +18,6 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
             timer = 0f;
             health = 100;
 
-            MovementCreator creator = new MovementCreator();
-            this.movement = creator.CreateMovement("ZigZagPath");
-            this.addMove(creator.CreateMovement("CirclePath"));
-            this.addMove(creator.CreateMovement("ZigZagPath"));
-            this.movement.speed = new Vector2(1f, 1f);
             this.frequencyOfBullets = 25;
         }
 

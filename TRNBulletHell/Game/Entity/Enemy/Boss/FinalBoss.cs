@@ -22,11 +22,6 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
          //   Speed = 2f;
             health = 300;
 
-            MovementCreator creator = new MovementCreator();
-            this.movement = creator.CreateMovement("AcrossScreen");
-            this.addMove(creator.CreateMovement("CirclePath"));
-            this.addMove(creator.CreateMovement("ZigZagPath"));
-
             this.frequencyOfBullets = 15;
         }
     }

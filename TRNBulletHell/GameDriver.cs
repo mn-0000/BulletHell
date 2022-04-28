@@ -11,6 +11,7 @@ using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Enemy.Boss;
 using System.Diagnostics;
 using TRNBulletHell.Game.Entity.Move;
+using BulletManager = TRNBulletHell.Game.BulletManager;
 
 namespace TRNBulletHell
 {
@@ -47,6 +48,7 @@ namespace TRNBulletHell
         Wave fourth;
 
         CollisionDetection collisionDetection = new CollisionDetection();
+        BulletManager bulletManager = new BulletManager();
         EntityLists entities = EntityLists.Instance;
 
         public GameDriver()
@@ -79,7 +81,7 @@ namespace TRNBulletHell
             enemyBullet = Content.Load<Texture2D>("EnemyBullet");
             lifeTexture = Content.Load<Texture2D>("HeartSprite2");
             textureList.Add(lifeTexture);
-
+            textureList.Add(enemyBullet);
             // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
             first = new Wave(0, 3, "EnemyA", enemyATexture);
             second = new Wave(30, 1, "MidBoss", midBossTexture);
@@ -138,6 +140,9 @@ namespace TRNBulletHell
 
             // update all entities
             EntityLists.Update(gameTime);
+
+            //Spawn Bullets from Enemys
+            this.bulletManager.spawnBullets();
 
             // detect collisions
             collisionDetection.detectCollision(gameTime);
