@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
+using TRNBulletHell.Game.Entity.BulletPattern;
 using TRNBulletHell.Game.Entity.Enemy;
 
 namespace TRNBulletHell.Game
@@ -10,16 +11,7 @@ namespace TRNBulletHell.Game
     class CreateBullet
     {
         Enemy enemy;
-        public void shootBullet()
-        {
 
-            PlayerBullet bullet = new PlayerBullet(GameDriver.textureList[1]);
-            bullet.movement.direction = new Vector2(0, -1);
-            bullet.movement.position = new Vector2();
-            bullet.movement.position.X = enemy.movement.position.X;
-            bullet.movement.position.Y = enemy.movement.position.Y;
-            EntityLists.enemyBulletList.Add(bullet);
-        }
 
         public void createBullet(Enemy enemy)
         {
@@ -28,7 +20,18 @@ namespace TRNBulletHell.Game
             //frequency here = 30
             if ((enemy.ProduceBulletcounter % enemy.frequencyOfBullets) == 0)
             {
-                shootBullet();
+                if (enemy.type == "midBoss")
+                {
+                    BulletPatterns bulletPatterns = new BulletPatterns();
+                    bulletPatterns.sprayBullets(enemy);
+
+                }
+                else
+                {
+                    BulletPatterns bulletPatterns = new BulletPatterns();
+                    bulletPatterns.regular(enemy);
+                }
+                    
             }
         }
     }

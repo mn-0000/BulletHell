@@ -18,7 +18,8 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
             timer = 0f;
             health = 100;
 
-            this.frequencyOfBullets = 25;
+            this.frequencyOfBullets = 40;
+            this.type = "midBoss";
         }
 
       

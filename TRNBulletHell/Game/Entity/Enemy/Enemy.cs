@@ -23,6 +23,8 @@ namespace TRNBulletHell.Game.Entity.Enemy
         protected Boolean lifeDrop;
         protected int health;
         public LifeSprite lifeTexture;
+        public string type;
+
 
         public Enemy(Texture2D texture) :base(texture)
         {
