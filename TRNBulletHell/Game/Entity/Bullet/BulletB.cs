@@ -7,9 +7,9 @@ namespace TRNBulletHell.Game.Bullet.BulletB
 {
     public class BulletB : Bullet
     {
-        public BulletB(Texture2D texture) : base(texture)
+        public BulletB(Texture2D texture, int bulletDamage) : base(texture)
         {
-
+            damage = bulletDamage;
         }
     }
 }

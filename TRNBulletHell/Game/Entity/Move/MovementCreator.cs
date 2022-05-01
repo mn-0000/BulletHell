@@ -7,7 +7,7 @@ namespace TRNBulletHell.Game.Entity.Move
 {
     public class MovementCreator : EntityFactory
     {
-        public override Bullet.Bullet CreateBullet(string type, Texture2D texture)
+        public override Bullet.Bullet CreateBullet(string type, Texture2D texture, int damage)
         {
             throw new NotImplementedException();
         }

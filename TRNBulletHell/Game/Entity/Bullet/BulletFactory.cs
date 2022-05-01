@@ -9,14 +9,14 @@ namespace TRNBulletHell.Game.Bullet
 {
     public class BulletFactory : EntityFactory
     {
-        public override Bullet CreateBullet(string type, Texture2D texture)
+        public override Bullet CreateBullet(string type, Texture2D texture, int damage)
         {
             switch (type)
             {
                 case "BulletA":
-                    return new BulletA.BulletA(texture);
+                    return new BulletA.BulletA(texture, damage);
                 case "BulletB":
-                    return new BulletB.BulletB(texture);
+                    return new BulletB.BulletB(texture, damage);
             }
             throw new ArgumentException("Unsupported bullet type");
         }
