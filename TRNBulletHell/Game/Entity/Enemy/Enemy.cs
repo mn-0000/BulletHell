@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
-using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.LifeSystem;
 
 namespace TRNBulletHell.Game.Entity.Enemy

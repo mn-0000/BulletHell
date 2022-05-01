@@ -10,6 +10,8 @@ using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Enemy.Boss;
 using System.Diagnostics;
 using TRNBulletHell.Game.Entity.Move;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using BulletManager = TRNBulletHell.Game.BulletManager;
 
 namespace TRNBulletHell
@@ -41,13 +43,13 @@ namespace TRNBulletHell
         private bool win = false;
 
         // waves
-        Wave first;
-        Wave second;
-        Wave third;
-        Wave fourth;
+        WaveLogic first;
+        WaveLogic second;
+        WaveLogic third;
+        WaveLogic fourth;
 
         // List of waves
-        List<Wave> waves = new List<Wave>();
+        List<WaveLogic> waves = new List<WaveLogic>();
 
         CollisionDetection collisionDetection = new CollisionDetection();
         BulletManager bulletManager = new BulletManager();
@@ -71,6 +73,15 @@ namespace TRNBulletHell
 
         protected override void LoadContent()
         {
+            string testString = @"{
+            ""Time"": 1000,
+            ""EnemyType"": ""A"",
+            ""EnemyAmount"": 5,
+            ""Interval"": 200,
+            ""BulletRate"": 20,
+            ""Damage"": 10
+        }";
+            //JSONGameObject gameObject = JsonSerializer.Deserialize<JSONGameObject>(testString);
             // graphics/textures
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("galleryFont");
@@ -85,10 +96,10 @@ namespace TRNBulletHell
             textureList.Add(lifeTexture);
             textureList.Add(enemyBullet);
             // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
-            first = new Wave(0, 3, "EnemyA", enemyATexture);
-            second = new Wave(30, 1, "MidBoss", midBossTexture);
-            third = new Wave(60, 5, "EnemyB", enemyBTexture);
-            fourth = new Wave(90, 1, "FinalBoss", finalBossTexture);
+            first = new WaveLogic(0, 3, "EnemyA", enemyATexture);
+            second = new WaveLogic(30, 1, "MidBoss", midBossTexture);
+            third = new WaveLogic(60, 5, "EnemyB", enemyBTexture);
+            fourth = new WaveLogic(90, 1, "FinalBoss", finalBossTexture);
             EntityLists.playerList.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
             {
                 playerBullet = new PlayerBullet(playerBullet2D)

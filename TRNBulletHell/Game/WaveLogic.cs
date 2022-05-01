@@ -5,13 +5,12 @@ using System.Collections.Generic;
 using System.Text;
 using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Bullet;
-using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.Enemy;
 
 namespace TRNBulletHell.Game
 {
 
-    class Wave
+    class WaveLogic
     {
         EnemyFactory enemyFactory = new EnemyFactory();
         private int total;
@@ -22,7 +21,7 @@ namespace TRNBulletHell.Game
         private int count;
         Texture2D texture;
 
-        public Wave(int time, int total, string type, Texture2D texture)
+        public WaveLogic(int time, int total, string type, Texture2D texture)
         {
             this.intervalTime = time;
             this.total = total;
