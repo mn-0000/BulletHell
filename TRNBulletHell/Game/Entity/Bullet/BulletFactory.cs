@@ -14,7 +14,7 @@ namespace TRNBulletHell.Game.Entity.Bullet
             switch (type)
             {
                 case "BulletA":
-                    return new BulletA.BulletA(texture);
+                    return new BulletA(texture);
                 case "BulletB":
                     return new BulletB.BulletB(texture);
             }

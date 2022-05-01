@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Bullet;
-using TRNBulletHell.Game.Entity.Bullet.BulletA;
+using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.Enemy;
 
 namespace TRNBulletHell.Game

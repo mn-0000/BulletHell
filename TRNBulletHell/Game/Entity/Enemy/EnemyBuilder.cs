@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TRNBulletHell.Game.Entity.Bullet.BulletA;
+using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.Move;
 
 namespace TRNBulletHell.Game.Entity.Enemy

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using TRNBulletHell.Game;
 using TRNBulletHell.Game.Entity.Bullet;
-using TRNBulletHell.Game.Entity.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.Enemy;
 using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Enemy.Boss;
@@ -46,6 +45,9 @@ namespace TRNBulletHell
         Wave second;
         Wave third;
         Wave fourth;
+
+        // List of waves
+        List<Wave> waves = new List<Wave>();
 
         CollisionDetection collisionDetection = new CollisionDetection();
         BulletManager bulletManager = new BulletManager();

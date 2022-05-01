@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
-using TRNBulletHell.Game.Entity.Bullet.BulletA;
+using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.LifeSystem;
 
 namespace TRNBulletHell.Game.Entity.Enemy
@@ -80,8 +80,8 @@ namespace TRNBulletHell.Game.Entity.Enemy
         {
             Random r1 = new Random();
 
-            int num1 = r1.Next(10);
-            int num2 = r1.Next(10);
+            int num1 = r1.Next(4);
+            int num2 = r1.Next(4);
 
             if (num1 == num2)
             {
