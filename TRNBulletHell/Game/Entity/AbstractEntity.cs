@@ -14,12 +14,12 @@ namespace TRNBulletHell.Game.Entity
         public bool isRemoved = false;
         public int counter = 0;
         public Movement movement;
-
+        
         public virtual Rectangle Rectangle
         {
             get
             {
-                return new Rectangle((int)movement.position.X, (int)movement.position.Y, texture.Width, texture.Height);
+                return new Rectangle((int)movement.position.X, (int)movement.position.Y, texture.Width - 20, texture.Height - 20);
             }
         }
 
@@ -34,17 +34,16 @@ namespace TRNBulletHell.Game.Entity
             texture = image;
 
         }
-
+        
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, movement.position, null, Color.White, 0, movement.origin, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, movement.position, null, Color.White, movement._rotation, new Vector2(texture.Width/2,texture.Height/2), 1, SpriteEffects.None, 0);
         }
 
-        public virtual void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public virtual void Update(GameTime gameTime)
         {
 
         }
-
 
         public Texture2D getImage()
         {

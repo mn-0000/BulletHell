@@ -16,7 +16,8 @@ namespace TRNBulletHell.Game.Entity.Enemy
         Texture2D enemyBullet;
         Enemy a;
         Random random = new Random();
-        
+        int randomMovement = 0;
+
 
 
         public EnemyBuilder(Texture2D texture, Texture2D bullet, string type)
@@ -26,17 +27,17 @@ namespace TRNBulletHell.Game.Entity.Enemy
             this.enemyBullet = bullet;          
         }
 
-        public int getRandomNumber()
+        public void getRandomNumber()
         {
-           return random.Next(0, 4);
+           randomMovement = random.Next(0, 4);
         }
 
         public void createEnemy(List<Enemy> enemies)
         {
 
             this.a = enemyFactory.CreateEnemy(type, texture);
-            a.enemyBullet = new BulletA(enemyBullet, damage);
-            int randomMovement = getRandomNumber();
+            a.enemyBullet = new BulletA(enemyBullet);
+            getRandomNumber();
             switch (randomMovement)
             {
                 case 0:

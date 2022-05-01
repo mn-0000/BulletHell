@@ -5,20 +5,26 @@ using System.Collections.Generic;
 using System.Text;
 using TRNBulletHell.Game.Entity;
 
-namespace TRNBulletHell.Game.Bullet
+namespace TRNBulletHell.Game.Entity.Bullet
 {
     public abstract class Bullet : AbstractEntity
     {
         protected float life = 0f;
+        protected int damage = 0;
 
         public Bullet(Texture2D texture) : base(texture)
         {
 
         }
 
-        public override void Update(GameTime gameTime, List<AbstractEntity> entities)
+        public override void Update(GameTime gameTime)
         {
 
+        }
+
+        public int GetDamage()
+        {
+            return damage;
         }
 
     }

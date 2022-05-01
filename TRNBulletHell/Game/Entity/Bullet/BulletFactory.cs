@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TRNBulletHell.Game.Entity;
-using TRNBulletHell.Game.Entity.Enemy;
 
-namespace TRNBulletHell.Game.Bullet
+
+namespace TRNBulletHell.Game.Entity.Bullet
 {
     public class BulletFactory : EntityFactory
     {
@@ -21,7 +21,7 @@ namespace TRNBulletHell.Game.Bullet
             throw new ArgumentException("Unsupported bullet type");
         }
 
-        public override Enemy CreateEnemy(string type, Texture2D texture)
+        public override Enemy.Enemy CreateEnemy(string type, Texture2D texture)
         {
             throw new NotImplementedException();
         }

@@ -20,11 +20,6 @@ public class PlayerMovement : Movement
             if (state.IsKeyDown(Keys.LeftShift) || state.IsKeyDown(Keys.RightShift))
             {
                 speed = 1;
-              //  ShowHitbox = true;
-            }
-            else
-            {
-              //  ShowHitbox = false;
             }
 
             if (state.IsKeyDown(Keys.Left))

@@ -4,45 +4,52 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using TRNBulletHell.Game;
-using TRNBulletHell.Game.Bullet;
-using TRNBulletHell.Game.Bullet.BulletA;
+using TRNBulletHell.Game.Entity.Bullet;
+using TRNBulletHell.Game.Entity.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.Enemy;
 using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Enemy.Boss;
 using System.Diagnostics;
 using TRNBulletHell.Game.Entity.Move;
-using System.Text.Json;
+using BulletManager = TRNBulletHell.Game.BulletManager;
 
 namespace TRNBulletHell
 {
     public class GameDriver : Microsoft.Xna.Framework.Game
     {
+        // graphics/textures
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Texture2D enemyATexture;
         Texture2D enemyBTexture;
         Texture2D midBossTexture;
         Texture2D finalBossTexture;
-        Texture2D playerSprite;
+        Texture2D enemyBullet;
         Texture2D backgroundSprite;
-        Player player;
-        EnemyA enemyA;
-        EnemyB enemyB;
-        MidBoss midBoss;
-        FinalBoss finalBoss;
+        Texture2D playerBullet2D;
+        Texture2D lifeTexture;
         SpriteFont font;
-        private List<AbstractEntity> entities;
-        private List<Enemy> enemies = new List<Enemy>();
+
+        // Testing this 
+        public static List<Texture2D> textureList = new List<Texture2D>();
+
+        // variables
         protected int minutes;
         protected int seconds;
-        EnemyFactory enemyFactory = new EnemyFactory();
-        BulletFactory bulletFactory = new BulletFactory();
-        MovementCreator movementCreator = new MovementCreator();
         private const float _delay = 2; // seconds
         private float _remainingDelay = _delay;
-        private int enemyACount = 0;
-        private int enemyBCount = 0;
+        private int finalBossCount = 0;
+        private bool win = false;
 
+        // waves
+        Wave first;
+        Wave second;
+        Wave third;
+        Wave fourth;
+
+        CollisionDetection collisionDetection = new CollisionDetection();
+        BulletManager bulletManager = new BulletManager();
+        EntityLists entities = EntityLists.Instance;
 
         public GameDriver()
         {
@@ -55,46 +62,31 @@ namespace TRNBulletHell
         protected override void Initialize()
         {
             base.Initialize();
-
-
             _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+            //_graphics.ApplyChanges();
         }
 
         protected override void LoadContent()
         {
-            string testString = @"{
-            ""ID"": 1,
-            ""Time"": 1000,
-            ""EnemyType"": ""A"",
-            ""EnemyAmount"": 5,
-            ""Interval"": 200,
-            ""BulletRate"": 20,
-            ""Damage"": 10
-        }";
-            JSONGameObject jgo = JsonSerializer.Deserialize<JSONGameObject>(testString);
             // graphics/textures
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            player = new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"));
-            enemyA = new EnemyA(Content.Load<Texture2D>("enemyA"));
-            enemyB = new EnemyB(Content.Load<Texture2D>("enemyB"));
-            midBoss = new MidBoss(Content.Load<Texture2D>("midboss"));
-            finalBoss = new FinalBoss(Content.Load<Texture2D>("boss"));
-            playerSprite = player.getImage();
             font = Content.Load<SpriteFont>("galleryFont");
             backgroundSprite = Content.Load<Texture2D>("background");
-
             enemyATexture = Content.Load<Texture2D>("enemyA");
             enemyBTexture = Content.Load<Texture2D>("enemyB");
             midBossTexture = Content.Load<Texture2D>("midBoss");
             finalBossTexture = Content.Load<Texture2D>("boss");
-
+            playerBullet2D = Content.Load<Texture2D>("bullet");
+            enemyBullet = Content.Load<Texture2D>("EnemyBullet");
+            lifeTexture = Content.Load<Texture2D>("HeartSprite2");
+            textureList.Add(lifeTexture);
+            textureList.Add(enemyBullet);
             // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
-            //first = new Wave(0, 3, "EnemyA", enemyATexture);
-            //second = new Wave(30, 1, "MidBoss", midBossTexture);
-            //third = new Wave(60, 5, "EnemyB", enemyBTexture);
-            //fourth = new Wave(90, 1, "FinalBoss", finalBossTexture);
-
+            first = new Wave(0, 3, "EnemyA", enemyATexture);
+            second = new Wave(30, 1, "MidBoss", midBossTexture);
+            third = new Wave(60, 5, "EnemyB", enemyBTexture);
+            fourth = new Wave(90, 1, "FinalBoss", finalBossTexture);
             EntityLists.playerList.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
             {
                 playerBullet = new PlayerBullet(playerBullet2D)
@@ -103,32 +95,40 @@ namespace TRNBulletHell
 
         protected override void Update(GameTime gameTime)
         {
+            //for clock display
             minutes = gameTime.TotalGameTime.Minutes;
             seconds = gameTime.TotalGameTime.Seconds;
+
+            //Set delay for spawning.
             var timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             _remainingDelay -= timer;
 
-            // enemyAs spawn
-            for (int i = 0; i < 5; i++)
+            double waveTimer = gameTime.TotalGameTime.TotalSeconds;
+
+           // Wave first = new Wave(0, 3, "EnemyA", enemyATexture);
+            if (first.createWave(waveTimer, _remainingDelay, enemyBullet) || 
+                second.createWave(waveTimer, _remainingDelay, enemyBullet) || 
+                third.createWave(waveTimer, _remainingDelay, enemyBullet) || 
+                fourth.createWave(waveTimer, _remainingDelay, enemyBullet))
             {
-                if (_remainingDelay <= 0 && enemyACount < 5)
-                {
-                    enemyACount++;
-                    enemies.Add(enemyFactory.CreateEnemy("EnemyA", enemyATexture));
-                    _remainingDelay = _delay;
-                }
+                _remainingDelay = _delay;
             }
 
-            // enemyBs spawn
-            for (int i = 0; i < 5; i++)
+            if (gameTime.TotalGameTime.TotalSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
             {
-                if (gameTime.TotalGameTime.Seconds >= 30 && _remainingDelay <= 0 && enemyBCount < 5)
-                {
-                    enemyBCount++;
-                    enemies.Add(enemyFactory.CreateEnemy("EnemyB", enemyBTexture));
-                    _remainingDelay = _delay;
-                }
+                finalBossCount++;                
+            }
+            
+            // check if boss is dead or game is over
+            if(finalBossCount >= 1 && (gameTime.TotalGameTime.TotalSeconds >= 150 || finalBossDead()))
+            {
+                win = true;
+            }
+
+            bool finalBossDead()
+            {
+                return (EntityLists.enemyList.ToArray().Length == 0);
             }
 
             KeyboardState state = Keyboard.GetState();
@@ -137,19 +137,15 @@ namespace TRNBulletHell
             {
                 Exit();
             }
-            player.Update();
-            // enemyA.Update();
 
-            foreach (var enemy in enemies.ToArray())
-            {
-                enemy.Update();
-                if (enemy.isRemoved)
-                {
-                    //Removing enemy from list once movemet is finished?
-                    // what should our logic be once the enemies are off screen?
-                    enemies.Remove(enemy);
-                }
-            }
+            // update all entities
+            EntityLists.Update(gameTime);
+
+            //Spawn Bullets from Enemys
+            this.bulletManager.spawnBullets();
+
+            // detect collisions
+            collisionDetection.detectCollision(gameTime);
 
             base.Update(gameTime);
         }
@@ -159,13 +155,8 @@ namespace TRNBulletHell
         {
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
-            //_spriteBatch.DrawString(font, enemyA.movement.position.X.ToString() , new Vector2(100, 0), Color.White);
-            player.Draw(_spriteBatch);
 
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                enemies[i].Draw(_spriteBatch);
-            }
+            EntityLists.Draw(_spriteBatch);
 
             if (seconds < 10)
             {
@@ -176,6 +167,31 @@ namespace TRNBulletHell
                 _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 10), Color.White);
             }
 
+            // display health if player(s) is alive
+            if(EntityLists.playerList.Count != 0)
+            {
+                _spriteBatch.DrawString(font, $"Health: { EntityLists.playerList[0].GetHealth().ToString()}", new Vector2(20, 10), Color.White);
+                _spriteBatch.DrawString(font, $"Extra Lives: {EntityLists.playerList[0].getLives().ToString()}", new Vector2(20, 50), Color.White);
+            }
+            else
+            {
+                _spriteBatch.DrawString(font, "Game Over", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
+                _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
+                EntityLists.enemyList.Clear();
+                EntityLists.playerBulletList.Clear();
+                EntityLists.enemyBulletList.Clear();
+                EntityLists.lifeSpriteList.Clear();
+            }
+
+            if(win)
+            {
+                _spriteBatch.DrawString(font, "Winner", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
+                _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
+                EntityLists.enemyList.Clear();
+                EntityLists.playerBulletList.Clear();
+                EntityLists.enemyBulletList.Clear();
+                EntityLists.lifeSpriteList.Clear();
+            }
 
             _spriteBatch.End();
             base.Draw(gameTime);

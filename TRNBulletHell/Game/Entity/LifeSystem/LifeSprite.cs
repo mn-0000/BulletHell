@@ -3,21 +3,20 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Move;
 
-namespace TRNBulletHell.Game.Entity.Bullet.BulletA
+namespace TRNBulletHell.Game.Entity.LifeSystem
 {
-    public class BulletA : Bullet
+    /// <summary>
+    /// Class is for the life sprite that drops from the enemies.
+    /// The player can pi
+    /// </summary>
+    public class LifeSprite : AbstractEntity
     {
-        private double timer;
-
-        public BulletA(Texture2D texture) : base(texture)
+        public LifeSprite(Texture2D texture) : base(texture)
         {
-            movement = new BulletMovement();
-         
-            movement.speed = new Vector2(4f, 4f);
-            damage = 10;
+            movement = new LifeDropMovement();
+            movement.speed = new Vector2(1.5f, 1.5f);
         }
 
         public override Rectangle Rectangle
@@ -30,16 +29,8 @@ namespace TRNBulletHell.Game.Entity.Bullet.BulletA
 
         public override void Update(GameTime gameTime)
         {
-            timer += gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (timer >= life)
-            {
-                isRemoved = true;
-            }
-
             movement.Moving();
         }
-
     }
 
 }

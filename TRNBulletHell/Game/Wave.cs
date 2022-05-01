@@ -38,12 +38,8 @@ namespace TRNBulletHell.Game
             if (seconds >= intervalTime && _remainingDelay <= 0 && this.count < total)
             {
                 this.count++;
-                enemyFactory.CreateEnemy(EntityLists.enemyList);
-                //EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
-                //builder.createEnemy(EntityLists.enemyList);
-                    /*  Enemy a = enemyFactory.CreateEnemy(type, texture);
-                      a.enemyBullet = new BulletA(enemyBullet);
-                      enemies.Add(a);*/
+                EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
+                builder.createEnemy(EntityLists.enemyList);
                     return true;
 
             }
