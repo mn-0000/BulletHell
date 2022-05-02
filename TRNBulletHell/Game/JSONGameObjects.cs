@@ -4,16 +4,28 @@ using System.Text;
 
 namespace TRNBulletHell.Game
 {
+    /// <summary>
+    /// Class representing the root object of the JSON file.
+    /// Contains a Stage object.
+    /// </summary>
     public class RootObject
     {
-        public Waves waves { get; set; }
+        public Stage stage { get; set; }
     }
 
-    public class Waves
+    /// <summary>
+    /// Class representing a stage object.
+    /// Contains an array of waves.
+    /// </summary>
+    public class Stage
     {
         public Wave[] wave { get; set; }
     }
 
+    /// <summary>
+    /// Class representing a wave object.
+    /// Contains the details of a wave.
+    /// </summary>
     public class Wave
     {
         public int waveTime { get; set; }
