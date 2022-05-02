@@ -27,7 +27,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
             this.addMove(creator.CreateMovement("CirclePath"));
             this.addMove(creator.CreateMovement("ZigZagPath"));
 
-            this.frequencyOfBullets = 15;
+            this.frequencyOfBullets = 20;
         }
     }
 }

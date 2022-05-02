@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.Bullet.BulletA;
+using TRNBulletHell.Game;
 
 namespace TRNBulletHell.Game.Entity.Enemy
 {
@@ -118,7 +119,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         {
             // frequency can determine the different levels.
             //frequency here = 30
-            if ((ProduceBulletcounter % frequencyOfBullets) == 0)
+            if ((ProduceBulletcounter % (frequencyOfBullets * GameInfo.GetDifficultyOffset())) == 0)
             {
                 shoot();
             }

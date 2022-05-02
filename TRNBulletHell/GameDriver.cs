@@ -54,7 +54,7 @@ namespace TRNBulletHell
         }
 
         GameState CurrentGameState = GameState.MainMenu;
-        cButton btnPlay, btnOptions, btnQuit, btnMenu;
+        cButton btnPlay, btnOptions, btnQuit, btnBack, btnDifficulty;
 
         public GameDriver()
         {
@@ -83,18 +83,19 @@ namespace TRNBulletHell
             playerBullet2D = Content.Load<Texture2D>("bullet");
             enemyBullet = Content.Load<Texture2D>("EnemyBullet");
 
-            // Buttons
+            // Menu Buttons
             btnPlay = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Play", 30);
             btnPlay.setPosition(new Vector2(325, 100));
-
             btnOptions = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Options", 55);
             btnOptions.setPosition(new Vector2(325, 200));
-
             btnQuit = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Quit", 30);
             btnQuit.setPosition(new Vector2(325, 300));
 
-            btnMenu = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Back", 35);
-            btnMenu.setPosition(new Vector2(325, 400));
+            // Options Buttons
+            btnDifficulty = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Difficulty", 65);
+            btnDifficulty.setPosition(new Vector2(100, 100));
+            btnBack = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Back", 35);
+            btnBack.setPosition(new Vector2(325, 400));
 
 
             // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
@@ -110,7 +111,8 @@ namespace TRNBulletHell
 
         protected override void Update(GameTime gameTime)
         {
-            MouseState mouse = Mouse.GetState();
+            MouseState currentMouseState = Mouse.GetState();
+            MouseState oldState = new MouseState();
 
             switch (CurrentGameState)
             {
@@ -119,15 +121,24 @@ namespace TRNBulletHell
                     if (btnPlay.isClicked) CurrentGameState = GameState.Playing;
                     if (btnOptions.isClicked) CurrentGameState = GameState.Options;
                     if (btnQuit.isClicked) CurrentGameState = GameState.Quit;
-                    btnPlay.Update(mouse);
-                    btnOptions.Update(mouse);
-                    btnQuit.Update(mouse);
+                    btnPlay.Update(currentMouseState);
+                    btnOptions.Update(currentMouseState);
+                    btnQuit.Update(currentMouseState);
                     break;
 
                 case GameState.Options:
                     this.IsMouseVisible = true;
-                    if (btnMenu.isClicked) CurrentGameState = GameState.MainMenu;
-                    btnMenu.Update(mouse);
+                    if (btnBack.isClicked) CurrentGameState = GameState.MainMenu;
+
+                    // record single click and switch difficulty
+                    if (btnDifficulty.isClicked && currentMouseState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+                    {
+                        GameInfo.SwitchDifficulty();
+                    }
+                    oldState = currentMouseState;
+
+                    btnBack.Update(currentMouseState);
+                    btnDifficulty.Update(currentMouseState);
                     break;
 
                 case GameState.Quit:
@@ -200,7 +211,9 @@ namespace TRNBulletHell
 
                 case GameState.Options:
                     _spriteBatch.DrawString(font, "Options", new Vector2(350, this.Window.ClientBounds.Height / 100), Color.White);
-                    btnMenu.Draw(_spriteBatch);
+                    btnBack.Draw(_spriteBatch);
+                    btnDifficulty.Draw(_spriteBatch);
+                    _spriteBatch.DrawString(font, GameInfo.GetDifficulty(), new Vector2(400, 115), Color.White);
                     break;
 
                 case GameState.Playing:

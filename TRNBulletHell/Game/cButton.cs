@@ -18,7 +18,8 @@ namespace TRNBulletHell.Game
         String text;
         int wordOffset;
         Vector2 position;
-        //Rectangle rectangle;
+        Vector2 textMiddlePoint;
+        Vector2 recMiddlePoint;
 
         Color color = new Color(255, 255, 255, 255);
 
@@ -38,9 +39,8 @@ namespace TRNBulletHell.Game
             font = newFont;
             text = newText;
             wordOffset = newWordOffset;
-            //ScreenW = 800, ScreenH = 600
-            //ImgW    = 100, ScreenH = 20
-            //size = new Vector2(graphics.Viewport.Width, graphics.Viewport.Height);
+            Vector2 textSize = font.MeasureString(text);
+            textMiddlePoint = new Vector2(textSize.X / 2, textSize.Y / 2);
 
         }
 
