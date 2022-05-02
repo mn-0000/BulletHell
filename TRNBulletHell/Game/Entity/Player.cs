@@ -83,7 +83,7 @@ namespace TRNBulletHell.Game.Entity
 
         public void TakeDamage(int damage)
         {
-            if(!GameInfo.IsGodModeEnabled())
+            if(!GameOptions.IsGodModeEnabled())
             {
                 health -= damage;
             }

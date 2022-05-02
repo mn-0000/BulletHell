@@ -69,6 +69,9 @@ namespace TRNBulletHell
         GameState CurrentGameState = GameState.MainMenu;
         cButton btnPlay, btnOptions, btnQuit, btnBack, btnDifficulty, btnGodMode;
 
+        // timer lock
+        bool locked = false;
+
         public GameDriver()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -102,7 +105,7 @@ namespace TRNBulletHell
            
             // Process user-provided JSON stage file
             // Edit path to file here
-            string stageDetails = File.ReadAllText("C:\\Users\\miran\\OneDrive\\Desktop\\main\\teamreptileninjas\\Sample.json");
+            string stageDetails = File.ReadAllText("C:\\Users\\Tanner\\Documents\\School\\WSU\\Senior Year\\Spring 2022\\CPTS_487\\teamreptileninjas\\Sample.json");
             RootObject jsonObject = JsonSerializer.Deserialize<RootObject>(stageDetails);
             
             // Process wave data and create waves.
@@ -115,6 +118,11 @@ namespace TRNBulletHell
             second = waves[1];
             third = waves[2];
             fourth = waves[3];
+
+            EntityLists.playerList.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
+            {
+                playerBullet = new PlayerBullet(playerBullet2D)
+            });
 
             // Menu Buttons
             btnPlay = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Play", 30);
@@ -131,22 +139,14 @@ namespace TRNBulletHell
             btnGodMode.setPosition(new Vector2(100, 200));
             btnBack = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Back", 35);
             btnBack.setPosition(new Vector2(325, 400));
-
-            // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
-            first = new Wave(0, 3, "EnemyA", enemyATexture);
-            second = new Wave(30, 1, "MidBoss", midBossTexture);
-            third = new Wave(60, 5, "EnemyB", enemyBTexture);
-            fourth = new Wave(90, 1, "FinalBoss", finalBossTexture);
-            EntityLists.playerList.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
-            {
-                playerBullet = new PlayerBullet(playerBullet2D)
-            });
         }
 
         protected override void Update(GameTime gameTime)
         {
             MouseState currentMouseState = Mouse.GetState();
             MouseState oldState = new MouseState();
+            int offsetMinutes = 0;
+            int offsetSeconds = 0;
 
             switch (CurrentGameState)
             {
@@ -167,8 +167,8 @@ namespace TRNBulletHell
                     // record single click and switch difficulty
                     if (currentMouseState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
                     {
-                        if(btnDifficulty.isClicked) GameInfo.SwitchDifficulty();
-                        if (btnGodMode.isClicked) GameInfo.ToggleGodMode();
+                        if (btnDifficulty.isClicked) GameOptions.SwitchDifficulty();
+                        if (btnGodMode.isClicked) GameOptions.ToggleGodMode();
                     }
                     oldState = currentMouseState;
 
@@ -183,42 +183,48 @@ namespace TRNBulletHell
 
                 case GameState.Playing:
                     this.IsMouseVisible = false;
+
                     //for clock display
-                    minutes = gameTime.TotalGameTime.Minutes;
-                    seconds = gameTime.TotalGameTime.Seconds;
+                    if(!locked)
+                    {
+                        offsetMinutes = gameTime.TotalGameTime.Minutes;
+                        offsetSeconds = gameTime.TotalGameTime.Seconds;
+                        locked = true;
+                    }
+
+                    minutes = gameTime.TotalGameTime.Minutes - offsetMinutes;
+                    seconds = gameTime.TotalGameTime.Seconds - offsetSeconds;
 
                     //Set delay for spawning.
                     var timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
                     _remainingDelay -= timer;
 
-            double waveTimer = gameTime.TotalGameTime.TotalSeconds;
+                    double waveTimer = gameTime.TotalGameTime.TotalSeconds - offsetSeconds;
 
-            // Wave first = new Wave(0, 3, "EnemyA", enemyATexture);
-            if (first.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                second.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                third.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                fourth.createWave(waveTimer, _remainingDelay, enemyBullet))
-            {
-                _remainingDelay = _delay;
-            }
-                _remainingDelay = _delay;
-            if (gameTime.TotalGameTime.TotalSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
-            {
-                finalBossCount++;
-            }
+                    // Wave first = new Wave(0, 3, "EnemyA", enemyATexture);
+                    if (first.createWave(waveTimer, _remainingDelay, enemyBullet) ||
+                        second.createWave(waveTimer, _remainingDelay, enemyBullet) ||
+                        third.createWave(waveTimer, _remainingDelay, enemyBullet) ||
+                        fourth.createWave(waveTimer, _remainingDelay, enemyBullet))
+                    {
+                        _remainingDelay = _delay;
+                    }
 
-            // check if boss is dead or game is over
-            if (finalBossCount >= 1 && (gameTime.TotalGameTime.TotalSeconds >= 150 || finalBossDead()))
-            {
-                win = true;
-            }
+                    if (gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
+                    {
+                        finalBossCount++;
+                    }
 
-            bool finalBossDead()
-            {
-                return (EntityLists.enemyList.ToArray().Length == 0);
-            }
-                return (EntityLists.enemyList.ToArray().Length == 0);
-            }
+                    // check if boss is dead or game is over
+                    if (finalBossCount >= 1 && (gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= 150 || finalBossDead()))
+                    {
+                        win = true;
+                    }
+
+                    bool finalBossDead()
+                    {
+                        return (EntityLists.enemyList.ToArray().Length == 0);
+                    }
 
                     // exit if esc pressed
                     if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -227,14 +233,15 @@ namespace TRNBulletHell
                     }
 
                     // update all entities
-            //Spawn Bullets from Enemys
-            this.bulletManager.spawnBullets();
+                    EntityLists.Update(gameTime);
 
-            // detect collisions
-            collisionDetection.detectCollision(gameTime);
-            // detect collisions
-            collisionDetection.detectCollision(gameTime);
+                    //Spawn Bullets from Enemys
+                    this.bulletManager.spawnBullets();
 
+                    // detect collisions
+                    collisionDetection.detectCollision(gameTime);
+                    break;
+            }
             base.Update(gameTime);
         }
 
@@ -258,10 +265,10 @@ namespace TRNBulletHell
                     btnBack.Draw(_spriteBatch);
 
                     btnDifficulty.Draw(_spriteBatch);
-                    _spriteBatch.DrawString(font, GameInfo.GetDifficulty(), new Vector2(400, 115), Color.White);
+                    _spriteBatch.DrawString(font, GameOptions.GetDifficulty(), new Vector2(400, 115), Color.White);
 
                     btnGodMode.Draw(_spriteBatch);
-                    _spriteBatch.DrawString(font, GameInfo.GetGodMode(), new Vector2(400, 215), Color.White);
+                    _spriteBatch.DrawString(font, GameOptions.GetGodMode(), new Vector2(400, 215), Color.White);
                     break;
 
                 case GameState.Playing:
@@ -274,34 +281,37 @@ namespace TRNBulletHell
                     else
                     {
                         _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 10), Color.White);
-            // display health if player(s) is alive
-            if (EntityLists.playerList.Count != 0)
-            {
-                _spriteBatch.DrawString(font, $"Health: { EntityLists.playerList[0].GetHealth().ToString()}", new Vector2(20, 10), Color.White);
-                _spriteBatch.DrawString(font, $"Extra Lives: {EntityLists.playerList[0].getLives().ToString()}", new Vector2(20, 50), Color.White);
-            }
-            else
-            {
-                _spriteBatch.DrawString(font, "Game Over", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
-                _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
-                EntityLists.enemyList.Clear();
-                EntityLists.playerBulletList.Clear();
-                EntityLists.enemyBulletList.Clear();
-                EntityLists.lifeSpriteList.Clear();
-            }
-                EntityLists.enemyBulletList.Clear();
-            if (win)
-            {
-                _spriteBatch.DrawString(font, "Winner", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
-                _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
-                EntityLists.enemyList.Clear();
-                EntityLists.playerBulletList.Clear();
-                EntityLists.enemyBulletList.Clear();
-                EntityLists.lifeSpriteList.Clear();
-            }
-                EntityLists.enemyBulletList.Clear();
-            }
 
+                    }
+
+                    // display health if player(s) is alive
+                    if (EntityLists.playerList.Count != 0)
+                    {
+                        _spriteBatch.DrawString(font, $"Health: { EntityLists.playerList[0].GetHealth().ToString()}", new Vector2(20, 10), Color.White);
+                        _spriteBatch.DrawString(font, $"Extra Lives: {EntityLists.playerList[0].getLives().ToString()}", new Vector2(20, 50), Color.White);
+                    }
+                    else
+                    {
+                        _spriteBatch.DrawString(font, "Game Over", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
+                        _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
+                        EntityLists.enemyList.Clear();
+                        EntityLists.playerBulletList.Clear();
+                        EntityLists.enemyBulletList.Clear();
+                        EntityLists.lifeSpriteList.Clear();
+                    }
+
+                    if (win)
+                    {
+                        _spriteBatch.DrawString(font, "Winner", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
+                        _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
+                        EntityLists.enemyList.Clear();
+                        EntityLists.playerBulletList.Clear();
+                        EntityLists.enemyBulletList.Clear();
+                        EntityLists.lifeSpriteList.Clear();
+                    }
+
+                    break;
+                }
             _spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -17,7 +17,7 @@ namespace TRNBulletHell.Game
         {
             // frequency can determine the different levels.
             //frequency here = 30
-            if ((spawner.FollowingEnemy.ProduceBulletcounter % spawner.FollowingEnemy.frequencyOfBullets) == 0)
+            if ((spawner.FollowingEnemy.ProduceBulletcounter % (spawner.FollowingEnemy.frequencyOfBullets * GameOptions.GetDifficultyOffset())) == 0)
             {
                 if (spawner.FollowingEnemy.type == "midBoss")
                 {
