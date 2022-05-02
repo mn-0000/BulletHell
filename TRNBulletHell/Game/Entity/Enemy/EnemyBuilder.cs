@@ -37,7 +37,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
             
              spawner = new BulletSpawn(GameDriver.textureList[0], a);
             
-            if(type == "EnemyA")
+            if(type == "FinalBoss")
             {
                 this.finalBoss();
                 enemies.Add(a);

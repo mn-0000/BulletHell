@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TRNBulletHell.Game
 {
-    public static class GameInfo
+    public static class GameOptions
     {
         public enum Difficulty
         {
@@ -52,7 +52,7 @@ namespace TRNBulletHell.Game
             if(difficulty == Difficulty.MED)
             {
                 difficulty = Difficulty.HARD;
-                difficultyOffset = .6;
+                difficultyOffset = .75;
             } else if(difficulty == Difficulty.HARD)
             {
                 difficulty = Difficulty.EASY;

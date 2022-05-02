@@ -167,8 +167,8 @@ namespace TRNBulletHell
                     // record single click and switch difficulty
                     if (currentMouseState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
                     {
-                        if (btnDifficulty.isClicked) GameInfo.SwitchDifficulty();
-                        if (btnGodMode.isClicked) GameInfo.ToggleGodMode();
+                        if (btnDifficulty.isClicked) GameOptions.SwitchDifficulty();
+                        if (btnGodMode.isClicked) GameOptions.ToggleGodMode();
                     }
                     oldState = currentMouseState;
 
@@ -265,10 +265,10 @@ namespace TRNBulletHell
                     btnBack.Draw(_spriteBatch);
 
                     btnDifficulty.Draw(_spriteBatch);
-                    _spriteBatch.DrawString(font, GameInfo.GetDifficulty(), new Vector2(400, 115), Color.White);
+                    _spriteBatch.DrawString(font, GameOptions.GetDifficulty(), new Vector2(400, 115), Color.White);
 
                     btnGodMode.Draw(_spriteBatch);
-                    _spriteBatch.DrawString(font, GameInfo.GetGodMode(), new Vector2(400, 215), Color.White);
+                    _spriteBatch.DrawString(font, GameOptions.GetGodMode(), new Vector2(400, 215), Color.White);
                     break;
 
                 case GameState.Playing:

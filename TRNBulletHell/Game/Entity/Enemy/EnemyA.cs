@@ -15,11 +15,10 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public EnemyA(Texture2D texture) : base(texture)
         {
-            //health = 50;
-            health = 10;
+            health = 50;
 
             // higher the number the easier the enemy.
-            this.frequencyOfBullets = 10;
+            this.frequencyOfBullets = 30;
             this.type = "enemyA";
             this.distance = 0;
             //this.lifeDrop = true;
