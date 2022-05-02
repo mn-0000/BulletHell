@@ -15,6 +15,7 @@ namespace TRNBulletHell.Game
 
         private static Difficulty difficulty = Difficulty.MED;
         private static double difficultyOffset = 1;
+        private static bool godMode = false;
 
         public static double GetDifficultyOffset()
         {
@@ -61,6 +62,26 @@ namespace TRNBulletHell.Game
                 difficulty = Difficulty.MED;
                 difficultyOffset = 1;
             }
+        }
+
+        public static void ToggleGodMode()
+        {
+            godMode = !godMode;
+        }
+
+        public static String GetGodMode()
+        {
+            if (godMode)
+            {
+                return "Enabled";
+            }
+            else return "Disabled";
+        }
+
+        public static bool IsGodModeEnabled()
+        {
+            bool retVal = godMode;
+            return retVal;
         }
     }
 }

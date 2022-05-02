@@ -54,7 +54,7 @@ namespace TRNBulletHell
         }
 
         GameState CurrentGameState = GameState.MainMenu;
-        cButton btnPlay, btnOptions, btnQuit, btnBack, btnDifficulty;
+        cButton btnPlay, btnOptions, btnQuit, btnBack, btnDifficulty, btnGodMode;
 
         public GameDriver()
         {
@@ -94,9 +94,10 @@ namespace TRNBulletHell
             // Options Buttons
             btnDifficulty = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Difficulty", 65);
             btnDifficulty.setPosition(new Vector2(100, 100));
+            btnGodMode = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "God Mode", 75);
+            btnGodMode.setPosition(new Vector2(100, 200));
             btnBack = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Back", 35);
             btnBack.setPosition(new Vector2(325, 400));
-
 
             // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
             first = new Wave(0, 3, "EnemyA", enemyATexture);
@@ -131,14 +132,16 @@ namespace TRNBulletHell
                     if (btnBack.isClicked) CurrentGameState = GameState.MainMenu;
 
                     // record single click and switch difficulty
-                    if (btnDifficulty.isClicked && currentMouseState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+                    if (currentMouseState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
                     {
-                        GameInfo.SwitchDifficulty();
+                        if(btnDifficulty.isClicked) GameInfo.SwitchDifficulty();
+                        if (btnGodMode.isClicked) GameInfo.ToggleGodMode();
                     }
                     oldState = currentMouseState;
 
                     btnBack.Update(currentMouseState);
                     btnDifficulty.Update(currentMouseState);
+                    btnGodMode.Update(currentMouseState);
                     break;
 
                 case GameState.Quit:
@@ -212,8 +215,12 @@ namespace TRNBulletHell
                 case GameState.Options:
                     _spriteBatch.DrawString(font, "Options", new Vector2(350, this.Window.ClientBounds.Height / 100), Color.White);
                     btnBack.Draw(_spriteBatch);
+
                     btnDifficulty.Draw(_spriteBatch);
                     _spriteBatch.DrawString(font, GameInfo.GetDifficulty(), new Vector2(400, 115), Color.White);
+
+                    btnGodMode.Draw(_spriteBatch);
+                    _spriteBatch.DrawString(font, GameInfo.GetGodMode(), new Vector2(400, 215), Color.White);
                     break;
 
                 case GameState.Playing:
