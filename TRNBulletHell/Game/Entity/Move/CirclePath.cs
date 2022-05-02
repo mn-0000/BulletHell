@@ -19,7 +19,7 @@ namespace TRNBulletHell.Game.Entity.Move
         }
         
 
-        public override void Moving()
+        public override void Moving(GameTime gameTime)
         {
             
             // Enter Screen

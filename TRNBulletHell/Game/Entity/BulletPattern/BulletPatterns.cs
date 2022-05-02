@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
+using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.Enemy;
 namespace TRNBulletHell.Game.Entity.BulletPattern
 {
     class BulletPatterns
     {
-        public void regular(Enemy.Enemy enemy)
+        public void regular(BulletSpawn enemy)
         {
 
             PlayerBullet bullet = new PlayerBullet(GameDriver.textureList[1]);
@@ -19,7 +20,7 @@ namespace TRNBulletHell.Game.Entity.BulletPattern
             EntityLists.enemyBulletList.Add(bullet);
         }
 
-        public void sprayBullets(Enemy.Enemy enemy)
+        public void sprayBullets(BulletSpawn enemy)
         {
             PlayerBullet bullet = new PlayerBullet(GameDriver.textureList[1]);
             bullet.movement.direction = new Vector2(0, -1);
@@ -57,5 +58,20 @@ namespace TRNBulletHell.Game.Entity.BulletPattern
             bulletFour.movement.position.Y = enemy.movement.position.Y;
             EntityLists.enemyBulletList.Add(bulletFour);
         }
+
+        public void toawrdsUser(BulletSpawn enemy)
+        {
+            PlayerBullet bulletFour = new PlayerBullet(GameDriver.textureList[1]);
+            
+            bulletFour.movement.position.X = enemy.movement.position.X;
+            bulletFour.movement.position.Y = enemy.movement.position.Y;
+            Vector2 check = EntityLists.playerList[0].movement.position - bulletFour.movement.position;
+            bulletFour.movement.direction = check;
+
+
+            EntityLists.enemyBulletList.Add(bulletFour);
+
+        }
+        
     }
 }

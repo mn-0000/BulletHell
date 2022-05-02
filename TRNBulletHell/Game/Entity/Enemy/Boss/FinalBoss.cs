@@ -24,6 +24,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
 
             this.frequencyOfBullets = 15;
             this.type = "finalBoss";
+
         }
     }
 }

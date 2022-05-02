@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.BulletPattern;
 using TRNBulletHell.Game.Entity.Enemy;
@@ -10,26 +11,25 @@ namespace TRNBulletHell.Game
 {
     class CreateBullet
     {
-        Enemy enemy;
 
 
-        public void createBullet(Enemy enemy)
+        public void createBullet(BulletSpawn spawner)
         {
-            this.enemy = enemy;
             // frequency can determine the different levels.
             //frequency here = 30
-            if ((enemy.ProduceBulletcounter % enemy.frequencyOfBullets) == 0)
+            if ((spawner.FollowingEnemy.ProduceBulletcounter % spawner.FollowingEnemy.frequencyOfBullets) == 0)
             {
-                if (enemy.type == "midBoss")
+                if (spawner.FollowingEnemy.type == "midBoss")
                 {
                     BulletPatterns bulletPatterns = new BulletPatterns();
-                    bulletPatterns.sprayBullets(enemy);
+                    bulletPatterns.sprayBullets(spawner);
 
                 }
                 else
                 {
                     BulletPatterns bulletPatterns = new BulletPatterns();
-                    bulletPatterns.regular(enemy);
+                    bulletPatterns.regular(spawner);
+                   // bulletPatterns.toawrdsUser(enemy);
                 }
                     
             }

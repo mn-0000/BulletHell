@@ -29,7 +29,7 @@ namespace TRNBulletHell.Game.Entity.LifeSystem
 
         public override void Update(GameTime gameTime)
         {
-            movement.Moving();
+            movement.Moving(gameTime);
         }
     }
 

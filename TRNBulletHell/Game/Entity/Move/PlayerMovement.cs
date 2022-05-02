@@ -12,7 +12,7 @@ public class PlayerMovement : Movement
     }
 	
         override
-        public void Moving()
+        public void Moving(GameTime gameTime)
         {
         KeyboardState state = Keyboard.GetState();
 

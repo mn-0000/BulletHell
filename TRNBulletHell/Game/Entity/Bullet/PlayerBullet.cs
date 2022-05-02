@@ -29,7 +29,7 @@ namespace TRNBulletHell.Game.Entity.Bullet
                 isRemoved = true;
             }
 
-            movement.Moving();
+            movement.Moving(gameTime);
         }
 
     }

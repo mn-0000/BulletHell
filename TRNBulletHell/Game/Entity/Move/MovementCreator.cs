@@ -35,6 +35,18 @@ namespace TRNBulletHell.Game.Entity.Move
             {
                 return new PlayerMovement();
             }
+            if(type == "finalBoss")
+            {
+                return new finalBossMovement();
+            }
+            if(type == "FinalBossBullet")
+            {
+                return new FinalBossBullet();
+            }
+            if (type == "BulletRope")
+            {
+                return new BulletRope();
+            }
             return null;
         }
     }

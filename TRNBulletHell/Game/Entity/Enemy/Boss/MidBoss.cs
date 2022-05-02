@@ -20,6 +20,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
 
             this.frequencyOfBullets = 40;
             this.type = "midBoss";
+            this.distance = 0;
         }
 
       

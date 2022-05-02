@@ -15,6 +15,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
             health = 20;
             this.frequencyOfBullets = 30;
             this.type = "enemyB";
+
+            //Bullet spawner distance
+            this.distance = 0;
         }
       
     }

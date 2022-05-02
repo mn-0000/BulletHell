@@ -14,7 +14,7 @@ public abstract class Movement
     private Boolean complete = false;
     
 
-    public abstract void Moving();
+    public abstract void Moving(GameTime gametime);
 
     public void completedMovement()
     {
@@ -32,5 +32,7 @@ public abstract class Movement
             this.completedMovement();
         }
     }
-    
+
+  
+
 }

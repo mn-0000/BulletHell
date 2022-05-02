@@ -14,11 +14,13 @@ namespace TRNBulletHell.Game.Entity.Bullet
 
         public BulletA(Texture2D texture) : base(texture)
         {
+           
             movement = new BulletMovement();
-         
             movement.speed = new Vector2(4f, 4f);
+            life = 10;
             damage = 10;
         }
+
 
         public override Rectangle Rectangle
         {
@@ -37,7 +39,7 @@ namespace TRNBulletHell.Game.Entity.Bullet
                 isRemoved = true;
             }
 
-            movement.Moving();
+            this.movement.Moving(gameTime);
         }
 
     }

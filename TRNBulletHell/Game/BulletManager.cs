@@ -12,10 +12,10 @@ namespace TRNBulletHell.Game
         public void spawnBullets()
         {
 
-            foreach (var enemy in EntityLists.enemyList)
+            foreach (var spawners in EntityLists.bulletSpawner)
             {
                 CreateBullet spawnBullet = new CreateBullet();
-                spawnBullet.createBullet(enemy);
+                spawnBullet.createBullet(spawners);
             }
         }
 

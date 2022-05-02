@@ -41,9 +41,10 @@ namespace TRNBulletHell.Game.Entity
             }
         }
 
+
         public override void Update(GameTime gameTime)
         {
-            this.movement.Moving();
+            this.movement.Moving(gameTime);
             _prevousKey = _currentKey;
             _currentKey = Keyboard.GetState();
 
@@ -51,12 +52,16 @@ namespace TRNBulletHell.Game.Entity
             {
                 PlayerBullet bullet = new PlayerBullet(playerBullet.getImage());
             
-
+                
 
                  bullet.movement.direction = new Vector2(0, 1);
                  bullet.movement.position = new Vector2();
+
+
+
+
                  bullet.movement.position.X = this.movement.position.X;
-                 bullet.movement.position.Y = this.movement.position.Y;
+                  bullet.movement.position.Y = this.movement.position.Y;
                  EntityLists.playerBulletList.Add(bullet);
             }
 

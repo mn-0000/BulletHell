@@ -23,7 +23,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         protected int health;
         public LifeSprite lifeTexture;
         public string type;
-
+        public int distance;
 
 
         public Enemy(Texture2D texture) :base(texture)
@@ -45,7 +45,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public override void Update(GameTime gameTime)
         {
             ProduceBulletcounter++;
-            this.movement.Moving();
+            this.movement.Moving(gameTime);
 
             this.movement.direction = new Vector2((float)Math.Cos(movement._rotation), (float)Math.Sin(movement._rotation));
 

@@ -17,7 +17,7 @@ namespace TRNBulletHell.Game.Entity.Move
         float midBoundary = 500;
 
 
-        public override void Moving()
+        public override void Moving(GameTime gameTime)
         {
             this.position.X += this.speed.X;
             this.position.Y += this.speed.Y;
