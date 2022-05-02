@@ -58,11 +58,21 @@ namespace TRNBulletHell
         BulletManager bulletManager = new BulletManager();
         EntityLists entities = EntityLists.Instance;
 
+        enum GameState
+        {
+            MainMenu,
+            Playing,
+            Options,
+            Quit,
+        }
+
+        GameState CurrentGameState = GameState.MainMenu;
+        cButton btnPlay, btnOptions, btnQuit, btnBack, btnDifficulty, btnGodMode;
+
         public GameDriver()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = false;
             _graphics.IsFullScreen = false;
         }
 
@@ -105,6 +115,28 @@ namespace TRNBulletHell
             second = waves[1];
             third = waves[2];
             fourth = waves[3];
+
+            // Menu Buttons
+            btnPlay = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Play", 30);
+            btnPlay.setPosition(new Vector2(325, 100));
+            btnOptions = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Options", 55);
+            btnOptions.setPosition(new Vector2(325, 200));
+            btnQuit = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Quit", 30);
+            btnQuit.setPosition(new Vector2(325, 300));
+            
+            // Options Buttons
+            btnDifficulty = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Difficulty", 65);
+            btnDifficulty.setPosition(new Vector2(100, 100));
+            btnGodMode = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "God Mode", 75);
+            btnGodMode.setPosition(new Vector2(100, 200));
+            btnBack = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Back", 35);
+            btnBack.setPosition(new Vector2(325, 400));
+
+            // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
+            first = new Wave(0, 3, "EnemyA", enemyATexture);
+            second = new Wave(30, 1, "MidBoss", midBossTexture);
+            third = new Wave(60, 5, "EnemyB", enemyBTexture);
+            fourth = new Wave(90, 1, "FinalBoss", finalBossTexture);
             EntityLists.playerList.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
             {
                 playerBullet = new PlayerBullet(playerBullet2D)
@@ -113,14 +145,51 @@ namespace TRNBulletHell
 
         protected override void Update(GameTime gameTime)
         {
-            //for clock display
-            minutes = gameTime.TotalGameTime.Minutes;
-            seconds = gameTime.TotalGameTime.Seconds;
+            MouseState currentMouseState = Mouse.GetState();
+            MouseState oldState = new MouseState();
 
-            //Set delay for spawning.
-            var timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            switch (CurrentGameState)
+            {
+                case GameState.MainMenu:
+                    this.IsMouseVisible = true;
+                    if (btnPlay.isClicked) CurrentGameState = GameState.Playing;
+                    if (btnOptions.isClicked) CurrentGameState = GameState.Options;
+                    if (btnQuit.isClicked) CurrentGameState = GameState.Quit;
+                    btnPlay.Update(currentMouseState);
+                    btnOptions.Update(currentMouseState);
+                    btnQuit.Update(currentMouseState);
+                    break;
 
-            _remainingDelay -= timer;
+                case GameState.Options:
+                    this.IsMouseVisible = true;
+                    if (btnBack.isClicked) CurrentGameState = GameState.MainMenu;
+
+                    // record single click and switch difficulty
+                    if (currentMouseState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+                    {
+                        if(btnDifficulty.isClicked) GameInfo.SwitchDifficulty();
+                        if (btnGodMode.isClicked) GameInfo.ToggleGodMode();
+                    }
+                    oldState = currentMouseState;
+
+                    btnBack.Update(currentMouseState);
+                    btnDifficulty.Update(currentMouseState);
+                    btnGodMode.Update(currentMouseState);
+                    break;
+
+                case GameState.Quit:
+                    Exit();
+                    break;
+
+                case GameState.Playing:
+                    this.IsMouseVisible = false;
+                    //for clock display
+                    minutes = gameTime.TotalGameTime.Minutes;
+                    seconds = gameTime.TotalGameTime.Seconds;
+
+                    //Set delay for spawning.
+                    var timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    _remainingDelay -= timer;
 
             double waveTimer = gameTime.TotalGameTime.TotalSeconds;
 
@@ -132,7 +201,7 @@ namespace TRNBulletHell
             {
                 _remainingDelay = _delay;
             }
-
+                _remainingDelay = _delay;
             if (gameTime.TotalGameTime.TotalSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
             {
                 finalBossCount++;
@@ -148,20 +217,21 @@ namespace TRNBulletHell
             {
                 return (EntityLists.enemyList.ToArray().Length == 0);
             }
-
-            KeyboardState state = Keyboard.GetState();
-
-            if (state.IsKeyDown(Keys.Escape))
-            {
-                Exit();
+                return (EntityLists.enemyList.ToArray().Length == 0);
             }
 
-            // update all entities
-            EntityLists.Update(gameTime);
+                    // exit if esc pressed
+                    if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    {
+                        Exit();
+                    }
 
+                    // update all entities
             //Spawn Bullets from Enemys
             this.bulletManager.spawnBullets();
 
+            // detect collisions
+            collisionDetection.detectCollision(gameTime);
             // detect collisions
             collisionDetection.detectCollision(gameTime);
 
@@ -174,17 +244,36 @@ namespace TRNBulletHell
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundSprite, new Vector2(0, 0), Color.White);
 
-            EntityLists.Draw(_spriteBatch);
-
-            if (seconds < 10)
+            switch (CurrentGameState)
             {
-                _spriteBatch.DrawString(font, $"{minutes + " : 0" + seconds}", new Vector2(700, 0), Color.White);
-            }
-            else
-            {
-                _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 10), Color.White);
-            }
+                case GameState.MainMenu:
+                    _spriteBatch.DrawString(font, "Bullet Hell Game", new Vector2(300, this.Window.ClientBounds.Height / 100), Color.White);
+                    btnPlay.Draw(_spriteBatch);
+                    btnOptions.Draw(_spriteBatch);
+                    btnQuit.Draw(_spriteBatch);
+                    break;
 
+                case GameState.Options:
+                    _spriteBatch.DrawString(font, "Options", new Vector2(350, this.Window.ClientBounds.Height / 100), Color.White);
+                    btnBack.Draw(_spriteBatch);
+
+                    btnDifficulty.Draw(_spriteBatch);
+                    _spriteBatch.DrawString(font, GameInfo.GetDifficulty(), new Vector2(400, 115), Color.White);
+
+                    btnGodMode.Draw(_spriteBatch);
+                    _spriteBatch.DrawString(font, GameInfo.GetGodMode(), new Vector2(400, 215), Color.White);
+                    break;
+
+                case GameState.Playing:
+                    EntityLists.Draw(_spriteBatch);
+
+                    if (seconds < 10)
+                    {
+                        _spriteBatch.DrawString(font, $"{minutes + " : 0" + seconds}", new Vector2(700, 0), Color.White);
+                    }
+                    else
+                    {
+                        _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 10), Color.White);
             // display health if player(s) is alive
             if (EntityLists.playerList.Count != 0)
             {
@@ -200,7 +289,7 @@ namespace TRNBulletHell
                 EntityLists.enemyBulletList.Clear();
                 EntityLists.lifeSpriteList.Clear();
             }
-
+                EntityLists.enemyBulletList.Clear();
             if (win)
             {
                 _spriteBatch.DrawString(font, "Winner", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
@@ -209,6 +298,8 @@ namespace TRNBulletHell
                 EntityLists.playerBulletList.Clear();
                 EntityLists.enemyBulletList.Clear();
                 EntityLists.lifeSpriteList.Clear();
+            }
+                EntityLists.enemyBulletList.Clear();
             }
 
             _spriteBatch.End();
