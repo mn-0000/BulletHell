@@ -18,6 +18,7 @@ namespace TRNBulletHell.Game.Entity
             this.distance = enemy.distance;
             // higher the number the easier the enemy.
             this.frequencyOfBullets = enemy.frequencyOfBullets;
+            this.lifeDrop = false;
         }
 
      
