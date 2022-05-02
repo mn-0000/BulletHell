@@ -23,7 +23,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
             health = 300;
 
             this.frequencyOfBullets = 15;
-            this.type = "finalBoss";
+            this.type = "finalboss";
         }
     }
 }

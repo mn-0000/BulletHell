@@ -13,9 +13,6 @@ using TRNBulletHell.Game.Entity.Move;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using BulletManager = TRNBulletHell.Game.BulletManager;
-using System.IO;
-using System.Reflection;
-using System.Linq;
 
 namespace TRNBulletHell
 {
@@ -24,10 +21,10 @@ namespace TRNBulletHell
         // graphics/textures
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        public Texture2D enemyATexture;
-        public Texture2D enemyBTexture;
-        public Texture2D midBossTexture;
-        public Texture2D finalBossTexture;
+        Texture2D enemyATexture;
+        Texture2D enemyBTexture;
+        Texture2D midBossTexture;
+        Texture2D finalBossTexture;
         Texture2D enemyBullet;
         Texture2D backgroundSprite;
         Texture2D playerBullet2D;
@@ -46,13 +43,13 @@ namespace TRNBulletHell
         private bool win = false;
 
         // waves
-        GameWave first;
-        GameWave second;
-        GameWave third;
-        GameWave fourth;
+        WaveLogic first;
+        WaveLogic second;
+        WaveLogic third;
+        WaveLogic fourth;
 
         // List of waves
-        List<GameWave> waves = new List<GameWave>();
+        List<WaveLogic> waves = new List<WaveLogic>();
 
         CollisionDetection collisionDetection = new CollisionDetection();
         BulletManager bulletManager = new BulletManager();
@@ -76,6 +73,15 @@ namespace TRNBulletHell
 
         protected override void LoadContent()
         {
+            string testString = @"{
+            ""Time"": 1000,
+            ""EnemyType"": ""A"",
+            ""EnemyAmount"": 5,
+            ""Interval"": 200,
+            ""BulletRate"": 20,
+            ""Damage"": 10
+        }";
+            //JSONGameObject gameObject = JsonSerializer.Deserialize<JSONGameObject>(testString);
             // graphics/textures
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("galleryFont");
@@ -89,22 +95,11 @@ namespace TRNBulletHell
             lifeTexture = Content.Load<Texture2D>("HeartSprite2");
             textureList.Add(lifeTexture);
             textureList.Add(enemyBullet);
-           
-            // Process user-provided JSON stage file
-            // Edit path to file here
-            string stageDetails = File.ReadAllText("C:\\Users\\ADMIN\\Desktop\\School Stuff\\CS 487\\Sample.json");
-            RootObject jsonObject = JsonSerializer.Deserialize<RootObject>(stageDetails);
-            
-            // Process wave data and create waves.
-            // Currently the following attributes of the JSON file are not used:
-            // spawnInterval, bulletRate, damage
-            waves = ProcessWavesData(jsonObject);
-
-            // Will need to be changed so that it'd not be necessary to hard-code only 4 waves.
-            first = waves[0];
-            second = waves[1];
-            third = waves[2];
-            fourth = waves[3];
+            // Next Deliverable a class that reads the JSON file will define the waves and the quantity of the waves for a longer Game Play.
+            first = new WaveLogic(0, 3, "EnemyA", enemyATexture);
+            second = new WaveLogic(30, 1, "MidBoss", midBossTexture);
+            third = new WaveLogic(60, 5, "EnemyB", enemyBTexture);
+            fourth = new WaveLogic(90, 1, "FinalBoss", finalBossTexture);
             EntityLists.playerList.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
             {
                 playerBullet = new PlayerBullet(playerBullet2D)
@@ -124,10 +119,10 @@ namespace TRNBulletHell
 
             double waveTimer = gameTime.TotalGameTime.TotalSeconds;
 
-            // Wave first = new Wave(0, 3, "EnemyA", enemyATexture);
-            if (first.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                second.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                third.createWave(waveTimer, _remainingDelay, enemyBullet) ||
+           // Wave first = new Wave(0, 3, "EnemyA", enemyATexture);
+            if (first.createWave(waveTimer, _remainingDelay, enemyBullet) || 
+                second.createWave(waveTimer, _remainingDelay, enemyBullet) || 
+                third.createWave(waveTimer, _remainingDelay, enemyBullet) || 
                 fourth.createWave(waveTimer, _remainingDelay, enemyBullet))
             {
                 _remainingDelay = _delay;
@@ -135,11 +130,11 @@ namespace TRNBulletHell
 
             if (gameTime.TotalGameTime.TotalSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
             {
-                finalBossCount++;
+                finalBossCount++;                
             }
-
+            
             // check if boss is dead or game is over
-            if (finalBossCount >= 1 && (gameTime.TotalGameTime.TotalSeconds >= 150 || finalBossDead()))
+            if(finalBossCount >= 1 && (gameTime.TotalGameTime.TotalSeconds >= 150 || finalBossDead()))
             {
                 win = true;
             }
@@ -186,7 +181,7 @@ namespace TRNBulletHell
             }
 
             // display health if player(s) is alive
-            if (EntityLists.playerList.Count != 0)
+            if(EntityLists.playerList.Count != 0)
             {
                 _spriteBatch.DrawString(font, $"Health: { EntityLists.playerList[0].GetHealth().ToString()}", new Vector2(20, 10), Color.White);
                 _spriteBatch.DrawString(font, $"Extra Lives: {EntityLists.playerList[0].getLives().ToString()}", new Vector2(20, 50), Color.White);
@@ -201,7 +196,7 @@ namespace TRNBulletHell
                 EntityLists.lifeSpriteList.Clear();
             }
 
-            if (win)
+            if(win)
             {
                 _spriteBatch.DrawString(font, "Winner", new Vector2(325, this.Window.ClientBounds.Height / 2), Color.White);
                 _spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(300, this.Window.ClientBounds.Height / 2 + 100), Color.White);
@@ -214,34 +209,5 @@ namespace TRNBulletHell
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-
-        /// <summary>
-        /// Process waves data provided by the deserialization of the JSON file.
-        /// </summary>
-        /// <param name="wavesData"> the deserialization data </param>
-        /// <returns> a list of waves found in the data </returns>
-        private List<GameWave> ProcessWavesData(RootObject wavesData)
-        {
-            List<GameWave> gameWaves = new List<GameWave>();
-
-            Wave[] waves = wavesData.stage.wave;
-            for (int i = 0; i < waves.Length; i++)
-            {
-                string enemyType = waves[i].enemyType;
-
-                // Query the fields in GameDriver to look for enemy texture.
-                // Should only return 1 result (which is the appropriate enemy texture).
-                var texture = from field in typeof(GameDriver).GetFields() 
-                              where field.Name.ToLower() == (enemyType + "Texture").ToLower() 
-                              select field;
-                Texture2D enemyTexture = (Texture2D)texture.First().GetValue(this);
-
-                // Add wave to list of waves
-                gameWaves.Add(new GameWave(waves[i].waveTime, waves[i].enemyAmount, enemyType, enemyTexture));
-            }
-            return gameWaves;
-        }
-
-
     }
 }
