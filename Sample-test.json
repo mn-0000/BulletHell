@@ -1,0 +1,15 @@
+{
+    "stage":
+    {
+        "wave": [
+        {
+            "waveTime": 90,
+            "enemyType": "FinalBoss",
+            "enemyAmount": 1,
+            "spawnInterval": 3,
+            "bulletRate": 15,
+            "damage": 25
+        }
+        ]
+    }
+}
