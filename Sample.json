@@ -1,0 +1,39 @@
+{
+    "stage":
+    {
+        "wave": [
+        {
+            "waveTime": 0,
+            "enemyType": "EnemyA",
+            "enemyAmount": 8,
+            "spawnInterval": 3,
+            "bulletRate": 20,
+            "damage": 10
+        },
+        {
+            "waveTime": 40,
+            "enemyType": "MidBoss",
+            "enemyAmount": 1,
+            "spawnInterval": 3,
+            "bulletRate": 18,
+            "damage": 20
+        },
+        {
+            "waveTime": 60,
+            "enemyType": "EnemyB",
+            "enemyAmount": 5,
+            "spawnInterval": 3,
+            "bulletRate": 20,
+            "damage": 15
+        },
+        {
+            "waveTime": 90,
+            "enemyType": "FinalBoss",
+            "enemyAmount": 1,
+            "spawnInterval": 3,
+            "bulletRate": 15,
+            "damage": 25
+        }
+        ]
+    }
+}
