@@ -25,6 +25,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public string type;
 
 
+
         public Enemy(Texture2D texture) :base(texture)
         {
             lifeTexture = new LifeSprite( GameDriver.textureList[0]);
@@ -79,8 +80,8 @@ namespace TRNBulletHell.Game.Entity.Enemy
         {
             Random r1 = new Random();
 
-            int num1 = r1.Next(4);
-            int num2 = r1.Next(4);
+            int num1 = r1.Next(10);
+            int num2 = r1.Next(10);
 
             if (num1 == num2)
             {
