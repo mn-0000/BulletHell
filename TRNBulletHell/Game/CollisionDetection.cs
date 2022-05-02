@@ -96,6 +96,29 @@ namespace TRNBulletHell.Game
                 }
             }
 
+            foreach (var bullet1 in EntityLists.enemyBulletList.ToArray())
+            {
+                foreach (var bullet2 in EntityLists.enemyBulletList.ToArray())
+                {
+                    if (bullet1.Rectangle.Intersects(bullet2.Rectangle))
+                    {
+                        //enemy.TakeDamage(bullet.GetDamage());
+                        //EntityLists.playerBulletList.Remove(bullet);
+                        Debug.WriteLine("Bullet hit bullet");
+                    }
+
+                    // remove enemy and bullet
+                    if (bullet1.isRemoved)
+                    {
+                        EntityLists.enemyBulletList.Remove(bullet1);
+                    }
+                    if (bullet2.isRemoved)
+                    {
+                        EntityLists.enemyBulletList.Remove(bullet2);
+                    }
+                }
+            }
+
         }
 
         void respawnPlayer(Player player)

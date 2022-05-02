@@ -18,6 +18,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         Random random = new Random();
         int randomMovement = 0;
         BulletSpawn spawner;
+
         public EnemyBuilder(Texture2D texture, Texture2D bullet, string type)
         {
             this.texture = texture;
@@ -35,6 +36,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
             this.a = enemyFactory.CreateEnemy(type, texture);
             a.enemyBullet = new BulletA(enemyBullet);
             
+            // I think that this is getting the "heart sprite" from the list. 
+            // Should it be getting the "bullet sprite"??
+            // Maybe it doesn't matter what sprite it is.
              spawner = new BulletSpawn(GameDriver.textureList[0], a);
             
             if(type == "FinalBoss")

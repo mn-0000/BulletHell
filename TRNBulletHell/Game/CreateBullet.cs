@@ -29,7 +29,7 @@ namespace TRNBulletHell.Game
                 {
                     BulletPatterns bulletPatterns = new BulletPatterns();
                     bulletPatterns.regular(spawner);
-                   // bulletPatterns.toawrdsUser(enemy);
+                   // bulletPatterns.towardsUser(enemy);
                 }
                     
             }

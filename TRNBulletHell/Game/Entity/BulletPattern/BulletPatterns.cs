@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.Bullet;
@@ -11,10 +12,15 @@ namespace TRNBulletHell.Game.Entity.BulletPattern
     {
         public void regular(BulletSpawn enemy)
         {
-
+            Debug.WriteLine("regular bullets");
             PlayerBullet bullet = new PlayerBullet(GameDriver.textureList[1]);
-            bullet.movement.direction = new Vector2(0, -1);
-            bullet.movement.position = new Vector2();
+            //bullet.movement.direction = new Vector2(0, -1);
+            //bullet.movement.position = new Vector2();
+            //bullet.movement.position.X = enemy.movement.position.X;
+            //bullet.movement.position.Y = enemy.movement.position.Y;
+            Debug.WriteLine("Enemy direction: " + enemy.movement.direction.ToString());
+            bullet.movement.direction = enemy.movement.direction;
+            bullet.movement.position += bullet.movement.position * bullet.movement.speed;
             bullet.movement.position.X = enemy.movement.position.X;
             bullet.movement.position.Y = enemy.movement.position.Y;
             EntityLists.enemyBulletList.Add(bullet);
@@ -22,6 +28,7 @@ namespace TRNBulletHell.Game.Entity.BulletPattern
 
         public void sprayBullets(BulletSpawn enemy)
         {
+            Debug.WriteLine("spray bullets");
             PlayerBullet bullet = new PlayerBullet(GameDriver.textureList[1]);
             bullet.movement.direction = new Vector2(0, -1);
             bullet.movement.position = new Vector2();
@@ -59,7 +66,7 @@ namespace TRNBulletHell.Game.Entity.BulletPattern
             EntityLists.enemyBulletList.Add(bulletFour);
         }
 
-        public void toawrdsUser(BulletSpawn enemy)
+        public void towardsUser(BulletSpawn enemy)
         {
             PlayerBullet bulletFour = new PlayerBullet(GameDriver.textureList[1]);
             

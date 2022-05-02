@@ -30,6 +30,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\bin\DesktopGL\Content\" />
-    <Folder Include="JSON-Script\" />
   </ItemGroup>
 </Project>

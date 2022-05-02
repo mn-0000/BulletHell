@@ -36,7 +36,7 @@ namespace TRNBulletHell
 
         // Testing this 
         public static List<Texture2D> textureList = new List<Texture2D>();
-
+        
         // variables
         protected int minutes;
         protected int seconds;
@@ -102,10 +102,10 @@ namespace TRNBulletHell
             lifeTexture = Content.Load<Texture2D>("HeartSprite2");
             textureList.Add(lifeTexture);
             textureList.Add(enemyBullet);
-           
+
             // Process user-provided JSON stage file
             // Edit path to file here
-            string stageDetails = File.ReadAllText("C:\\Users\\Colin Willis\\Desktop\\teamreptileninjas\\TRNBulletHell\\JSON-Script\\Sample.json");
+            string stageDetails = File.ReadAllText("C:\\Users\\Colin Willis\\Desktop\\teamreptileninjas\\TRNBulletHell\\JSON-Script\\Sample-test.json");
             RootObject jsonObject = JsonSerializer.Deserialize<RootObject>(stageDetails);
             
             // Process wave data and create waves.
