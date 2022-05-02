@@ -5,13 +5,12 @@ using System.Collections.Generic;
 using System.Text;
 using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Bullet;
-using TRNBulletHell.Game.Entity.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.Enemy;
 
 namespace TRNBulletHell.Game
 {
 
-    class Wave
+    class GameWave
     {
         EnemyFactory enemyFactory = new EnemyFactory();
         private int total;
@@ -22,7 +21,7 @@ namespace TRNBulletHell.Game
         private int count;
         Texture2D texture;
 
-        public Wave(int time, int total, string type, Texture2D texture)
+        public GameWave(int time, int total, string type, Texture2D texture)
         {
             this.intervalTime = time;
             this.total = total;
@@ -33,17 +32,13 @@ namespace TRNBulletHell.Game
 
         public bool createWave(double seconds, float _remainingDelay, Texture2D enemyBullet)
         {
-            
-            
             if (seconds >= intervalTime && _remainingDelay <= 0 && this.count < total)
             {
                 this.count++;
                 EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
                 builder.createEnemy(EntityLists.enemyList);
-                    return true;
-
+                return true;
             }
-           
             return false;
         }
     }

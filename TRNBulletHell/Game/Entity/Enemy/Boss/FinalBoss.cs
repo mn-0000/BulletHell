@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TRNBulletHell.Game.Entity.Bullet.BulletA;
+using TRNBulletHell.Game.Entity.Bullet;
 using TRNBulletHell.Game.Entity.Move;
 
 namespace TRNBulletHell.Game.Entity.Enemy.Boss
@@ -23,7 +23,7 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
             health = 300;
 
             this.frequencyOfBullets = 15;
-            this.type = "finalboss";
+            this.type = "finalBoss";
         }
     }
 }

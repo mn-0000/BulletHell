@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using TRNBulletHell.Game.Entity.Bullet;
-using TRNBulletHell.Game.Entity.Bullet.BulletA;
 using TRNBulletHell.Game.Entity.LifeSystem;
 
 namespace TRNBulletHell.Game.Entity.Enemy
@@ -24,6 +23,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         protected int health;
         public LifeSprite lifeTexture;
         public string type;
+
 
 
         public Enemy(Texture2D texture) :base(texture)

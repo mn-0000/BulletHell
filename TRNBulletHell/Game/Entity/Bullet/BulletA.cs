@@ -6,7 +6,7 @@ using System.Text;
 using TRNBulletHell.Game.Entity;
 using TRNBulletHell.Game.Entity.Move;
 
-namespace TRNBulletHell.Game.Entity.Bullet.BulletA
+namespace TRNBulletHell.Game.Entity.Bullet
 {
     public class BulletA : Bullet
     {
