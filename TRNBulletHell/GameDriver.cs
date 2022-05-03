@@ -45,6 +45,9 @@ namespace TRNBulletHell
         private int finalBossCount = 0;
         private bool win = false;
 
+        // previous mouse state
+        MouseState oldState = new MouseState();
+
         // waves
         GameWave first;
         GameWave second;
@@ -144,7 +147,6 @@ namespace TRNBulletHell
         protected override void Update(GameTime gameTime)
         {
             MouseState currentMouseState = Mouse.GetState();
-            MouseState oldState = new MouseState();
             int offsetMinutes = 0;
             int offsetSeconds = 0;
 
