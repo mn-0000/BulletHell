@@ -109,7 +109,7 @@ namespace TRNBulletHell
 
             // Process wave data and create waves.
             // Currently the following attributes of the JSON file are not used:
-            // spawnInterval, bulletRate, damage
+            // bulletRate, damage
             waves = ProcessWavesData(jsonObject);
 
             EntityLists.playerList.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
@@ -193,23 +193,17 @@ namespace TRNBulletHell
 
                     double waveTimer = gameTime.TotalGameTime.TotalSeconds - offsetSeconds;
 
-                    // Wave first = new Wave(0, 3, "EnemyA", enemyATexture);
-                    //if (first.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                    //    second.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                    //    third.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                    //    fourth.createWave(waveTimer, _remainingDelay, enemyBullet))
-                    //{
-                    //    _remainingDelay = _delay;
-                    //}
-
+                    
+                    // Create waves
                     if (currentWave < waves.Count)
                     {
-                        _delay = waves[currentWave].GetIntervalTime();
-                        if (waves[currentWave].createWave(waveTimer, _remainingDelay, enemyBullet))
+                        _delay = waves[currentWave].GetIntervalTime(); // update spawn interval based on JSON script
+                        if (waves[currentWave].createWave(waveTimer, _remainingDelay, enemyBullet, waves[currentWave].GetBulletFrequency()))
                         {
                             _remainingDelay = _delay;
                         }
 
+                        // If the wave's enemies are all created, move on to the next wave
                         if (waves[currentWave].IsDoneCreatingEnemies())
                         {
                             currentWave++;
@@ -341,6 +335,7 @@ namespace TRNBulletHell
                 // Add wave to list of waves
                 GameWave gameWave = new GameWave(waves[i].waveTime, waves[i].enemyAmount, enemyType, enemyTexture);
                 gameWave.SetIntervalTime(waves[i].spawnInterval);
+                gameWave.SetBulletFrequency(waves[i].bulletRate);
                 gameWaves.Add(gameWave);
             }
             return gameWaves;

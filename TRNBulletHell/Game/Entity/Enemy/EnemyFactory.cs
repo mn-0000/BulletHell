@@ -31,6 +31,22 @@ namespace TRNBulletHell.Game.Entity.Enemy
             
         }
 
+        public Enemy CreateEnemy(string type, Texture2D texture, int bulletFrequency)
+        {
+            switch (type)
+            {
+                case "EnemyA":
+                    return new EnemyA(texture, bulletFrequency);
+                case "EnemyB":
+                    return new EnemyB(texture, bulletFrequency);
+                case "MidBoss":
+                    return new MidBoss(texture, bulletFrequency);
+                case "FinalBoss":
+                    return new FinalBoss(texture, bulletFrequency);
+                default:
+                    throw new ArgumentException("Unexpected enemy type");
+            }
+        }
         public override Movement CreateMovement(string type)
         {
             throw new NotImplementedException();
