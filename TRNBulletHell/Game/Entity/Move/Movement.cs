@@ -12,7 +12,7 @@ public abstract class Movement
     public Vector2 speed = new Vector2(2f, 2f);
     public int screenWidth = 775;
     private Boolean complete = false;
-    
+    public float _rotationVelocity = 1f;
 
     public abstract void Moving(GameTime gametime);
 

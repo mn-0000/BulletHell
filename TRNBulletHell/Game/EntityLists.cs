@@ -20,7 +20,10 @@ namespace TRNBulletHell.Game
         public static List<Bullet> playerBulletList = new List<Bullet>();
         public static List<LifeSprite> lifeSpriteList = new List<LifeSprite>();
         public static List<BulletSpawn> bulletSpawner = new List<BulletSpawn>();
+        public static List<Bullet> bigBulletList = new List<Bullet>();
+
         private EntityLists() { }
+
         public static EntityLists Instance
         {
             get
@@ -89,6 +92,10 @@ namespace TRNBulletHell.Game
             {
                 life.Draw(spriteBatch);
             }
+            //foreach (var spawner in EntityLists.bulletSpawner)
+            //{
+            //    spawner.Draw(spriteBatch);
+            //}
         }
     }
 }

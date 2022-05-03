@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace TRNBulletHell.Game.Entity.Move
@@ -14,9 +15,10 @@ namespace TRNBulletHell.Game.Entity.Move
     
         public override void Moving(GameTime gameTime)
         {
-            this.position -= direction * speed;
+            this.position -= this.direction * this.speed;
+
         }
 
-      
+
     }
 }

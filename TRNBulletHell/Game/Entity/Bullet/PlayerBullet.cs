@@ -15,7 +15,7 @@ namespace TRNBulletHell.Game.Entity.Bullet
         public PlayerBullet(Texture2D texture) : base(texture)
         {
             movement = new BulletMovement();
-            movement.speed = new Vector2 (4f, 4f);
+            movement.speed = new Vector2 (2f, 2f);
             life = 10;
             damage = 10;
         }

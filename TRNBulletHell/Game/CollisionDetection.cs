@@ -15,7 +15,9 @@ namespace TRNBulletHell.Game
     public class CollisionDetection
     {
         bool invincible = false;
+        //bool invincible = true;
         TimeSpan timer = new TimeSpan(0, 0, 3);
+
         public void detectCollision(GameTime gameTime)
         {
             timer -= gameTime.ElapsedGameTime;
@@ -92,9 +94,34 @@ namespace TRNBulletHell.Game
                     if (enemy.isRemoved)
                     {
                         EntityLists.enemyList.Remove(enemy);
+                        EntityLists.bulletSpawner.Remove(enemy.bulletSpawn);
+                        Debug.WriteLine("Spawner length: " + EntityLists.bulletSpawner.Count.ToString());
                     }
                 }
             }
+
+            //foreach (var bullet1 in EntityLists.enemyBulletList.ToArray())
+            //{
+            //    foreach (var bullet2 in EntityLists.enemyBulletList.ToArray())
+            //    {
+            //        if (bullet1.Rectangle.Intersects(bullet2.Rectangle) && bullet1 != bullet2)
+            //        {
+            //            //enemy.TakeDamage(bullet.GetDamage());
+            //            //EntityLists.playerBulletList.Remove(bullet);
+            //            Debug.WriteLine("Bullet hit bullet");
+            //        }
+
+            //        // remove enemy and bullet
+            //        if (bullet1.isRemoved)
+            //        {
+            //            EntityLists.enemyBulletList.Remove(bullet1);
+            //        }
+            //        if (bullet2.isRemoved)
+            //        {
+            //            EntityLists.enemyBulletList.Remove(bullet2);
+            //        }
+            //    }
+            //}
 
         }
 

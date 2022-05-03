@@ -14,7 +14,6 @@ namespace TRNBulletHell.Game.Entity.Move
         }
 
         public override void Moving(GameTime gameTime)
-
         {
             //Moving to the right
 

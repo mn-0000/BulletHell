@@ -33,12 +33,12 @@ namespace TRNBulletHell.Game.Entity.Bullet
             PlayerPosition = new Vector2(position.X, position.Y);
         }
 
-        public void createBullet(List<AbstractEntity> entities)
+        public void createBullet()
         {
             PlayerBullet bullet = playerBullet.Clone() as PlayerBullet;
             bullet.movement.direction = new Vector2(0, 1);
             bullet.movement.position = new Vector2(PlayerPosition.X, PlayerPosition.Y);
-            entities.Add(bullet);
+            EntityLists.enemyBulletList.Add(bullet);
         }
     }
 }

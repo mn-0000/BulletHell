@@ -51,17 +51,10 @@ namespace TRNBulletHell.Game.Entity
             if (_currentKey.IsKeyDown(Keys.Space) && _prevousKey.IsKeyUp(Keys.Space))
             {
                 PlayerBullet bullet = new PlayerBullet(playerBullet.getImage());
-            
-                
-
                  bullet.movement.direction = new Vector2(0, 1);
                  bullet.movement.position = new Vector2();
-
-
-
-
                  bullet.movement.position.X = this.movement.position.X;
-                  bullet.movement.position.Y = this.movement.position.Y;
+                 bullet.movement.position.Y = this.movement.position.Y;
                  EntityLists.playerBulletList.Add(bullet);
             }
 
