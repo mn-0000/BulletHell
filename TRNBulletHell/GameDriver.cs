@@ -44,6 +44,7 @@ namespace TRNBulletHell
         private float _remainingDelay = 2;
         private int finalBossCount = 0;
         private bool win = false;
+        MouseState oldState = new MouseState();
         int offsetMinutes = 0;
         int offsetSeconds = 0;
 
@@ -137,8 +138,6 @@ namespace TRNBulletHell
         protected override void Update(GameTime gameTime)
         {
             MouseState currentMouseState = Mouse.GetState();
-            MouseState oldState = new MouseState();
-            
 
             switch (CurrentGameState)
             {
