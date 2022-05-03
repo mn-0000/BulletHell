@@ -23,7 +23,6 @@ namespace TRNBulletHell.Game
                 {
                     BulletPatterns bulletPatterns = new BulletPatterns();
                     bulletPatterns.regular(spawner);
-
                 }
                 else if (spawner.FollowingEnemy.type == "enemyB")
                 {

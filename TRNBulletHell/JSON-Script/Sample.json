@@ -5,31 +5,31 @@
         {
             "waveTime": 0,
             "enemyType": "EnemyA",
-            "enemyAmount": 1,
+            "enemyAmount": 3,
             "spawnInterval": 3,
             "bulletRate": 20,
             "damage": 10
         },
         {
-            "waveTime": 0,
+            "waveTime": 20,
             "enemyType": "MidBoss",
-            "enemyAmount": 0,
+            "enemyAmount": 1,
             "spawnInterval": 3,
             "bulletRate": 18,
             "damage": 20
         },
         {
-            "waveTime": 0,
+            "waveTime": 60,
             "enemyType": "EnemyB",
-            "enemyAmount": 0,
+            "enemyAmount": 3,
             "spawnInterval": 3,
             "bulletRate": 20,
             "damage": 15
         },
         {
-            "waveTime": 0,
+            "waveTime": 130,
             "enemyType": "FinalBoss",
-            "enemyAmount": 0,
+            "enemyAmount": 1,
             "spawnInterval": 3,
             "bulletRate": 15,
             "damage": 25

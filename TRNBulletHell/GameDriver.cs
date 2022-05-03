@@ -28,6 +28,7 @@ namespace TRNBulletHell
         public Texture2D enemyBTexture;
         public Texture2D midBossTexture;
         public Texture2D finalBossTexture;
+        Texture2D bigBullet;
         Texture2D enemyBullet;
         Texture2D backgroundSprite;
         Texture2D playerBullet2D;
@@ -97,12 +98,14 @@ namespace TRNBulletHell
             playerBullet2D = Content.Load<Texture2D>("bullet");
             enemyBullet = Content.Load<Texture2D>("EnemyBullet");
             lifeTexture = Content.Load<Texture2D>("HeartSprite2");
+            bigBullet = Content.Load<Texture2D>("big-bullet-resized");
             EntityTextures.textureList.Add(lifeTexture);
             EntityTextures.textureList.Add(enemyBullet);
+            EntityTextures.textureList.Add(bigBullet);
 
             // Process user-provided JSON stage file
             // Edit path to file here
-            string stageDetails = File.ReadAllText("C:\\Users\\Tanner\\Documents\\School\\WSU\\Senior Year\\Spring 2022\\CPTS_487\\teamreptileninjas\\Sample.json");
+            string stageDetails = File.ReadAllText("C:\\Users\\Colin Willis\\Desktop\\teamreptileninjas\\TRNBulletHell\\JSON-Script\\Sample.json");
             RootObject jsonObject = JsonSerializer.Deserialize<RootObject>(stageDetails);
 
             // Process wave data and create waves.

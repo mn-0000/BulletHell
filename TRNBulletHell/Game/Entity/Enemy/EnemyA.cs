@@ -32,7 +32,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
             this.frequencyOfBullets = bulletFrequency;
             this.type = "enemyA";
             this.distance = 0;
-            //this.lifeDrop = true;
+            this.lifeDrop = true;
         }
     }
 }
