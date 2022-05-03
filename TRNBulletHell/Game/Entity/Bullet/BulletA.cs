@@ -21,6 +21,13 @@ namespace TRNBulletHell.Game.Entity.Bullet
             damage = 10;
         }
 
+        public BulletA(Texture2D texture, int bulletDamage) : base(texture)
+        {
+            movement = new BulletMovement();
+            movement.speed = new Vector2(4f, 4f);
+            life = 20;
+            damage = bulletDamage;
+        }
 
         public override Rectangle Rectangle
         {

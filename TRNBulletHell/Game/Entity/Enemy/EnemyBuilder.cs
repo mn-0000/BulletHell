@@ -77,6 +77,51 @@ namespace TRNBulletHell.Game.Entity.Enemy
             }
         }
 
+        public void createEnemy(List<Enemy> enemies, int bulletFrequency, int bulletDamage)
+        {
+            this.a = enemyFactory.CreateEnemy(type, texture, bulletFrequency);
+            a.enemyBullet = new BulletA(enemyBullet, bulletDamage);
+
+            spawner = new BulletSpawn(GameDriver.textureList[0], a);
+
+            if (type == "FinalBoss")
+            {
+                this.finalBoss();
+                enemies.Add(a);
+                spawner.movement = creator.CreateMovement("FinalBossBullet");
+                spawner.addMove(creator.CreateMovement("FinalBossBullet"));
+                EntityLists.bulletSpawner.Add(spawner);
+            }
+            else
+            {
+                getRandomNumber();
+                switch (randomMovement)
+                {
+                    case 0:
+                        this.addMovementsOne();
+                        enemies.Add(a);
+                        EntityLists.bulletSpawner.Add(spawner);
+                        return;
+                    case 1:
+                        this.addMovementsTwo();
+                        enemies.Add(a);
+                        EntityLists.bulletSpawner.Add(spawner);
+                        return;
+                    case 2:
+                        this.addMovementsThree();
+                        enemies.Add(a);
+                        EntityLists.bulletSpawner.Add(spawner);
+                        return;
+                    case 3:
+                        this.addMovementsFour();
+                        enemies.Add(a);
+                        EntityLists.bulletSpawner.Add(spawner);
+                        return;
+                    default:
+                        throw new ArgumentException("Unexpected random number");
+                }
+            }
+        }
         public void createEnemy(List<Enemy> enemies, int bulletFrequency)
         {
             this.newEnemy = enemyFactory.CreateEnemy(type, texture, bulletFrequency);

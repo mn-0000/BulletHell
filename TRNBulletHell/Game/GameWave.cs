@@ -18,6 +18,7 @@ namespace TRNBulletHell.Game
         string type;
         private int intervalTime;
         private int bulletFrequency = 0;
+        private int waveDamage = 0;
 
         private int count;
         Texture2D texture;
@@ -31,11 +32,23 @@ namespace TRNBulletHell.Game
             this.count = 0;
         }
 
+        public int GetWaveDamage()
+        {
+            return waveDamage;
+        }
+
+        public void SetWaveDamage(int damage)
+        {
+            waveDamage = damage;
+        }
+
+
         public int GetBulletFrequency()
         {
             return bulletFrequency;
         }
 
+        
         public void SetBulletFrequency(int frequency)
         {
             bulletFrequency = frequency;
@@ -75,6 +88,18 @@ namespace TRNBulletHell.Game
                 this.count++;
                 EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
                 builder.createEnemy(EntityLists.enemyList, bulletFrequency);
+                return true;
+            }
+            return false;
+        }
+
+        public bool createWave(double seconds, float _remainingDelay, Texture2D enemyBullet, int bulletFrequency, int bulletDamage)
+        {
+            if (seconds >= startTime && _remainingDelay <= 0 && this.count < total)
+            {
+                this.count++;
+                EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
+                builder.createEnemy(EntityLists.enemyList, bulletFrequency, bulletDamage);
                 return true;
             }
             return false;

@@ -11,8 +11,6 @@ namespace TRNBulletHell.Game
 {
     class CreateBullet
     {
-
-
         public void createBullet(BulletSpawn spawner)
         {
             // frequency can determine the different levels.

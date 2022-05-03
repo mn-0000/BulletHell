@@ -20,6 +20,7 @@ namespace TRNBulletHell.Game.Entity
             // higher the number the easier the enemy.
             this.frequencyOfBullets = enemy.frequencyOfBullets;
             this.lifeDrop = false;
+            
         }
         public override void Update(GameTime gameTime)
         {
