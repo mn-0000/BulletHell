@@ -214,16 +214,21 @@ namespace TRNBulletHell
                             currentWave++;
                         }
                     }
-                    if (gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
-                    {
-                        finalBossCount++;
-                    }
+                    //if (gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
+                    //{
+                    //    finalBossCount++;
+                    //}
 
-                    // check if boss is dead or game is over
-                    if (finalBossCount >= 1 && (gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= 150 || finalBossDead()))
+                    //// check if boss is dead or game is over
+                    //if (finalBossCount >= 1 && (gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= 150 || finalBossDead()))
+                    //{
+                    //    win = true;
+                    //}
+
+                    if (currentWave == waves.Count && (finalBossDead() || gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= waves.Last().GetIntervalTime() + 45))
                     {
                         win = true;
-                    }
+                    } 
 
                     bool finalBossDead()
                     {
