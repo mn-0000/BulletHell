@@ -19,6 +19,7 @@ namespace TRNBulletHell.Game.Entity.Move
 
         public override Movement CreateMovement(string type)
         {
+            //return new AcrossScreen();
             if (type == "AcrossScreen")
             {
                 return new AcrossScreen();
@@ -35,11 +36,11 @@ namespace TRNBulletHell.Game.Entity.Move
             {
                 return new PlayerMovement();
             }
-            if(type == "finalBoss")
+            if (type == "finalBoss")
             {
                 return new finalBossMovement();
             }
-            if(type == "FinalBossBullet")
+            if (type == "FinalBossBullet")
             {
                 return new FinalBossBullet();
             }

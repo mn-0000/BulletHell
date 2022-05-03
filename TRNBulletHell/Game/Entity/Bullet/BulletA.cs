@@ -16,7 +16,7 @@ namespace TRNBulletHell.Game.Entity.Bullet
         {
            
             movement = new BulletMovement();
-            movement.speed = new Vector2(4f, 4f);
+            movement.speed = new Vector2(10f, 10f);
             life = 10;
             damage = 10;
         }

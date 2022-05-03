@@ -6,12 +6,10 @@ using TRNBulletHell.Game.Entity.Bullet;
 
 namespace TRNBulletHell.Game
 {
-    class BulletManager
+    public class BulletManager
     {
-
         public void spawnBullets()
         {
-
             foreach (var spawners in EntityLists.bulletSpawner)
             {
                 CreateBullet spawnBullet = new CreateBullet();

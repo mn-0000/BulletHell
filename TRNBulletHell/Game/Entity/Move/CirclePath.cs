@@ -11,11 +11,10 @@ namespace TRNBulletHell.Game.Entity.Move
         float angle = 0;
         float originX = 300;
         float originY = 75;
-        public CirclePath()
-    
-       {
-            position = new Vector2(700, 75);
 
+        public CirclePath()
+        {
+            position = new Vector2(700, 75);
         }
         
 

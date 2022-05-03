@@ -24,6 +24,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public LifeSprite lifeTexture;
         public string type;
         public int distance;
+        public BulletSpawn bulletSpawn;
 
         public void SetFrequencyOfBullets(int frequency)
         {
@@ -32,7 +33,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public Enemy(Texture2D texture) :base(texture)
         {
-            lifeTexture = new LifeSprite( GameDriver.textureList[0]);
+            lifeTexture = new LifeSprite(EntityTextures.textureList[0]);
             setRandLifeDrop();
         }
 
@@ -49,9 +50,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public override void Update(GameTime gameTime)
         {
             ProduceBulletcounter++;
-            this.movement.Moving(gameTime);
 
             this.movement.direction = new Vector2((float)Math.Cos(movement._rotation), (float)Math.Sin(movement._rotation));
+            this.movement.Moving(gameTime);
 
             if (this.movement.isComplete() && counter < movements.Count)
             {
@@ -66,6 +67,11 @@ namespace TRNBulletHell.Game.Entity.Enemy
            // this.shootBullet();
 
             checkHealth();
+        }
+
+        public void rotateHelper()
+        {
+
         }
 
         public void checkHealth()

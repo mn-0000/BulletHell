@@ -14,7 +14,6 @@ namespace TRNBulletHell.Game.Entity.Move
 
 
         public FinalBossBullet()
-
         {
             position = new Vector2(-100, 100);
 
