@@ -7,7 +7,7 @@
             "enemyType": "EnemyA",
             "enemyAmount": 1,
             "spawnInterval": 3,
-            "bulletRate": 20,
+            "bulletRate": 100,
             "damage": 10
         },
         {

@@ -16,8 +16,6 @@ namespace TRNBulletHell.Game.Entity
         public BulletSpawn(Texture2D texture, Enemy.Enemy enemy) : base(texture)
         {
             this.FollowingEnemy = enemy;
-            //this.movement = new BulletMovement();         // These don't seem to affect the movement.
-            //this.movement = new BulletSpawnMovement();    // These don't seem to affect the movement.
             this.distance = enemy.distance;
             // higher the number the easier the enemy.
             this.frequencyOfBullets = enemy.frequencyOfBullets;

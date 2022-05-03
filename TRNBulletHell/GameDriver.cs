@@ -105,7 +105,7 @@ namespace TRNBulletHell
 
             // Process user-provided JSON stage file
             // Edit path to file here
-            string stageDetails = File.ReadAllText("C:\\Users\\Colin Willis\\Desktop\\teamreptileninjas\\TRNBulletHell\\JSON-Script\\Sample-test.json");
+            string stageDetails = File.ReadAllText("C:\\Users\\colinwillis\\Desktop\\teamreptileninjas\\TRNBulletHell\\JSON-Script\\Sample-test.json");
             RootObject jsonObject = JsonSerializer.Deserialize<RootObject>(stageDetails);
             
             // Process wave data and create waves.

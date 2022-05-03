@@ -26,6 +26,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public int distance;
         public Boolean cw = true;
         public Boolean cww = false;
+        public BulletSpawn bulletSpawn;
 
 
         public Enemy(Texture2D texture) :base(texture)
@@ -75,7 +76,6 @@ namespace TRNBulletHell.Game.Entity.Enemy
             ProduceBulletcounter++;
 
             this.movement.direction = new Vector2((float)Math.Cos(movement._rotation), (float)Math.Sin(movement._rotation));
-            this.movement.direction.Normalize();
             Debug.WriteLine("Direction in Enemy: " + movement.direction.ToString());
             this.movement.Moving(gameTime);
 
