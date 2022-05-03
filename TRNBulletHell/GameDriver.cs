@@ -44,15 +44,14 @@ namespace TRNBulletHell
         private float _remainingDelay = _delay;
         private int finalBossCount = 0;
         private bool win = false;
-
-        // waves
-        GameWave first;
-        GameWave second;
-        GameWave third;
-        GameWave fourth;
+        int offsetMinutes = 0;
+        int offsetSeconds = 0;
 
         // List of waves
         List<GameWave> waves = new List<GameWave>();
+        
+        // Current wave indicator
+        int currentWave = 0;
 
         CollisionDetection collisionDetection = new CollisionDetection();
         BulletManager bulletManager = new BulletManager();
@@ -102,22 +101,16 @@ namespace TRNBulletHell
             lifeTexture = Content.Load<Texture2D>("HeartSprite2");
             textureList.Add(lifeTexture);
             textureList.Add(enemyBullet);
-           
+
             // Process user-provided JSON stage file
             // Edit path to file here
-            string stageDetails = File.ReadAllText("C:\\Users\\Tanner\\Documents\\School\\WSU\\Senior Year\\Spring 2022\\CPTS_487\\teamreptileninjas\\Sample.json");
+            string stageDetails = File.ReadAllText("C:\\Users\\ADMIN\\Desktop\\School Stuff\\CS 487\\Sample.json");
             RootObject jsonObject = JsonSerializer.Deserialize<RootObject>(stageDetails);
-            
+
             // Process wave data and create waves.
             // Currently the following attributes of the JSON file are not used:
             // spawnInterval, bulletRate, damage
             waves = ProcessWavesData(jsonObject);
-
-            // Will need to be changed so that it'd not be necessary to hard-code only 4 waves.
-            first = waves[0];
-            second = waves[1];
-            third = waves[2];
-            fourth = waves[3];
 
             EntityLists.playerList.Add(new Player(_graphics.GraphicsDevice, Content.Load<Texture2D>("player"))
             {
@@ -131,7 +124,7 @@ namespace TRNBulletHell
             btnOptions.setPosition(new Vector2(325, 200));
             btnQuit = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Quit", 30);
             btnQuit.setPosition(new Vector2(325, 300));
-            
+
             // Options Buttons
             btnDifficulty = new cButton(Content.Load<Texture2D>("Button"), _graphics.GraphicsDevice, font, "Difficulty", 65);
             btnDifficulty.setPosition(new Vector2(100, 100));
@@ -145,8 +138,7 @@ namespace TRNBulletHell
         {
             MouseState currentMouseState = Mouse.GetState();
             MouseState oldState = new MouseState();
-            int offsetMinutes = 0;
-            int offsetSeconds = 0;
+            
 
             switch (CurrentGameState)
             {
@@ -185,7 +177,7 @@ namespace TRNBulletHell
                     this.IsMouseVisible = false;
 
                     //for clock display
-                    if(!locked)
+                    if (!locked)
                     {
                         offsetMinutes = gameTime.TotalGameTime.Minutes;
                         offsetSeconds = gameTime.TotalGameTime.Seconds;
@@ -202,14 +194,26 @@ namespace TRNBulletHell
                     double waveTimer = gameTime.TotalGameTime.TotalSeconds - offsetSeconds;
 
                     // Wave first = new Wave(0, 3, "EnemyA", enemyATexture);
-                    if (first.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                        second.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                        third.createWave(waveTimer, _remainingDelay, enemyBullet) ||
-                        fourth.createWave(waveTimer, _remainingDelay, enemyBullet))
-                    {
-                        _remainingDelay = _delay;
-                    }
+                    //if (first.createWave(waveTimer, _remainingDelay, enemyBullet) ||
+                    //    second.createWave(waveTimer, _remainingDelay, enemyBullet) ||
+                    //    third.createWave(waveTimer, _remainingDelay, enemyBullet) ||
+                    //    fourth.createWave(waveTimer, _remainingDelay, enemyBullet))
+                    //{
+                    //    _remainingDelay = _delay;
+                    //}
 
+                    if (currentWave < waves.Count)
+                    {
+                        if (waves[currentWave].createWave(waveTimer, _remainingDelay, enemyBullet))
+                        {
+                            _remainingDelay = _delay;
+                        }
+
+                        if (waves[currentWave].IsDoneCreatingEnemies())
+                        {
+                            currentWave++;
+                        }
+                    }
                     if (gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
                     {
                         finalBossCount++;
@@ -311,7 +315,7 @@ namespace TRNBulletHell
                     }
 
                     break;
-                }
+            }
             _spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -332,8 +336,8 @@ namespace TRNBulletHell
 
                 // Query the fields in GameDriver to look for enemy texture.
                 // Should only return 1 result (which is the appropriate enemy texture).
-                var texture = from field in typeof(GameDriver).GetFields() 
-                              where field.Name.ToLower() == (enemyType + "Texture").ToLower() 
+                var texture = from field in typeof(GameDriver).GetFields()
+                              where field.Name.ToLower() == (enemyType + "Texture").ToLower()
                               select field;
                 Texture2D enemyTexture = (Texture2D)texture.First().GetValue(this);
 

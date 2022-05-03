@@ -30,6 +30,11 @@ namespace TRNBulletHell.Game
             this.count = 0;
         }
 
+        public int GetIntervalTime()
+        {
+            return intervalTime;
+        }
+
         public bool createWave(double seconds, float _remainingDelay, Texture2D enemyBullet)
         {
             if (seconds >= intervalTime && _remainingDelay <= 0 && this.count < total)
@@ -40,6 +45,18 @@ namespace TRNBulletHell.Game
                 return true;
             }
             return false;
+        }
+
+        public bool IsDoneCreatingEnemies()
+        {
+            if (count == total)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
