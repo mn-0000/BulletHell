@@ -10,21 +10,18 @@ using TRNBulletHell.Game.Entity.Enemy;
 namespace TRNBulletHell.Game
 {
 
-    class GameWave
+    public class GameWave
     {
-        EnemyFactory enemyFactory = new EnemyFactory();
         private int total;
         private int intervalTime;
-        string type;
-
-
+        private string type;
         private int count;
         Texture2D texture;
 
         public GameWave(int time, int total, string type, Texture2D texture)
         {
             this.intervalTime = time;
-            this.total = total;
+            this.total = total; // Number of enemies to create.
             this.texture = texture;
             this.type = type;
             this.count = 0;
@@ -36,7 +33,7 @@ namespace TRNBulletHell.Game
             {
                 this.count++;
                 EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
-                builder.createEnemy(EntityLists.enemyList);
+                builder.createEnemy();
                 return true;
             }
             return false;

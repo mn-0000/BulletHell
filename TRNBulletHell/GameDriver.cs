@@ -33,9 +33,6 @@ namespace TRNBulletHell
         Texture2D playerBullet2D;
         Texture2D lifeTexture;
         SpriteFont font;
-
-        // Testing this 
-        public static List<Texture2D> textureList = new List<Texture2D>();
         
         // variables
         protected int minutes;
@@ -100,12 +97,12 @@ namespace TRNBulletHell
             playerBullet2D = Content.Load<Texture2D>("bullet");
             enemyBullet = Content.Load<Texture2D>("EnemyBullet");
             lifeTexture = Content.Load<Texture2D>("HeartSprite2");
-            textureList.Add(lifeTexture);
-            textureList.Add(enemyBullet);
+            EntityTextures.textureList.Add(lifeTexture);
+            EntityTextures.textureList.Add(enemyBullet);
 
             // Process user-provided JSON stage file
             // Edit path to file here
-            string stageDetails = File.ReadAllText("C:\\Users\\colinwillis\\Desktop\\teamreptileninjas\\TRNBulletHell\\JSON-Script\\Sample-test.json");
+            string stageDetails = File.ReadAllText("C:\\Users\\Colin Willis\\Desktop\\teamreptileninjas\\TRNBulletHell\\JSON-Script\\Sample.json");
             RootObject jsonObject = JsonSerializer.Deserialize<RootObject>(stageDetails);
             
             // Process wave data and create waves.

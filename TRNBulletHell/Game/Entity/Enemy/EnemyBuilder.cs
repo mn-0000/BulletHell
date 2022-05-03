@@ -14,7 +14,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         string type;
         MovementCreator creator = new MovementCreator();
         Texture2D enemyBullet;
-        Enemy a;
+        Enemy newEnemy;
         Random random = new Random();
         int randomMovement = 0;
         BulletSpawn spawner;
@@ -31,17 +31,17 @@ namespace TRNBulletHell.Game.Entity.Enemy
            randomMovement = random.Next(0, 4);
         }
 
-        public void createEnemy(List<Enemy> enemies)
+        public void createEnemy()
         {
-            this.a = enemyFactory.CreateEnemy(type, texture);
-            a.enemyBullet = new BulletA(enemyBullet);
-            spawner = new BulletSpawn(GameDriver.textureList[0], a);
-            a.bulletSpawn = spawner;
+            this.newEnemy = enemyFactory.CreateEnemy(type, texture);
+            newEnemy.enemyBullet = new BulletA(enemyBullet);
+            spawner = new BulletSpawn(EntityTextures.textureList[0], newEnemy);
+            newEnemy.bulletSpawn = spawner;
             
             if(type == "FinalBoss")
             {
                 this.finalBoss();
-                enemies.Add(a);
+                EntityLists.enemyList.Add(newEnemy);
                 spawner.movement = creator.CreateMovement("FinalBossBullet");
                 spawner.addMove(creator.CreateMovement("FinalBossBullet"));
                 EntityLists.bulletSpawner.Add(spawner);
@@ -52,22 +52,22 @@ namespace TRNBulletHell.Game.Entity.Enemy
                 {
                     case 0:
                         this.addMovementsOne();
-                        enemies.Add(a);
+                        EntityLists.enemyList.Add(newEnemy);
                         EntityLists.bulletSpawner.Add(spawner);
                         return;
                     case 1:
                         this.addMovementsTwo();
-                        enemies.Add(a);
+                        EntityLists.enemyList.Add(newEnemy);
                         EntityLists.bulletSpawner.Add(spawner);
                         return;
                     case 2:
                         this.addMovementsThree();
-                        enemies.Add(a);
+                        EntityLists.enemyList.Add(newEnemy);
                         EntityLists.bulletSpawner.Add(spawner);
                         return;
                     case 3:
                         this.addMovementsFour();
-                        enemies.Add(a);
+                        EntityLists.enemyList.Add(newEnemy);
                         EntityLists.bulletSpawner.Add(spawner);
                         return;
                     default:
@@ -78,15 +78,15 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public void finalBoss()
         {
-            a.movement = creator.CreateMovement("finalBoss");
-            a.addMove(creator.CreateMovement("finalBoss"));
+            newEnemy.movement = creator.CreateMovement("finalBoss");
+            newEnemy.addMove(creator.CreateMovement("finalBoss"));
         }
 
         public void addMovementsOne()
         {
-            a.movement = creator.CreateMovement("AcrossScreen");
-            a.addMove(creator.CreateMovement("AcrossScreen"));
-            a.addMove(creator.CreateMovement("ZigZagPath"));
+            newEnemy.movement = creator.CreateMovement("AcrossScreen");
+            newEnemy.addMove(creator.CreateMovement("AcrossScreen"));
+            newEnemy.addMove(creator.CreateMovement("ZigZagPath"));
 
             spawner.movement = creator.CreateMovement("AcrossScreen");
             spawner.addMove(creator.CreateMovement("AcrossScreen"));
@@ -96,9 +96,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public void addMovementsTwo()
         {
-            a.movement = creator.CreateMovement("ZigZagPath");
-            a.addMove(creator.CreateMovement("CirclePath"));
-            a.addMove(creator.CreateMovement("ZigZagPath"));
+            newEnemy.movement = creator.CreateMovement("ZigZagPath");
+            newEnemy.addMove(creator.CreateMovement("CirclePath"));
+            newEnemy.addMove(creator.CreateMovement("ZigZagPath"));
 
             spawner.movement = creator.CreateMovement("ZigZagPath");
             spawner.addMove(creator.CreateMovement("CirclePath"));
@@ -107,9 +107,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public void addMovementsThree()
         {
-            a.movement = creator.CreateMovement("ZigZagPath");
-            a.addMove(creator.CreateMovement("CirclePath"));
-            a.addMove(creator.CreateMovement("AcrossScreen"));
+            newEnemy.movement = creator.CreateMovement("ZigZagPath");
+            newEnemy.addMove(creator.CreateMovement("CirclePath"));
+            newEnemy.addMove(creator.CreateMovement("AcrossScreen"));
 
             spawner.movement = creator.CreateMovement("ZigZagPath");
             spawner.addMove(creator.CreateMovement("CirclePath"));
@@ -119,9 +119,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public void addMovementsFour()
         {
-            a.movement = creator.CreateMovement("CirclePath");
-            a.addMove(creator.CreateMovement("CirclePath"));
-            a.addMove(creator.CreateMovement("AcrossScreen"));
+            newEnemy.movement = creator.CreateMovement("CirclePath");
+            newEnemy.addMove(creator.CreateMovement("CirclePath"));
+            newEnemy.addMove(creator.CreateMovement("AcrossScreen"));
 
             spawner.movement = creator.CreateMovement("CirclePath");
             spawner.addMove(creator.CreateMovement("CirclePath"));

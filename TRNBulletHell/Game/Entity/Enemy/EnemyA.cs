@@ -18,7 +18,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
             health = 50;
 
             // higher the number the easier the enemy.
-            this.frequencyOfBullets = 5;
+            this.frequencyOfBullets = 30;
             this.type = "enemyA";
             this.distance = 0;
             //this.lifeDrop = true;

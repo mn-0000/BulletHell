@@ -19,36 +19,36 @@ namespace TRNBulletHell.Game.Entity.Move
 
         public override Movement CreateMovement(string type)
         {
-            return new AcrossScreen();
-            //if (type == "AcrossScreen")
-            //{
-            //    return new AcrossScreen();
-            //}
-            //if (type == "CirclePath")
-            //{
-            //    return new CirclePath();
-            //}
-            //if (type == "ZigZagPath")
-            //{
-            //    return new ZigZagPath();
-            //}
-            //if (type == "Player")
-            //{
-            //    return new PlayerMovement();
-            //}
-            //if(type == "finalBoss")
-            //{
-            //    return new finalBossMovement();
-            //}
-            //if(type == "FinalBossBullet")
-            //{
-            //    return new FinalBossBullet();
-            //}
-            //if (type == "BulletRope")
-            //{
-            //    return new BulletRope();
-            //}
-            //return null;
+            //return new AcrossScreen();
+            if (type == "AcrossScreen")
+            {
+                return new AcrossScreen();
+            }
+            if (type == "CirclePath")
+            {
+                return new CirclePath();
+            }
+            if (type == "ZigZagPath")
+            {
+                return new ZigZagPath();
+            }
+            if (type == "Player")
+            {
+                return new PlayerMovement();
+            }
+            if (type == "finalBoss")
+            {
+                return new finalBossMovement();
+            }
+            if (type == "FinalBossBullet")
+            {
+                return new FinalBossBullet();
+            }
+            if (type == "BulletRope")
+            {
+                return new BulletRope();
+            }
+            return null;
         }
     }
 }

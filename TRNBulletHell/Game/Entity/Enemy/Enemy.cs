@@ -29,7 +29,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public Enemy(Texture2D texture) :base(texture)
         {
-            lifeTexture = new LifeSprite( GameDriver.textureList[0]);
+            lifeTexture = new LifeSprite(EntityTextures.textureList[0]);
             setRandLifeDrop();
         }
 

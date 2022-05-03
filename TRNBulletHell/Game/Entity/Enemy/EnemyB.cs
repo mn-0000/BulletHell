@@ -13,7 +13,7 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public EnemyB(Texture2D texture) : base(texture)
         {
             health = 20;
-            this.frequencyOfBullets = 30;
+            this.frequencyOfBullets = 5;
             this.type = "enemyB";
 
             //Bullet spawner distance
