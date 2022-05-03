@@ -39,11 +39,16 @@ namespace TRNBulletHell
 
         // variables
         protected int minutes;
-        protected int seconds;
+        protected int seconds = 0;
         private const float _delay = 2; // seconds
         private float _remainingDelay = _delay;
         private int finalBossCount = 0;
         private bool win = false;
+
+        // gameclock vars
+        bool locked = false;
+        int offsetMinutes = 0;
+        int offsetSeconds = 0;
 
         // previous mouse state
         MouseState oldState = new MouseState();
@@ -72,8 +77,7 @@ namespace TRNBulletHell
         GameState CurrentGameState = GameState.MainMenu;
         cButton btnPlay, btnOptions, btnQuit, btnBack, btnDifficulty, btnGodMode;
 
-        // timer lock
-        bool locked = false;
+
 
         public GameDriver()
         {
@@ -147,8 +151,6 @@ namespace TRNBulletHell
         protected override void Update(GameTime gameTime)
         {
             MouseState currentMouseState = Mouse.GetState();
-            int offsetMinutes = 0;
-            int offsetSeconds = 0;
 
             switch (CurrentGameState)
             {
@@ -166,7 +168,7 @@ namespace TRNBulletHell
                     this.IsMouseVisible = true;
                     if (btnBack.isClicked) CurrentGameState = GameState.MainMenu;
 
-                    // record single click and switch difficulty
+                    // record single click and toggle option
                     if (currentMouseState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
                     {
                         if (btnDifficulty.isClicked) GameOptions.SwitchDifficulty();
@@ -186,16 +188,17 @@ namespace TRNBulletHell
                 case GameState.Playing:
                     this.IsMouseVisible = false;
 
-                    //for clock display
-                    if(!locked)
+                    //set clock display
+                    if (!locked)
                     {
-                        offsetMinutes = gameTime.TotalGameTime.Minutes;
                         offsetSeconds = gameTime.TotalGameTime.Seconds;
+                        offsetMinutes = ((gameTime.TotalGameTime.Seconds - offsetSeconds) / 60);
                         locked = true;
                     }
 
-                    minutes = gameTime.TotalGameTime.Minutes - offsetMinutes;
-                    seconds = gameTime.TotalGameTime.Seconds - offsetSeconds;
+                    int totalTime = (int)gameTime.TotalGameTime.TotalSeconds - offsetMinutes * 60 - offsetSeconds;
+                    minutes = totalTime / 60;
+                    seconds = totalTime % 60;  
 
                     //Set delay for spawning.
                     var timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -282,7 +285,7 @@ namespace TRNBulletHell
                     }
                     else
                     {
-                        _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 10), Color.White);
+                        _spriteBatch.DrawString(font, $"{minutes + " : " + seconds}", new Vector2(700, 0), Color.White);
 
                     }
 
