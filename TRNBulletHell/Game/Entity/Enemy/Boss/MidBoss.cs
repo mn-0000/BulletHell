@@ -23,10 +23,18 @@ namespace TRNBulletHell.Game.Entity.Enemy.Boss
             this.distance = 0;
         }
 
-      
+        public MidBoss(Texture2D texture, int bulletFrequency) : base(texture)
+        {
+            timer = 0f;
+            health = 100;
 
-        
+            this.frequencyOfBullets = bulletFrequency;
+            this.type = "midBoss";
+            this.distance = 0;
+        }
 
-      
+
+
+
     }
 }
