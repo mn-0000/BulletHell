@@ -52,8 +52,6 @@ namespace TRNBulletHell
 
         // previous mouse state
         MouseState oldState = new MouseState();
-        int offsetMinutes = 0;
-        int offsetSeconds = 0;
 
         // List of waves
         List<GameWave> waves = new List<GameWave>();
