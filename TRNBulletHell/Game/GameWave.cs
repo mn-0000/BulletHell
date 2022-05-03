@@ -13,15 +13,18 @@ namespace TRNBulletHell.Game
     public class GameWave
     {
         private int total;
+        private int startTime;
+        string type;
         private int intervalTime;
-        private string type;
+        private int bulletFrequency = 0;
+
         private int count;
         Texture2D texture;
 
         public GameWave(int time, int total, string type, Texture2D texture)
         {
-            this.intervalTime = time;
-            this.total = total; // Number of enemies to create.
+            this.startTime = time;
+            this.total = total;
             this.texture = texture;
             this.type = type;
             this.count = 0;
@@ -29,7 +32,7 @@ namespace TRNBulletHell.Game
 
         public bool createWave(double seconds, float _remainingDelay, Texture2D enemyBullet)
         {
-            if (seconds >= intervalTime && _remainingDelay <= 0 && this.count < total)
+            if (seconds >= startTime && _remainingDelay <= 0 && this.count < total)
             {
                 this.count++;
                 EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
@@ -37,6 +40,30 @@ namespace TRNBulletHell.Game
                 return true;
             }
             return false;
+        }
+
+        public bool createWave(double seconds, float _remainingDelay, Texture2D enemyBullet, int bulletFrequency)
+        {
+            if (seconds >= startTime && _remainingDelay <= 0 && this.count < total)
+            {
+                this.count++;
+                EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
+                builder.createEnemy(EntityLists.enemyList, bulletFrequency);
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsDoneCreatingEnemies()
+        {
+            if (count == total)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

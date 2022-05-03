@@ -23,22 +23,68 @@ namespace TRNBulletHell.Game.Entity.Enemy
         {
             this.texture = texture;
             this.type = type;
-            this.enemyBullet = bullet;          
+            this.enemyBullet = bullet;
         }
 
         public void getRandomNumber()
         {
-           randomMovement = random.Next(0, 4);
+            randomMovement = random.Next(0, 4);
         }
 
         public void createEnemy()
         {
-            this.newEnemy = enemyFactory.CreateEnemy(type, texture);
-            newEnemy.enemyBullet = new BulletA(enemyBullet);
-            spawner = new BulletSpawn(EntityTextures.textureList[0], newEnemy);
-            newEnemy.bulletSpawn = spawner;
-            
-            if(type == "FinalBoss")
+            this.a = enemyFactory.CreateEnemy(type, texture);
+            a.enemyBullet = new BulletA(enemyBullet);
+
+            spawner = new BulletSpawn(GameDriver.textureList[0], a);
+
+            if (type == "FinalBoss")
+            {
+                this.finalBoss();
+                enemies.Add(a);
+                spawner.movement = creator.CreateMovement("FinalBossBullet");
+                spawner.addMove(creator.CreateMovement("FinalBossBullet"));
+                EntityLists.bulletSpawner.Add(spawner);
+            }
+            else
+            {
+                getRandomNumber();
+                switch (randomMovement)
+                {
+                    case 0:
+                        this.addMovementsOne();
+                        enemies.Add(a);
+                        EntityLists.bulletSpawner.Add(spawner);
+                        return;
+                    case 1:
+                        this.addMovementsTwo();
+                        enemies.Add(a);
+                        EntityLists.bulletSpawner.Add(spawner);
+                        return;
+                    case 2:
+                        this.addMovementsThree();
+                        enemies.Add(a);
+                        EntityLists.bulletSpawner.Add(spawner);
+                        return;
+                    case 3:
+                        this.addMovementsFour();
+                        enemies.Add(a);
+                        EntityLists.bulletSpawner.Add(spawner);
+                        return;
+                    default:
+                        throw new ArgumentException("Unexpected random number");
+                }
+            }
+        }
+
+        public void createEnemy(List<Enemy> enemies, int bulletFrequency)
+        {
+            this.a = enemyFactory.CreateEnemy(type, texture, bulletFrequency);
+            a.enemyBullet = new BulletA(enemyBullet);
+
+            spawner = new BulletSpawn(GameDriver.textureList[0], a);
+
+            if (type == "FinalBoss")
             {
                 this.finalBoss();
                 EntityLists.enemyList.Add(newEnemy);
@@ -46,8 +92,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
                 spawner.addMove(creator.CreateMovement("FinalBossBullet"));
                 EntityLists.bulletSpawner.Add(spawner);
             }
-            else { 
-            getRandomNumber();
+            else
+            {
+                getRandomNumber();
                 switch (randomMovement)
                 {
                     case 0:

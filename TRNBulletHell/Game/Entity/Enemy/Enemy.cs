@@ -26,6 +26,10 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public int distance;
         public BulletSpawn bulletSpawn;
 
+        public void SetFrequencyOfBullets(int frequency)
+        {
+            frequencyOfBullets = frequency;
+        }
 
         public Enemy(Texture2D texture) :base(texture)
         {
