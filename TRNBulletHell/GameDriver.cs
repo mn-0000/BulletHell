@@ -183,8 +183,9 @@ namespace TRNBulletHell
                         locked = true;
                     }
 
-                    minutes = gameTime.TotalGameTime.Minutes - offsetMinutes;
-                    seconds = gameTime.TotalGameTime.Seconds - offsetSeconds;
+                    int totalTime = (int)gameTime.TotalGameTime.TotalSeconds - offsetMinutes * 60 - offsetSeconds;
+                    minutes = totalTime / 60; // this actually returns an int
+                    seconds = totalTime % 60;
 
                     //Set delay for spawning.
                     var timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -197,7 +198,8 @@ namespace TRNBulletHell
                     if (currentWave < waves.Count)
                     {
                         _delay = waves[currentWave].GetIntervalTime(); // update spawn interval based on JSON script
-                        if (waves[currentWave].createWave(waveTimer, _remainingDelay, enemyBullet, waves[currentWave].GetBulletFrequency()))
+                        if (waves[currentWave].createWave(waveTimer, _remainingDelay, enemyBullet,
+                            waves[currentWave].GetBulletFrequency(), waves[currentWave].GetWaveDamage()))
                         {
                             _remainingDelay = _delay;
                         }
@@ -270,7 +272,7 @@ namespace TRNBulletHell
 
                     if (seconds < 10)
                     {
-                        _spriteBatch.DrawString(font, $"{minutes + " : 0" + seconds}", new Vector2(700, 0), Color.White);
+                        _spriteBatch.DrawString(font, $"{minutes + " : 0" + seconds}", new Vector2(700, 10), Color.White);
                     }
                     else
                     {
@@ -335,6 +337,7 @@ namespace TRNBulletHell
                 GameWave gameWave = new GameWave(waves[i].waveTime, waves[i].enemyAmount, enemyType, enemyTexture);
                 gameWave.SetIntervalTime(waves[i].spawnInterval);
                 gameWave.SetBulletFrequency(waves[i].bulletRate);
+                gameWave.SetWaveDamage(waves[i].damage);
                 gameWaves.Add(gameWave);
             }
             return gameWaves;

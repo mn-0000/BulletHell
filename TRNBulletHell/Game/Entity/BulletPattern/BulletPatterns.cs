@@ -11,7 +11,7 @@ namespace TRNBulletHell.Game.Entity.BulletPattern
     {
         public void regular(BulletSpawn enemy)
         {
-
+            
             PlayerBullet bullet = new PlayerBullet(GameDriver.textureList[1]);
             bullet.movement.direction = new Vector2(0, -1);
             bullet.movement.position = new Vector2();

@@ -17,6 +17,11 @@ namespace TRNBulletHell.Game.Entity.Bullet
 
         }
 
+        public Bullet(Texture2D texture, int bulletDamage) : base(texture)
+        {
+            damage = bulletDamage;
+        }
+
         public override void Update(GameTime gameTime)
         {
 
