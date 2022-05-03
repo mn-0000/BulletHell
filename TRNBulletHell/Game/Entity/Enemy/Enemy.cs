@@ -24,8 +24,6 @@ namespace TRNBulletHell.Game.Entity.Enemy
         public LifeSprite lifeTexture;
         public string type;
         public int distance;
-        public Boolean cw = true;
-        public Boolean cww = false;
         public BulletSpawn bulletSpawn;
 
 
@@ -47,36 +45,9 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public override void Update(GameTime gameTime)
         {
-          
-
-            if (this.movement.direction.Y >= 0)
-            {
-                cw = true;
-            }
-            else
-            {
-                cw = false;
-            }
-
-            if (this.movement.direction.Y >= 0)
-            {
-                cw = true;
-            }
-            else
-            {
-                cw = false;
-            }
-
-
-            //Debug.WriteLine("To Rads: " + MathHelper.ToRadians(4f).ToString());
-            movement._rotation += MathHelper.ToRadians(2f);
-
-            Debug.WriteLine("Rotation: " + movement._rotation.ToString());
-
             ProduceBulletcounter++;
 
             this.movement.direction = new Vector2((float)Math.Cos(movement._rotation), (float)Math.Sin(movement._rotation));
-            Debug.WriteLine("Direction in Enemy: " + movement.direction.ToString());
             this.movement.Moving(gameTime);
 
             if (this.movement.isComplete() && counter < movements.Count)
