@@ -40,8 +40,8 @@ namespace TRNBulletHell
         // variables
         protected int minutes;
         protected int seconds;
-        private const float _delay = 2; // seconds
-        private float _remainingDelay = _delay;
+        private float _delay = 2; // seconds
+        private float _remainingDelay = 2;
         private int finalBossCount = 0;
         private bool win = false;
         int offsetMinutes = 0;
@@ -204,6 +204,7 @@ namespace TRNBulletHell
 
                     if (currentWave < waves.Count)
                     {
+                        _delay = waves[currentWave].GetIntervalTime();
                         if (waves[currentWave].createWave(waveTimer, _remainingDelay, enemyBullet))
                         {
                             _remainingDelay = _delay;
@@ -214,18 +215,9 @@ namespace TRNBulletHell
                             currentWave++;
                         }
                     }
-                    //if (gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= 120 && _remainingDelay <= 0 && finalBossCount < 1)
-                    //{
-                    //    finalBossCount++;
-                    //}
 
-                    //// check if boss is dead or game is over
-                    //if (finalBossCount >= 1 && (gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= 150 || finalBossDead()))
-                    //{
-                    //    win = true;
-                    //}
-
-                    if (currentWave == waves.Count && (finalBossDead() || gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= waves.Last().GetIntervalTime() + 45))
+                    // check if boss is dead or game is over
+                    if ((currentWave == waves.Count && finalBossDead()) || gameTime.TotalGameTime.TotalSeconds - offsetSeconds >= waves.Last().GetStartTime() + 45)
                     {
                         win = true;
                     } 
@@ -347,7 +339,9 @@ namespace TRNBulletHell
                 Texture2D enemyTexture = (Texture2D)texture.First().GetValue(this);
 
                 // Add wave to list of waves
-                gameWaves.Add(new GameWave(waves[i].waveTime, waves[i].enemyAmount, enemyType, enemyTexture));
+                GameWave gameWave = new GameWave(waves[i].waveTime, waves[i].enemyAmount, enemyType, enemyTexture);
+                gameWave.SetIntervalTime(waves[i].spawnInterval);
+                gameWaves.Add(gameWave);
             }
             return gameWaves;
         }

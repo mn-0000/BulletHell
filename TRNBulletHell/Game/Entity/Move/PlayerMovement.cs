@@ -94,9 +94,9 @@ public class PlayerMovement : Movement
     public void moveUp(int speed)
     {
         float newPosition = position.Y + -speed;
-        if (newPosition < 200)
+        if (newPosition < 300)
         {
-            newPosition = 200;
+            newPosition = 300;
         }
         position.Y = newPosition;
 

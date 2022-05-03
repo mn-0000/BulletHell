@@ -14,8 +14,9 @@ namespace TRNBulletHell.Game
     {
         EnemyFactory enemyFactory = new EnemyFactory();
         private int total;
-        private int intervalTime;
+        private int startTime;
         string type;
+        private int intervalTime;
 
 
         private int count;
@@ -23,11 +24,16 @@ namespace TRNBulletHell.Game
 
         public GameWave(int time, int total, string type, Texture2D texture)
         {
-            this.intervalTime = time;
+            this.startTime = time;
             this.total = total;
             this.texture = texture;
             this.type = type;
             this.count = 0;
+        }
+
+        public int GetStartTime()
+        {
+            return startTime;
         }
 
         public int GetIntervalTime()
@@ -35,9 +41,13 @@ namespace TRNBulletHell.Game
             return intervalTime;
         }
 
+        public void SetIntervalTime(int interval)
+        {
+            intervalTime = interval;
+        }
         public bool createWave(double seconds, float _remainingDelay, Texture2D enemyBullet)
         {
-            if (seconds >= intervalTime && _remainingDelay <= 0 && this.count < total)
+            if (seconds >= startTime && _remainingDelay <= 0 && this.count < total)
             {
                 this.count++;
                 EnemyBuilder builder = new EnemyBuilder(this.texture, enemyBullet, type);
