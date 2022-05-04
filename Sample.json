@@ -5,8 +5,8 @@
         {
             "waveTime": 0,
             "enemyType": "EnemyA",
-            "enemyAmount": 8,
-            "spawnInterval": 3,
+            "enemyAmount": 3,
+            "spawnInterval": 1,
             "bulletRate": 20,
             "damage": 10
         },

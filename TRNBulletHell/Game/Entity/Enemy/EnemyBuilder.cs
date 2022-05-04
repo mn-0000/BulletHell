@@ -79,15 +79,15 @@ namespace TRNBulletHell.Game.Entity.Enemy
 
         public void createEnemy(List<Enemy> enemies, int bulletFrequency, int bulletDamage)
         {
-            this.a = enemyFactory.CreateEnemy(type, texture, bulletFrequency);
-            a.enemyBullet = new BulletA(enemyBullet, bulletDamage);
+            this.newEnemy = enemyFactory.CreateEnemy(type, texture, bulletFrequency);
+            newEnemy.enemyBullet = new BulletA(enemyBullet, bulletDamage);
 
-            spawner = new BulletSpawn(GameDriver.textureList[0], a);
+            spawner = new BulletSpawn(EntityTextures.textureList[0], newEnemy);
 
             if (type == "FinalBoss")
             {
                 this.finalBoss();
-                enemies.Add(a);
+                enemies.Add(newEnemy);
                 spawner.movement = creator.CreateMovement("FinalBossBullet");
                 spawner.addMove(creator.CreateMovement("FinalBossBullet"));
                 EntityLists.bulletSpawner.Add(spawner);
@@ -99,22 +99,22 @@ namespace TRNBulletHell.Game.Entity.Enemy
                 {
                     case 0:
                         this.addMovementsOne();
-                        enemies.Add(a);
+                        enemies.Add(newEnemy);
                         EntityLists.bulletSpawner.Add(spawner);
                         return;
                     case 1:
                         this.addMovementsTwo();
-                        enemies.Add(a);
+                        enemies.Add(newEnemy);
                         EntityLists.bulletSpawner.Add(spawner);
                         return;
                     case 2:
                         this.addMovementsThree();
-                        enemies.Add(a);
+                        enemies.Add(newEnemy);
                         EntityLists.bulletSpawner.Add(spawner);
                         return;
                     case 3:
                         this.addMovementsFour();
-                        enemies.Add(a);
+                        enemies.Add(newEnemy);
                         EntityLists.bulletSpawner.Add(spawner);
                         return;
                     default:
